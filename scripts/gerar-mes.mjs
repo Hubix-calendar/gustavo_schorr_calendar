@@ -366,7 +366,7 @@ function schemaMes() {
 
 // ------------------------------------------------------------------ prompt
 
-function montarPrompt({ ano, mes, dias, firstDow, feriados, estrutura, estrategia, aprendizado }) {
+function montarPrompt({ ano, mes, dias, firstDow, feriados, estrutura, estrategia, aprendizado, permanente }) {
   const DOW = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
   const nome = NOMES_MES[mes - 1];
 
@@ -408,8 +408,26 @@ ${estrategia}`
 ${aprendizado}`
     : '';
 
+  const estrategiaPermanente = permanente
+    ? `## Estratégia permanente do perfil
+
+O bloco abaixo é o arquivo ESTRATEGIA.md do repositório. Ele vale mais que
+qualquer suposição sua sobre o perfil: posicionamento, dores confirmadas, papel
+de cada pilar, critério de escolha de formato, mapa de CTA, dados públicos
+autorizados e teses que já foram usadas. Leia inteiro antes de montar o mês e
+respeite as decisões registradas nele.
+
+---
+
+${permanente}
+
+---
+`
+    : '';
+
   return `Monte o mês de ${nome} de ${ano} do calendário editorial de vídeos do Gustavo Schorr.
 
+${estrategiaPermanente}
 ## Quem é e para quem fala
 
 Gustavo Schorr é referência em mídia exterior (OOH/DOOH) na América Latina. O
@@ -447,6 +465,12 @@ Regras que valem para os dois modelos:
 Hook (0–3s), contexto, virada, conclusão, CTA. É o formato padrão do
 calendário. Use na maioria das peças, principalmente nas educativas de método,
 nos bastidores e no conteúdo de nicho.
+
+A cena de CTA do clássico não pode terminar só numa pergunta retórica. A
+pergunta cria a reflexão, mas quem concorda mentalmente desliza sem agir. Feche
+com a pergunta **e** uma ação concreta, escolhida pelo objetivo da peça — salvar,
+seguir, compartilhar ou comentar. Exemplo: "Na sua última campanha, você comprou
+lugar ou comprou tamanho? Salva esse vídeo pra rever antes de fechar a próxima."
 
 ### modelo "viral" — 75 a 90 segundos, 9 tempos
 
@@ -837,6 +861,16 @@ async function main() {
 
   const estrutura = analisarEstrutura(meses, videos);
 
+  // A estratégia permanente vive em Markdown, não no código — assim ela pode ser
+  // corrigida por quem entende do negócio, sem tocar no gerador.
+  let permanente = '';
+  try {
+    permanente = (await readFile(path.join(RAIZ, 'ESTRATEGIA.md'), 'utf8')).trim();
+    console.log(`· ESTRATEGIA.md carregado (${permanente.length} caracteres).`);
+  } catch {
+    console.log('· ESTRATEGIA.md não encontrado — seguindo só com a estratégia embutida no prompt.');
+  }
+
   const alvo = interpretarMes(alvoBruto);
   if (!alvo) throw new Error(`Não consegui interpretar MES="${alvoBruto}".`);
 
@@ -895,6 +929,7 @@ async function main() {
       estrutura,
       estrategia: process.env.ESTRATEGIA,
       aprendizado: process.env.APRENDIZADO,
+      permanente,
     });
 
     if (debugPrompt) {

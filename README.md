@@ -126,6 +126,21 @@ O campo `mock` também é grátis — roda o fluxo inteiro sem chamar a API.
 
 ---
 
+## Onde mexer quando algo muda de vez
+
+Há três lugares, e a diferença importa:
+
+| Onde | Para o quê | Exemplo |
+|---|---|---|
+| Campo `estrategia` do workflow | Comando de **um mês só** | "Novembro é Black Friday, puxa mais Opinião" |
+| `ESTRATEGIA.md` | Regra **permanente** do perfil | "Sábado deixou de performar, tirar da cadência" |
+| `scripts/gerar-mes.mjs` | Como o sistema **funciona** | Mudar validação, schema, modelo de IA |
+
+Quando uma decisão pontual se repetir por dois ou três meses, ela deixou de ser
+comando e virou regra: suba do campo `estrategia` para o `ESTRATEGIA.md`.
+
+---
+
 ## Se o mês sair ruim
 
 1. **Não apague nada.** Abra as peças ruins no site e clique em **Recusar**,
@@ -156,6 +171,7 @@ Para ver só o prompt que seria enviado, sem chamar a API:
 | Arquivo | O que é |
 |---|---|
 | `index.html` | O site inteiro, num arquivo só. Abre offline, sem servidor |
+| **`ESTRATEGIA.md`** | **A estratégia editorial. O gerador lê a cada mês — editar aqui muda o conteúdo sem tocar em código** |
 | `scripts/gerar-mes.mjs` | O gerador. Lê o mês anterior, chama a IA, valida e grava |
 | `.github/workflows/gerar-mes.yml` | O botão do Actions |
 | `package.json` / `package-lock.json` | A única dependência: o SDK da Anthropic |
