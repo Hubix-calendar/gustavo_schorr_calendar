@@ -1,0 +1,14 @@
+{
+  "name": "gustavo-schorr-calendario",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Calendário editorial de vídeos do Gustavo Schorr, com roteiros completos, aprovação, banco de aprendizado e geração de novos meses por IA.",
+  "scripts": {
+    "gerar": "node scripts/gerar-mes.mjs",
+    "teste": "MOCK=1 node scripts/gerar-mes.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.115.0"
+  }
+}

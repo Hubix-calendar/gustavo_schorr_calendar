@@ -1,0 +1,3 @@
+# O gerador reescreve o index.html casando strings exatas entre os marcadores.
+# Forçar LF evita que um checkout no Windows converta para CRLF e quebre isso.
+* text=auto eol=lf
