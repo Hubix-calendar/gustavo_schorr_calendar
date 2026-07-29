@@ -149,6 +149,7 @@ function serializarVideo(v) {
 
   return `{
  n:${v.n},semana:${v.semana},dia:${v.dia},mes:${v.mes},ano:${v.ano},pilar:${texto(v.pilar)},duracao:${texto(v.duracao)},
+ modelo:${texto(v.modelo || 'classico')},
  titulo:${texto(v.titulo)},
  objetivo:${texto(v.objetivo)},
  publico:${texto(v.publico)},
@@ -242,6 +243,8 @@ function analisarEstrutura(meses, videos) {
   const contPilar = {};
   for (const v of doMes) contPilar[v.pilar] = (contPilar[v.pilar] ?? 0) + 1;
 
+  const virais = doMes.filter((v) => v.modelo === 'viral');
+
   const semanas = {};
   for (const v of doMes) semanas[v.semana] = (semanas[v.semana] ?? 0) + 1;
 
@@ -254,7 +257,9 @@ function analisarEstrutura(meses, videos) {
     diasDaSemana: contDow,
     pilares: contPilar,
     duracoes: [...new Set(doMes.map((v) => v.duracao))],
-    arco: doMes.map((v) => `dia ${pad(v.dia)} · ${v.pilar} · ${v.titulo}`),
+    virais: virais.length,
+    temasVirais: virais.map((v) => v.titulo),
+    arco: doMes.map((v) => `dia ${pad(v.dia)} · ${v.modelo === 'viral' ? '[viral] ' : ''}${v.pilar} · ${v.titulo}`),
   };
 }
 
@@ -285,12 +290,21 @@ function schemaMes() {
       dia: { type: 'integer', description: 'Dia do mês' },
       semana: { type: 'integer', description: 'Semana do mês, 1 a 5' },
       pilar: { type: 'string', enum: PILARES },
-      duracao: { type: 'string', description: 'Ex: "60–75s"' },
+      modelo: {
+        type: 'string',
+        enum: ['viral', 'classico'],
+        description: 'Estrutura do roteiro. "viral" = 9 tempos de retenção (só para os temas de maior potencial de compartilhamento). "classico" = 5 cenas.',
+      },
+      duracao: { type: 'string', description: 'Ex: "60–75s" no clássico, "78–88s" no viral' },
       titulo: str,
       objetivo: { type: 'string', description: 'Por que esta peça existe e o que ela move no negócio' },
       publico: { type: 'string', description: 'Recorte específico do público-alvo' },
       hooks: { type: 'array', items: str, description: 'Exatamente 3 ganchos alternativos' },
-      roteiro: { type: 'array', items: cena, description: 'Exatamente 5 cenas: hook, contexto, virada, conclusão, CTA' },
+      roteiro: {
+        type: 'array',
+        items: cena,
+        description: 'No modelo "classico": exatamente 5 cenas (hook, contexto, virada, conclusão, CTA). No modelo "viral": exatamente 9 tempos, nesta ordem — Ganchismo, Promessa aberta, Introdução, Bloco 1, Ponta solta, Bloco 2, Ponta solta, Solução, CTA. O rótulo em "c" deve começar com o número e o nome do tempo, com a marcação de tempo. Ex: "5. Ponta solta (28–32s)".',
+      },
       broll: { type: 'array', items: str, description: '5 sugestões de B-roll' },
       legendas: { type: 'array', items: str, description: 'Momentos de legenda na tela, com marcação de tempo' },
       impacto: { type: 'array', items: str, description: '3 frases de impacto recortáveis' },
@@ -332,7 +346,7 @@ function schemaMes() {
       srt: { type: 'string', description: 'Legenda SRT completa, numerada, com timecodes' },
     },
     required: [
-      'dia', 'semana', 'pilar', 'duracao', 'titulo', 'objetivo', 'publico',
+      'dia', 'semana', 'pilar', 'modelo', 'duracao', 'titulo', 'objetivo', 'publico',
       'hooks', 'roteiro', 'broll', 'legendas', 'impacto', 'cta',
       'titulos', 'desc', 'hash', 'thumb', 'cortes', 'srt',
     ],
@@ -371,6 +385,9 @@ Peças por semana: ${JSON.stringify(estrutura.porSemana)}
 Dias da semana usados: ${JSON.stringify(estrutura.diasDaSemana)}
 Mix de pilares: ${JSON.stringify(estrutura.pilares)}
 Durações usadas: ${estrutura.duracoes.join(', ')}
+Peças no modelo viral: ${estrutura.virais} de ${estrutura.total}
+Temas que foram virais no mês de referência (não repita as mesmas teses):
+${estrutura.temasVirais.length ? estrutura.temasVirais.map((t) => `  · ${t}`).join('\n') : '  (nenhum)'}
 
 Arco de objetivos do mês de referência:
 ${estrutura.arco.map((l) => `  ${l}`).join('\n')}
@@ -411,18 +428,68 @@ Português do Brasil, oralidade natural — o roteiro é lido em teleprompter.
 
 ## Formato de cada peça
 
-Vídeo de 45 a 90 segundos, distribuído em Reels, Shorts, TikTok, LinkedIn e
-Facebook. Cada peça carrega 17 entregáveis; o schema define todos eles.
+Vídeo distribuído em Reels, Shorts, TikTok, LinkedIn e Facebook. Cada peça
+carrega 17 entregáveis; o schema define todos eles.
 
-Regras que não podem ser quebradas:
-- roteiro tem exatamente 5 cenas: hook (0–3s), contexto, virada, conclusão, CTA
+Regras que valem para os dois modelos:
 - o campo "t" de cada cena é só a fala corrida, sem "CENA 1", sem descrição de
   imagem, sem rubrica. Direção de imagem vai no campo "d"
 - hooks tem exatamente 3 alternativas de abertura
 - impacto tem exatamente 3 frases recortáveis
 - srt é a legenda completa, numerada, com timecodes no formato
-  00:00:00,000 --> 00:00:04,500, coerente com a duração declarada
+  00:00:00,000 --> 00:00:04,500, coerente com as falas e com a duração declarada
 - pilar é um de: ${PILARES.join(' · ')}
+
+## Dois modelos de roteiro — escolha peça a peça
+
+### modelo "classico" — 45 a 90 segundos, 5 cenas
+
+Hook (0–3s), contexto, virada, conclusão, CTA. É o formato padrão do
+calendário. Use na maioria das peças, principalmente nas educativas de método,
+nos bastidores e no conteúdo de nicho.
+
+### modelo "viral" — 75 a 90 segundos, 9 tempos
+
+Reserve para os temas de maior potencial de compartilhamento. Escolha o modelo
+pelo tema, não por sorteio: mito a derrubar, erro comum e caro, contradição com
+o senso comum, polêmica do setor, previsão que mexe com medo do empresário,
+pergunta que ele já se faz. Tema técnico, tutorial passo a passo e conteúdo de
+nicho continuam no clássico — a estrutura de retenção neles soa forçada.
+
+**Proporção obrigatória: entre um quarto e um terço das peças do mês. Nunca mais
+que metade.** Se todas virassem, o feed ficaria repetitivo e o formato perderia
+o efeito. Espalhe pelo mês, evitando dois virais em dias seguidos.
+
+Os 9 tempos, nesta ordem exata, com o rótulo em "c" começando pelo número e o
+nome do tempo mais a marcação de tempo (ex: "5. Ponta solta (28–32s)"):
+
+1. **Ganchismo (0–3s)** — nunca um gatilho só. Combine vários ao mesmo tempo:
+   quebra de padrão, curiosidade, promessa forte, conflito, contradição, erro
+   comum, identificação, benefício claro. O objetivo é impedir o deslize para o
+   próximo vídeo. Comece já falando, sem "oi, tudo bem".
+2. **Promessa aberta (3–8s)** — o benefício fica claro, a resposta não. "Tem
+   três erros, e o terceiro é o que faz você perder dinheiro." "A maior
+   vantagem aparece só no final."
+3. **Introdução (8–14s)** — entra no assunto direto. Sem apresentação, sem
+   contextualização longa. Aos 10 segundos o espectador já tem que estar dentro.
+4. **Bloco 1 (14–30s)** — primeira entrega útil de verdade. A pessoa precisa
+   sentir que já aprendeu algo.
+5. **Ponta solta (28–34s)** — interrompe a entrega com curiosidade. "Mas isso
+   ainda não é o maior problema." "E quase ninguém percebe esse detalhe."
+6. **Bloco 2 (32–52s)** — segunda entrega, com informação melhor que a primeira.
+7. **Ponta solta (50–56s)** — nova quebra antes da conclusão. Nunca entregue
+   tudo de uma vez.
+8. **Solução (54–78s)** — fecha todas as promessas e resolve todas as pontas
+   soltas. Não deixe pergunta sem resposta.
+9. **CTA (76–88s)** — nunca genérico. Escolha pelo objetivo da peça:
+   educativo ou tutorial → salvar · autoridade → seguir · polêmico → compartilhar
+   · gerador de debate → comentar · comercial → link. Um CTA por peça.
+
+Escrevendo o roteiro viral, cada frase responde a "o que faz a pessoa assistir
+mais 3 segundos?". Frases curtas. Linguagem falada. Nada de frase decorativa.
+A sequência é curiosidade → recompensa → curiosidade → recompensa até o fim.
+Varie os CTAs entre as peças virais do mês — não repita "salva esse vídeo" em
+todas.
 
 ## Autenticidade — inegociável
 
@@ -458,7 +525,7 @@ Devolva o mês completo no formato do schema.`;
 
 // --------------------------------------------------------------- validação
 
-function validar(videos, { ano, mes, dias }) {
+export function validar(videos, { ano, mes, dias }) {
   const erros = [];
   const vistos = new Set();
 
@@ -478,6 +545,10 @@ function validar(videos, { ano, mes, dias }) {
     if (!v.titulo?.trim()) erros.push(`${rot}: sem título`);
     if (!v.publico?.trim()) erros.push(`${rot}: sem público definido`);
 
+    if (!['viral', 'classico'].includes(v.modelo)) {
+      erros.push(`${rot}: modelo inválido "${v.modelo}" (use "viral" ou "classico")`);
+    }
+
     if (!Array.isArray(v.roteiro) || v.roteiro.length < 3) {
       erros.push(`${rot}: reel sem roteiro utilizável`);
     } else {
@@ -485,6 +556,22 @@ function validar(videos, { ano, mes, dias }) {
       if (semFala) erros.push(`${rot}: ${semFala} cena(s) sem fala`);
       const semDirecao = v.roteiro.filter((c) => !c?.d?.trim()).length;
       if (semDirecao) erros.push(`${rot}: ${semDirecao} cena(s) sem orientação de gravação`);
+
+      // A estrutura de retenção só funciona inteira. Faltando uma ponta solta,
+      // o roteiro perde exatamente o que faz a pessoa continuar assistindo.
+      if (v.modelo === 'viral') {
+        if (v.roteiro.length !== 9) {
+          erros.push(`${rot}: roteiro viral precisa de 9 tempos (tem ${v.roteiro.length})`);
+        }
+        const rotulos = v.roteiro.map((c) => normalizar(c?.c ?? ''));
+        const pontas = rotulos.filter((r) => r.includes('ponta solta')).length;
+        if (pontas < 2) erros.push(`${rot}: roteiro viral com ${pontas} ponta(s) solta(s), precisa de 2`);
+        if (!rotulos.some((r) => r.includes('ganchismo'))) erros.push(`${rot}: roteiro viral sem o tempo de ganchismo`);
+        if (!rotulos.some((r) => r.includes('promessa aberta'))) erros.push(`${rot}: roteiro viral sem promessa aberta`);
+        if (!rotulos.some((r) => r.includes('solucao'))) erros.push(`${rot}: roteiro viral sem o tempo de solução`);
+      } else if (v.modelo === 'classico' && v.roteiro.length !== 5) {
+        erros.push(`${rot}: roteiro clássico precisa de 5 cenas (tem ${v.roteiro.length})`);
+      }
     }
 
     if (!Array.isArray(v.hooks) || v.hooks.filter((h) => h?.trim()).length < 3) {
@@ -501,6 +588,16 @@ function validar(videos, { ano, mes, dias }) {
   }
 
   if (!videos.length) erros.push('nenhuma peça gerada');
+
+  // Proporção: se todo mês virasse roteiro de retenção, o feed ficaria repetitivo
+  // e o formato perderia o efeito. Se nenhum virasse, o mês não teria peça de alcance.
+  if (videos.length >= 4) {
+    const virais = videos.filter((v) => v.modelo === 'viral').length;
+    const parte = virais / videos.length;
+    if (virais === 0) erros.push('nenhuma peça no modelo viral — o mês precisa de peças de alcance');
+    else if (parte > 0.5) erros.push(`${virais} de ${videos.length} peças no modelo viral (${Math.round(parte * 100)}%) — o teto é 50%, senão o feed fica repetitivo`);
+  }
+
   return erros;
 }
 
@@ -518,7 +615,10 @@ function markdown(mesKey, meta, videos) {
   for (const v of ordenados) {
     L.push(`## Dia ${pad(v.dia)} — ${v.titulo}`);
     L.push('');
-    L.push(`**Pilar:** ${v.pilar} · **Semana:** ${v.semana} · **Duração:** ${v.duracao}`);
+    const rotuloModelo = v.modelo === 'viral'
+      ? `retenção, ${v.roteiro.length} tempos`
+      : `clássico, ${v.roteiro.length} cenas`;
+    L.push(`**Pilar:** ${v.pilar} · **Semana:** ${v.semana} · **Duração:** ${v.duracao} · **Formato:** ${rotuloModelo}`);
     L.push('');
     L.push(`**Objetivo:** ${v.objetivo}`);
     L.push('');
@@ -646,27 +746,41 @@ async function gerarComIA(prompt) {
   }
 }
 
+const TEMPOS_VIRAL = [
+  'Ganchismo (0–3s)', 'Promessa aberta (3–8s)', 'Introdução (8–14s)',
+  'Bloco 1 (14–30s)', 'Ponta solta (30–34s)', 'Bloco 2 (34–52s)',
+  'Ponta solta (52–56s)', 'Solução (56–78s)', 'CTA (78–88s)',
+];
+
 function gerarMock({ dias, estrutura }) {
   const alvo = estrutura?.total ?? 8;
   const videos = [];
   let dia = 1;
   for (let i = 0; i < alvo && dia <= dias; i++) {
+    const viral = i % 3 === 0;
     videos.push({
       dia,
       semana: Math.min(5, Math.ceil(dia / 7)),
       pilar: PILARES[i % PILARES.length],
-      duracao: '60–75s',
+      modelo: viral ? 'viral' : 'classico',
+      duracao: viral ? '78–88s' : '60–75s',
       titulo: `[MOCK] Peça de teste ${i + 1}`,
       objetivo: '[MOCK] objetivo de teste do fluxo do gerador.',
       publico: '[MOCK] público de teste.',
       hooks: ['[MOCK] gancho 1', '[MOCK] gancho 2', '[MOCK] gancho 3'],
-      roteiro: [
-        { c: 'Cena 1 · Hook (0–3s)', t: '[MOCK] fala do hook.', d: '[MOCK] plano fechado.' },
-        { c: 'Cena 2 · Contexto (3–18s)', t: '[MOCK] fala de contexto.', d: '[MOCK] B-roll urbano.' },
-        { c: 'Cena 3 · Virada (18–40s)', t: '[MOCK] fala da virada.', d: '[substituir por história real do Gustavo: teste].' },
-        { c: 'Cena 4 · Conclusão (40–58s)', t: '[MOCK] fala de conclusão.', d: '[MOCK] plano médio.' },
-        { c: 'Cena 5 · CTA (58–70s)', t: '[MOCK] pergunta final.', d: '[MOCK] plano fechado.' },
-      ],
+      roteiro: viral
+        ? TEMPOS_VIRAL.map((tempo, k) => ({
+            c: `${k + 1}. ${tempo}`,
+            t: `[MOCK] fala do tempo ${k + 1}.`,
+            d: k === 5 ? '[substituir por história real do Gustavo: teste].' : '[MOCK] direção de imagem.',
+          }))
+        : [
+            { c: 'Cena 1 · Hook (0–3s)', t: '[MOCK] fala do hook.', d: '[MOCK] plano fechado.' },
+            { c: 'Cena 2 · Contexto (3–18s)', t: '[MOCK] fala de contexto.', d: '[MOCK] B-roll urbano.' },
+            { c: 'Cena 3 · Virada (18–40s)', t: '[MOCK] fala da virada.', d: '[substituir por história real do Gustavo: teste].' },
+            { c: 'Cena 4 · Conclusão (40–58s)', t: '[MOCK] fala de conclusão.', d: '[MOCK] plano médio.' },
+            { c: 'Cena 5 · CTA (58–70s)', t: '[MOCK] pergunta final.', d: '[MOCK] plano fechado.' },
+          ],
       broll: ['[MOCK] painel de LED', '[MOCK] avenida', '[MOCK] reunião', '[MOCK] mapa', '[MOCK] fachada'],
       legendas: ['0–3s: [MOCK]', '30s: [MOCK]'],
       impacto: ['[MOCK] frase 1', '[MOCK] frase 2', '[MOCK] frase 3'],

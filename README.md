@@ -29,6 +29,50 @@ Trechos marcados assim `[substituir por história real do Gustavo: ...]` são
 propositais: nunca inventamos viagens, negociações ou números internos. Preencha
 com experiência real antes de gravar. O mesmo vale para `[INSERIR NÚMERO REAL]`.
 
+---
+
+## Os dois formatos de roteiro
+
+As peças não seguem todas o mesmo desenho. Há dois formatos, e o filtro
+**Formato** no topo da grade separa os dois.
+
+### Clássico — 5 cenas, 45 a 90s
+
+Hook, contexto, virada, conclusão, CTA. É o padrão do calendário, usado na
+maioria das peças: educativo de método, bastidores, conteúdo de nicho.
+
+### ⚡ Retenção — 9 tempos, 75 a 90s
+
+Marcado com ⚡ na grade. Construído para segurar o espectador até o fim:
+
+| # | Tempo | Para que serve |
+|---|---|---|
+| 1 | Ganchismo (0–3s) | Vários gatilhos ao mesmo tempo — impedir o deslize |
+| 2 | Promessa aberta (3–8s) | Benefício claro, resposta escondida |
+| 3 | Introdução (8–14s) | Entra no assunto direto, sem apresentação |
+| 4 | Bloco 1 (14–30s) | Primeira entrega útil |
+| 5 | **Ponta solta** (30–34s) | Quebra a entrega com curiosidade |
+| 6 | Bloco 2 (34–52s) | Segunda entrega, informação melhor |
+| 7 | **Ponta solta** (52–56s) | Nova quebra antes da conclusão |
+| 8 | Solução (56–78s) | Fecha todas as promessas e pontas soltas |
+| 9 | CTA (78–88s) | Ação escolhida pelo objetivo da peça |
+
+No teleprompter, os tempos de gancho e as pontas soltas aparecem com uma barra
+lateral colorida — são os pontos em que a atenção se perde se a entrega for mole.
+
+O CTA nunca é genérico. Educativo e tutorial pedem **salvar**, autoridade pede
+**seguir**, polêmica pede **compartilhar**, tese que divide opinião pede
+**comentar**.
+
+**Por que não em todas:** o formato depende de novidade. Se todo vídeo abrisse
+com quebra de padrão e duas pontas soltas, o feed viraria uma coisa só e o
+efeito acabava. Por isso o gerador é obrigado a ficar entre um quarto e um terço
+das peças do mês, com teto de metade — se passar disso, a validação aborta e
+nada é gravado. Hoje são **12 de 35** (34%), escolhidas por tema: mito a
+derrubar, erro caro, contradição com o senso comum e polêmica do setor. Tutorial
+passo a passo e conteúdo técnico seguem no clássico, onde a estrutura de
+retenção soaria forçada.
+
 > As aprovações e o histórico ficam salvos **no navegador que você usou**. Não
 > sincronizam entre computadores. Para levar de uma máquina para outra, use
 > **Exportar base (JSON)**.
@@ -59,9 +103,11 @@ Quando terminar (uns minutos), o mês novo já está no site. Atualize a página
 ### A regra da herança
 
 O mês novo **herda a estrutura do último mês preenchido**: quantas peças, em
-quais dias da semana, com que mistura de pilares e que arco de assuntos. A
-`estrategia` sobrepõe isso **apenas naquilo que ela mencionar**. Se você deixar
-em branco, ele repete a estrutura e troca só os temas e ângulos.
+quais dias da semana, com que mistura de pilares, quantas peças de retenção e
+que arco de assuntos. A `estrategia` sobrepõe isso **apenas naquilo que ela
+mencionar**. Se você deixar em branco, ele repete a estrutura e troca só os
+temas e ângulos. Ele também recebe a lista de temas que já foram ⚡ Retenção no
+mês anterior, para não repetir a mesma tese.
 
 Exemplo de estratégia que ele obedece:
 

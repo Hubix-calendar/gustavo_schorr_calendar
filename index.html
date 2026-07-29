@@ -222,6 +222,14 @@
   }
   .teleprompter .dir{display:block;font-size:12.5px;color:var(--muted);margin-top:4px;font-style:italic}
   .ph{background:var(--realce-fraco);color:var(--realce);border-radius:4px;padding:0 4px;font-style:normal}
+  .teleprompter p.ponta{border-left:2px solid var(--realce);padding-left:11px;margin-left:-13px}
+  .teleprompter p.ponta .cena{color:var(--realce)}
+  .selo{
+    display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.07em;text-transform:uppercase;border-radius:5px;padding:2px 7px;
+    background:var(--realce-fraco);color:var(--realce);
+  }
+  .ev .fmt{font-weight:700;color:var(--realce)}
   .cta-fala{color:var(--realce);font-weight:600}
 
   .abas{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px}
@@ -313,6 +321,10 @@
   </section>
 
   <footer>
+    <strong>⚡ Retenção</strong> marca os roteiros montados em 9 tempos — ganchismo, promessa aberta,
+    duas pontas soltas e CTA de acordo com o objetivo. São os temas de maior potencial de
+    compartilhamento; o restante segue o formato clássico de 5 cenas para o feed não ficar repetitivo.
+    <br><br>
     Roteiros marcados com <span class="ph">[substituir por história real do Gustavo]</span> precisam de experiência real antes de gravar — não inventamos viagens, negociações nem números internos.
     Onde aparece <span class="ph">[INSERIR NÚMERO REAL]</span>, confirme o dado antes de publicar.
     <br>Decisões e histórico ficam salvos neste navegador (localStorage). Para levar para outra máquina, use <em>Exportar base</em>.
@@ -368,6 +380,7 @@ const MESES={
 const VIDEOS=[
 {
  n:13,semana:1,dia:1,mes:8,ano:2026,pilar:"Autoridade",duracao:"55–70s",
+ modelo:"classico",
  titulo:"O mercado brasileiro de mídia exterior movimenta bilhões",
  objetivo:"Abrir o mês com uma afirmação de escala para reposicionar o outdoor como investimento estratégico, não secundário. Mostra ao empresário o tamanho real do mercado que ele está ignorando ou subestimando.",
  publico:"Empresários e diretores de marketing que ainda tratam mídia exterior como item de orçamento residual.",
@@ -391,55 +404,66 @@ const VIDEOS=[
  srt:"1\n00:00:00,000 --> 00:00:06,400\nVocê sabia que a mídia exterior movimenta bilhões de reais todos os anos no Brasil?\n\n2\n00:00:06,400 --> 00:00:13,649\nE mesmo assim, muita empresa ainda trata outdoor e painel de LED como investimento secundário.\n\n3\n00:00:13,649 --> 00:00:26,450\nA verdade é que a mídia exterior continua sendo um dos poucos meios capazes de gerar impacto em massa, fortalecer marca e influenciar decisão de compra no mundo real.\n\n4\n00:00:26,450 --> 00:00:37,169\nEnquanto as pessoas passam cada vez mais tempo tentando ignorar anúncio na internet, elas continuam circulando pelas cidades todos os dias.\n\n5\n00:00:37,169 --> 00:00:43,647\nE é nesse momento que uma marca forte aparece, gera lembrança e constrói autoridade.\n\n6\n00:00:43,647 --> 00:00:48,042\nEmpresa líder não investe em outdoor só para vender hoje.\n\n7\n00:00:48,042 --> 00:00:50,587\nInveste para ser lembrada amanhã.\n\n8\n00:00:50,587 --> 00:00:57,604\nQuem entende isso para de disputar atenção e começa a ocupar espaço na mente do consumidor.\n\n9\n00:00:57,604 --> 00:01:02,000\nVale pensar: onde a sua marca está ocupando espaço agora?"
 },
 {
- n:14,semana:1,dia:3,mes:8,ano:2026,pilar:"Opinião",duracao:"50–65s",
+ n:14,semana:1,dia:3,mes:8,ano:2026,pilar:"Opinião",duracao:"76–86s",
+ modelo:"viral",
  titulo:"O maior erro dos anunciantes",
  objetivo:"Posicionar opinião forte sobre a diferença entre vender e construir marca. Gera debate entre empresários que tratam marketing como ferramenta puramente transacional.",
  publico:"Empresários e gestores comerciais focados em resultado de curto prazo.",
- hooks:["Na minha opinião, o maior erro dos anunciantes é acreditar que marketing serve só para vender.","Empresa que só pensa na próxima venda está cavando o próprio problema de preço.","Quem trata marketing como caixa registradora esquece da parte que realmente sustenta o negócio."],
+ hooks:["O maior erro dos anunciantes é achar que marketing serve só pra vender. E o preço disso aparece tarde.","Sua empresa bate meta todo mês e mesmo assim perde no preço. Tem um motivo.","Existe um dia exato em que a falta de marca cobra a conta. Você vai reconhecer o dia."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–4s)",t:"Na minha opinião, o maior erro dos anunciantes é acreditar que marketing serve só para vender.",d:"Gustavo direto na câmera, tom de opinião."},
-  {c:"Cena 2 · Contexto (4–22s)",t:"Marketing também serve para construir confiança. Empresa que pensa só na próxima venda esquece de fortalecer a marca. E quando chega a hora de disputar preço, não tem diferencial nenhum.",d:"B-roll de vitrine com preço em destaque, depois cortando para painel de marca."},
-  {c:"Cena 3 · Desenvolvimento (22–42s)",t:"As grandes marcas fazem diferente. Investem continuamente em presença, lembrança e posicionamento. Quando chega a hora da compra, o cliente já conhece a empresa e sente muito mais segurança.",d:"[substituir por exemplo real do Gustavo de uma marca que investiu em presença antes de vender]."},
-  {c:"Cena 4 · Conclusão (42–55s)",t:"Quem constrói marca vende mais hoje e continua vendendo amanhã.",d:"Plano fechado."},
-  {c:"Cena 5 · CTA (55–63s)",t:"Sua empresa está construindo confiança ou só correndo atrás da próxima venda?",d:"Convite ao debate."}
+  {c:"1. Ganchismo (0–3s)",t:"O maior erro dos anunciantes é achar que marketing serve só pra vender. E o preço disso aparece tarde.",d:"Gustavo direto na câmera, tom de opinião."},
+  {c:"2. Promessa aberta (3–8s)",t:"Aparece num dia específico. Eu vou te dizer qual é, e você vai reconhecer na hora.",d:"Plano fechado."},
+  {c:"3. Introdução (8–13s)",t:"Marketing também serve pra construir confiança. Só que confiança não entra no relatório da semana.",d:"B-roll de relatório de desempenho na tela."},
+  {c:"4. Bloco 1 (13–28s)",t:"Aí a empresa foca só na próxima venda. Faz promoção, corre atrás de lead, bate a meta do mês. Tudo certo. Nada disso é errado.",d:"B-roll de vitrine com preço em destaque."},
+  {c:"5. Ponta solta (28–32s)",t:"Errado é o que deixa de acontecer enquanto isso. E ninguém percebe. Até o tal dia.",d:"Volta pro Gustavo, plano médio."},
+  {c:"6. Bloco 2 (32–50s)",t:"O dia em que o cliente coloca você lado a lado com o concorrente. Mesmo produto, mesma proposta, mesma tela. Nesse momento, se ele não conhece a sua marca, sobra uma variável só pra ele decidir.",d:"[substituir por exemplo real do Gustavo: uma marca que investiu em presença antes de precisar vender]."},
+  {c:"7. Ponta solta (50–54s)",t:"E não é o preço. Preço é a consequência. A causa é outra.",d:"Plano fechado, pausa."},
+  {c:"8. Solução (54–74s)",t:"A causa é você não ter dado nenhum motivo pra ele te escolher antes de comparar. Marca é isso: chegar na comparação já com vantagem. As grandes fazem exatamente isso. Investem em presença, lembrança e posicionamento o ano inteiro, pra que a conversa de preço comece de um lugar melhor. Quem constrói marca vende mais hoje e continua vendendo amanhã.",d:"Gustavo, plano médio, tom de conclusão."},
+  {c:"9. CTA (74–84s)",t:"Comenta: sua empresa está construindo confiança ou correndo atrás da próxima venda?",d:"Plano fechado, convite ao debate."}
  ],
  broll:["Vitrine com etiqueta de preço em destaque","Painel de marca em ponto estratégico","Cliente entrando numa loja com segurança","Gráfico simples de presença de marca ao longo do tempo","Gustavo em ambiente de escritório, tom reflexivo"],
  legendas:["0–4s: 'maior erro dos anunciantes'","15s: 'sem diferencial nenhum'","35s: 'muito mais segurança'","55s: pergunta final"],
  impacto:["Marketing também serve para construir confiança, não só para vender.","Quando chega a hora de disputar preço, quem não construiu marca não tem diferencial.","Quem constrói marca vende mais hoje e continua vendendo amanhã."],
- cta:"\"Sua empresa está construindo confiança ou só correndo atrás da próxima venda?\"",
+ cta:"\"Comenta: sua empresa está construindo confiança ou correndo atrás da próxima venda?\"",
  titulos:{ig:"O erro que a maioria dos anunciantes comete sem perceber",li:"O maior erro dos anunciantes: tratar marketing só como ferramenta de venda",yt:"O MAIOR erro dos anunciantes (na minha opinião)"},
  desc:{ig:"Marketing não é só sobre vender hoje. É sobre ser lembrado amanhã. Um erro comum que sai caro lá na frente.",li:"Empresas que tratam marketing apenas como ferramenta de venda acabam sem diferencial na hora de disputar preço. Minha visão sobre por que construir confiança e presença de marca é o que sustenta o crescimento no longo prazo.",fb:"O maior erro dos anunciantes, na minha opinião: achar que marketing serve só para vender.",yt:"Gustavo Schorr dá sua opinião sobre o maior erro que vê nos anunciantes: tratar marketing apenas como ferramenta de venda, esquecendo de construir confiança e presença de marca."},
  hash:{ig:"#marketing #marca #empreendedorismo #opiniao #negocios #branding",li:"#marketing #branding #opiniao #estrategia #marca",tt:"#marketing #negocios #empreendedorismo #opiniao",yt:"#marketing #marca #opiniao #empreendedorismo"},
  thumb:{texto:"O ERRO DOS ANUNCIANTES",comp:"Gustavo com expressão de contestação, etiqueta de preço riscada ao fundo",expr:"Firme, tom de opinião direta"},
  cortes:{shorts:"Hook + conclusão 'vende mais hoje e continua vendendo amanhã' + pergunta final.",linkedin:"Manter estrutura completa de opinião fundamentada, tom mais pausado e executivo.",tiktok:"Hook agressivo, texto 'ERRO Nº 1' na tela, cortes rápidos até a pergunta final."},
- srt:"1\n00:00:00,000 --> 00:00:08,997\nNa minha opinião, o maior erro dos anunciantes é acreditar que marketing serve só para vender.\n\n2\n00:00:08,997 --> 00:00:13,591\nMarketing também serve para construir confiança.\n\n3\n00:00:13,591 --> 00:00:20,099\nEmpresa que pensa só na próxima venda esquece de fortalecer a marca.\n\n4\n00:00:20,099 --> 00:00:26,607\nE quando chega a hora de disputar preço, não tem diferencial nenhum.\n\n5\n00:00:26,607 --> 00:00:29,861\nAs grandes marcas fazem diferente.\n\n6\n00:00:29,861 --> 00:00:35,891\nInvestem continuamente em presença, lembrança e posicionamento.\n\n7\n00:00:35,891 --> 00:00:44,601\nQuando chega a hora da compra, o cliente já conhece a empresa e sente muito mais segurança.\n\n8\n00:00:44,601 --> 00:00:50,630\nQuem constrói marca vende mais hoje e continua vendendo amanhã.\n\n9\n00:00:50,630 --> 00:00:58,000\nSua empresa está construindo confiança ou só correndo atrás da próxima venda?"
+ srt:"1\n00:00:00,000 --> 00:00:02,109\nO maior erro dos anunciantes é achar que marketing serve só pra vender.\n\n2\n00:00:02,109 --> 00:00:03,000\nE o preço disso aparece tarde.\n\n3\n00:00:03,000 --> 00:00:08,000\nAparece num dia específico. Eu vou te dizer qual é, e você vai reconhecer na hora.\n\n4\n00:00:08,000 --> 00:00:10,423\nMarketing também serve pra construir confiança.\n\n5\n00:00:10,423 --> 00:00:13,000\nSó que confiança não entra no relatório da semana.\n\n6\n00:00:13,000 --> 00:00:17,560\nAí a empresa foca só na próxima venda.\n\n7\n00:00:17,560 --> 00:00:28,000\nFaz promoção, corre atrás de lead, bate a meta do mês. Tudo certo. Nada disso é errado.\n\n8\n00:00:28,000 --> 00:00:32,000\nErrado é o que deixa de acontecer enquanto isso. E ninguém percebe. Até o tal dia.\n\n9\n00:00:32,000 --> 00:00:38,094\nO dia em que o cliente coloca você lado a lado com o concorrente.\n\n10\n00:00:38,094 --> 00:00:42,031\nMesmo produto, mesma proposta, mesma tela.\n\n11\n00:00:42,031 --> 00:00:50,000\nNesse momento, se ele não conhece a sua marca, sobra uma variável só pra ele decidir.\n\n12\n00:00:50,000 --> 00:00:54,000\nE não é o preço. Preço é a consequência. A causa é outra.\n\n13\n00:00:54,000 --> 00:00:58,624\nA causa é você não ter dado nenhum motivo pra ele te escolher antes de comparar.\n\n14\n00:00:58,624 --> 00:01:03,538\nMarca é isso: chegar na comparação já com vantagem. As grandes fazem exatamente isso.\n\n15\n00:01:03,538 --> 00:01:10,358\nInvestem em presença, lembrança e posicionamento o ano inteiro, pra que a conversa de preço comece de um lugar melhor.\n\n16\n00:01:10,358 --> 00:01:14,000\nQuem constrói marca vende mais hoje e continua vendendo amanhã.\n\n17\n00:01:14,000 --> 00:01:24,000\nComenta: sua empresa está construindo confiança ou correndo atrás da próxima venda?"
 },
 {
- n:1,semana:1,dia:4,mes:8,ano:2026,pilar:"Bastidores",duracao:"60–75s",
+ n:1,semana:1,dia:4,mes:8,ano:2026,pilar:"Bastidores",duracao:"75–85s",
+ modelo:"viral",
  titulo:"Quem realmente decide uma campanha de OOH?",
  objetivo:"Mostrar ao empresário que a decisão de marca não deveria ficar só no time de mídia. Posiciona Gustavo como quem enxerga o negócio inteiro, não só a compra de espaço. Conteúdo altamente compartilhável entre donos de empresa que sentem que 'perdem o controle' do próprio marketing.",
  publico:"CEOs, fundadores e diretores de marketing que assinam o cheque, mas não participam da decisão criativa.",
- hooks:["Numa reunião de campanha, tem sempre alguém que fala pouco. E é essa pessoa que decide o que importa.","O erro não é escolher o ponto errado. É deixar a escolha na mão de quem não pensa como dono.","Todo mundo acha que quem decide a campanha é o marketing. Na prática, quase nunca é."],
+ hooks:["Numa reunião de campanha, quem menos fala é quem mais decide. E quase nunca é o marketing.","Sua empresa gasta em mídia todo mês. E provavelmente quem decide onde não é você.","Existe uma cadeira errada em toda reunião de campanha. Deixa eu te mostrar qual."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–3s)",t:"Numa reunião de campanha, tem sempre alguém que fala pouco. E no fim é essa pessoa que decide onde a marca vai aparecer.",d:"Gustavo direto na câmera, plano fechado, ambiente de escritório."},
-  {c:"Cena 2 · Contexto (3–18s)",t:"Deixa eu te dar um número. Mídia exterior no Brasil hoje é o terceiro canal que mais recebe investimento. São R$ 3,5 bilhões por ano, uns 12% de tudo que se investe em publicidade. Isso não é mais 'outdoor'. Virou decisão de estratégia.",d:"Corta para B-roll de avenida com painéis; texto na tela com o dado."},
-  {c:"Cena 3 · Virada (18–40s)",t:"E o que pouca gente percebe é isso. Quem devia decidir não é quem entende de mídia. É quem entende do negócio. Porque onde a sua marca precisa aparecer muda com o momento da empresa. Se você tá buscando cliente novo, é um lugar. Se tá segurando o que já conquistou, é outro. Isso é decisão de dono. Não dá pra passar inteira pro fornecedor.",d:"[substituir por história real do Gustavo: uma reunião em que o ponto foi definido pela estratégia do negócio, não pelo preço da mídia]."},
-  {c:"Cena 4 · Conclusão (40–58s)",t:"Quando o dono senta nessa conversa, a mídia para de ser um custo e começa a puxar o negócio. Quando ele entrega tudo e some, acaba pagando caro pra aparecer sem construir nada.",d:"Volta para Gustavo, plano médio."},
-  {c:"Cena 5 · CTA (58–70s)",t:"Fica a pergunta: na sua empresa, quem decide de verdade onde a marca aparece?",d:"Plano fechado, tom de convite."}
+  {c:"1. Ganchismo (0–3s)",t:"Numa reunião de campanha, quem menos fala é quem mais decide. E quase nunca é o marketing.",d:"Gustavo direto na câmera, plano fechado, corte seco já falando."},
+  {c:"2. Promessa aberta (3–7s)",t:"Vou te mostrar quem é essa pessoa. E por que, na sua empresa, ela provavelmente tá sentada na cadeira errada.",d:"Mantém plano fechado, sem respiro."},
+  {c:"3. Introdução (7–13s)",t:"Mídia exterior no Brasil já é o terceiro canal que mais recebe investimento. R$ 3,5 bilhões por ano.",d:"Card na tela: R$ 3,5 bi/ano · 3º maior canal."},
+  {c:"4. Bloco 1 (13–27s)",t:"Quando vira esse tamanho, deixa de ser compra de espaço e vira decisão de estratégia. Só que a reunião continua igual: o time de mídia apresenta as opções, o fornecedor defende o ponto dele, e o dono aprova o orçamento no fim.",d:"B-roll de reunião vista de cima, pessoas ao redor da mesa."},
+  {c:"5. Ponta solta (27–31s)",t:"Só que tem um detalhe nessa cena que muda tudo. E quase ninguém repara.",d:"Volta pro Gustavo, plano médio."},
+  {c:"6. Bloco 2 (31–48s)",t:"Onde a sua marca precisa aparecer muda conforme o momento da empresa. Se você tá buscando cliente novo, é um lugar. Se tá segurando o que já conquistou, é outro. Isso não é informação de mídia. É informação de dono.",d:"[substituir por história real do Gustavo: uma reunião em que o ponto foi definido pela estratégia do negócio, não pelo preço da mídia]."},
+  {c:"7. Ponta solta (48–52s)",t:"E é aqui que a maioria comete o erro mais caro. E não é escolher o ponto errado.",d:"Plano fechado, pausa curta."},
+  {c:"8. Solução (52–72s)",t:"É terceirizar a pergunta. Quando o dono entra na conversa, a mídia para de ser custo e começa a puxar o negócio. Quando ele aprova o orçamento e some, paga caro pra aparecer sem construir nada. Quem decide não precisa entender de mídia. Precisa entender do negócio. O time de mídia executa.",d:"Gustavo, plano médio, tom de conclusão."},
+  {c:"9. CTA (72–82s)",t:"Comenta aqui: na sua empresa, quem decide de verdade onde a marca aparece?",d:"Plano fechado, tom de convite ao debate."}
  ],
  broll:["Avenida movimentada com painel de LED ao entardecer","Reunião vista de cima, pessoas ao redor de uma mesa","Mãos apontando para um mapa da cidade","Close em tela com dados de audiência","Fachada de empresa / logo em ambiente urbano"],
  legendas:["0–3s: destacar 'ela decide tudo'","10s: card 'R$ 3,51 bi/ano · 3º maior canal'","25s: 'decisão de dono, não de fornecedor'","58s: pergunta final em tela cheia"],
  impacto:["Mídia exterior parou de ser gasto de exposição. Virou decisão de estratégia.","Quem entende do negócio escolhe onde a marca aparece. O time de mídia executa.","Quando você terceiriza onde a marca aparece, terceiriza um pedaço de como te enxergam."],
- cta:"\"Fica a pergunta: na sua empresa, quem decide de verdade onde a marca aparece?\"",
+ cta:"\"Comenta aqui: na sua empresa, quem decide de verdade onde a marca aparece?\"",
  titulos:{ig:"Quem decide sua campanha de mídia? (não é quem você pensa)",li:"Por que a decisão de mídia exterior é uma decisão de CEO, não de fornecedor",yt:"Quem REALMENTE decide uma campanha de OOH | Bastidores da mídia exterior"},
  desc:{ig:"A mídia exterior já é o 3º maior canal de investimento do Brasil. Mesmo assim, muita empresa deixa a decisão inteira na mão de terceiros. Salve para a próxima reunião de marketing. [inserir história real na legenda]",li:"O OOH cresceu 20,6% no último ano e representa cerca de 12% do investimento publicitário nacional (R$ 3,51 bi/ano). Com esse peso, decidir onde a marca aparece virou pauta de estratégia, não de compra de espaço. Neste vídeo, por que o dono precisa estar nessa conversa.",fb:"Quem decide onde a sua marca aparece? Na maioria das empresas, a resposta revela um problema de estratégia. Um ponto de vista para empresários.",yt:"A mídia exterior é o terceiro maior canal de investimento publicitário do Brasil (fonte: Kantar Ibope / dados de mercado). Neste vídeo, Gustavo Schorr explica por que a decisão de uma campanha de OOH deveria começar no dono do negócio, e não terminar no fornecedor de mídia."},
  hash:{ig:"#midiaexterior #OOH #marketing #empreendedorismo #gestao #marca #publicidade",li:"#OOH #DOOH #marketing #estrategia #lideranca #branding",tt:"#empreendedorismo #marketing #negocios #midiaexterior #gestao",yt:"#OOH #midiaexterior #marketing #empreendedorismo"},
  thumb:{texto:"QUEM DECIDE?",comp:"Gustavo à direita olhando para um painel urbano desfocado à esquerda; seta apontando para a mesa de reunião",expr:"Sério, confiante, sobrancelha levemente levantada (provocação)"},
  cortes:{shorts:"Hook (0–3s) + Cena 3 (a virada 'decisão de dono') + pergunta final. Cortar o dado detalhado.",linkedin:"Abrir pelo dado de mercado (contexto/autoridade), depois a tese da decisão, fechar com a pergunta. Tom mais analítico.",tiktok:"Começar já na frase 'quem decide não é quem você pensa', cortes rápidos a cada 2s, texto grande na tela, ritmo acelerado."},
- srt:"1\n00:00:00,000 --> 00:00:03,200\nNuma reunião de campanha de OOH, existe uma pessoa que quase não fala.\n\n2\n00:00:03,200 --> 00:00:06,000\nE é ela que decide tudo.\n\n3\n00:00:06,000 --> 00:00:12,500\nA mídia exterior já é o terceiro maior canal de investimento do Brasil.\n\n4\n00:00:12,500 --> 00:00:18,000\nCerca de 12% do bolo publicitário. R$ 3,5 bilhões por ano.\n\n5\n00:00:18,000 --> 00:00:26,000\nMas a campanha não é decidida por quem entende de mídia. É por quem entende do negócio.\n\n6\n00:00:26,000 --> 00:00:34,000\nOnde a marca precisa ser vista muda conforme a fase da empresa. Isso é decisão de dono.\n\n7\n00:00:34,000 --> 00:00:42,000\nQuando o empresário entra na conversa, a mídia deixa de ser custo e vira alavanca.\n\n8\n00:00:42,000 --> 00:00:48,000\nNa sua empresa, quem realmente decide onde a marca aparece?"
+ srt:"1\n00:00:00,000 --> 00:00:02,056\nNuma reunião de campanha, quem menos fala é quem mais decide.\n\n2\n00:00:02,056 --> 00:00:03,000\nE quase nunca é o marketing.\n\n3\n00:00:03,000 --> 00:00:04,259\nVou te mostrar quem é essa pessoa.\n\n4\n00:00:04,259 --> 00:00:07,000\nE por que, na sua empresa, ela provavelmente tá sentada na cadeira errada.\n\n5\n00:00:07,000 --> 00:00:11,606\nMídia exterior no Brasil já é o terceiro canal que mais recebe investimento.\n\n6\n00:00:11,606 --> 00:00:13,000\nR$ 3,5 bilhões por ano.\n\n7\n00:00:13,000 --> 00:00:18,289\nQuando vira esse tamanho, deixa de ser compra de espaço e vira decisão de estratégia.\n\n8\n00:00:18,289 --> 00:00:27,000\nSó que a reunião continua igual: o time de mídia apresenta as opções, o fornecedor defende o ponto dele, e o dono aprova o orçamento no fim.\n\n9\n00:00:27,000 --> 00:00:31,000\nSó que tem um detalhe nessa cena que muda tudo. E quase ninguém repara.\n\n10\n00:00:31,000 --> 00:00:36,533\nOnde a sua marca precisa aparecer muda conforme o momento da empresa.\n\n11\n00:00:36,533 --> 00:00:40,142\nSe você tá buscando cliente novo, é um lugar.\n\n12\n00:00:40,142 --> 00:00:46,316\nSe tá segurando o que já conquistou, é outro. Isso não é informação de mídia.\n\n13\n00:00:46,316 --> 00:00:48,000\nÉ informação de dono.\n\n14\n00:00:48,000 --> 00:00:52,000\nE é aqui que a maioria comete o erro mais caro. E não é escolher o ponto errado.\n\n15\n00:00:52,000 --> 00:00:53,748\nÉ terceirizar a pergunta.\n\n16\n00:00:53,748 --> 00:00:59,762\nQuando o dono entra na conversa, a mídia para de ser custo e começa a puxar o negócio.\n\n17\n00:00:59,762 --> 00:01:05,357\nQuando ele aprova o orçamento e some, paga caro pra aparecer sem construir nada.\n\n18\n00:01:05,357 --> 00:01:10,322\nQuem decide não precisa entender de mídia. Precisa entender do negócio.\n\n19\n00:01:10,322 --> 00:01:12,000\nO time de mídia executa.\n\n20\n00:01:12,000 --> 00:01:22,000\nComenta aqui: na sua empresa, quem decide de verdade onde a marca aparece?"
 },
 {
  n:15,semana:1,dia:5,mes:8,ano:2026,pilar:"Educação",duracao:"55–70s",
+ modelo:"classico",
  titulo:"Como escolher um ponto de Outdoor",
  objetivo:"Ensinar de forma simples os critérios reais de escolha de ponto, além de 'lugar com movimento'. Conteúdo de método, alto valor de salvamento.",
  publico:"Empresários e gestores de marketing que vão comprar mídia exterior pela primeira vez ou revisar critérios de escolha.",
@@ -463,31 +487,37 @@ const VIDEOS=[
  srt:"1\n00:00:00,000 --> 00:00:09,061\nEscolher um bom ponto de outdoor vai muito além de achar um lugar com bastante movimento.\n\n2\n00:00:09,061 --> 00:00:14,253\nO primeiro passo é entender quem você quer atingir.\n\n3\n00:00:14,253 --> 00:00:26,164\nDepois, analisa o fluxo de veículos e de pessoas, a velocidade da via, o tempo de exposição e a visibilidade da peça.\n\n4\n00:00:26,164 --> 00:00:28,608\nTambém entra o contexto.\n\n5\n00:00:28,608 --> 00:00:35,632\nQuem passa por ali está no momento certo para receber a sua mensagem?\n\n6\n00:00:35,632 --> 00:00:43,573\nUm ponto excelente para uma empresa pode ser totalmente inadequado para outra.\n\n7\n00:00:43,573 --> 00:00:50,089\nA melhor localização é aquela onde o seu público realmente está.\n\n8\n00:00:50,089 --> 00:00:54,975\nNo final das contas, outdoor não é sobre espaço.\n\n9\n00:00:54,975 --> 00:00:56,910\nÉ sobre estratégia.\n\n10\n00:00:56,910 --> 00:01:01,1000\nComo você escolhe o ponto da sua próxima campanha?"
 },
 {
- n:2,semana:1,dia:6,mes:8,ano:2026,pilar:"Autoridade",duracao:"60–80s",
+ n:2,semana:1,dia:6,mes:8,ano:2026,pilar:"Autoridade",duracao:"78–88s",
+ modelo:"viral",
  titulo:"O maior erro das empresas ao investir em mídia exterior",
  objetivo:"Estabelecer autoridade técnica traduzida para linguagem de negócio. Ensinar que empresa não compra 'tamanho de painel', compra atenção e contexto. Conteúdo de forte valor percebido, salvável.",
  publico:"Empresários e gestores comerciais que já investiram em OOH e sentiram que 'não deu retorno'.",
- hooks:["O erro que mais vejo empresa cometer em mídia exterior não é gastar pouco. É gastar na coisa errada.","Empresa que corre atrás do outdoor mais barato costuma sair pagando o mais caro no fim.","Vou te falar uma coisa que pouca gente para pra pensar: o tamanho do painel é o que menos importa."],
+ hooks:["O erro que mais vejo empresa cometer em mídia exterior não é gastar pouco. É gastar certinho na coisa errada.","Se a sua primeira pergunta ao fornecedor for \"qual o maior e mais barato\", a campanha já começou perdida.","Empresa que corre atrás do painel mais barato costuma sair pagando o mais caro. Vou te explicar a conta."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–3s)",t:"O erro que mais vejo empresa cometer em mídia exterior não é gastar pouco. É gastar na coisa errada.",d:"Gustavo direto na câmera."},
-  {c:"Cena 2 · O erro (3–22s)",t:"A pergunta que quase todo mundo faz é: qual o painel maior e mais barato? E aí já começou errado. Mídia exterior não é sobre tamanho, é sobre atenção. Pesquisas mostram que um painel digital bem posicionado chega a prender 5 vezes mais atenção que um anúncio digital comum. E isso não tem a ver com ser grande. Tem a ver com onde ele está.",d:"Card na tela: '5x mais atenção, DOOH premium'."},
-  {c:"Cena 3 · O que importa (22–45s)",t:"O que dá resultado é outra coisa. É o painel estar na rota que o seu cliente faz todo dia, com uma mensagem que faz sentido pra ele ali. 65% das pessoas pegam o celular pra procurar a marca depois de ver um anúncio na rua. Mas só quando aquilo conversa com elas.",d:"[substituir por exemplo real do Gustavo: uma campanha em que o ponto certo mudou o resultado]."},
-  {c:"Cena 4 · Conclusão (45–65s)",t:"Se você compra mídia como quem compra metro quadrado, é o jeito mais rápido de torrar orçamento. Quem trata como construção de marca gasta melhor e colhe depois.",d:"Plano médio."},
-  {c:"Cena 5 · CTA (65–75s)",t:"Antes de fechar a próxima, se pergunta uma coisa: eu tô comprando tamanho ou tô comprando atenção?",d:"Plano fechado."}
+  {c:"1. Ganchismo (0–3s)",t:"O erro que mais vejo empresa cometer em mídia exterior não é gastar pouco. É gastar certinho na coisa errada.",d:"Gustavo direto na câmera, corte seco."},
+  {c:"2. Promessa aberta (3–8s)",t:"São três erros. O primeiro quase todo mundo comete. E é justamente ele que estraga a campanha antes de começar.",d:"Plano fechado."},
+  {c:"3. Introdução (8–14s)",t:"Começa com a pergunta errada: qual o painel maior e mais barato?",d:"Card na tela com a pergunta riscada."},
+  {c:"4. Bloco 1 (14–30s)",t:"Mídia exterior não vende tamanho. Vende atenção. Pesquisa mostra que um painel digital bem posicionado chega a prender cinco vezes mais atenção que um anúncio digital comum. E isso não tem nada a ver com ser grande.",d:"Card: 5x mais atenção · DOOH premium. B-roll de painel bem posicionado."},
+  {c:"5. Ponta solta (30–34s)",t:"Mas o tamanho nem é o pior erro. Tem um mais caro que ninguém coloca na planilha.",d:"Volta pro Gustavo, plano médio."},
+  {c:"6. Bloco 2 (34–52s)",t:"É comprar sem saber quem passa ali. 65% das pessoas pegam o celular pra procurar a marca depois de ver um anúncio na rua. Mas só quando aquilo conversa com elas. Painel na rota errada não gera busca nenhuma. Gera foto bonita pro relatório.",d:"[substituir por exemplo real do Gustavo: uma campanha em que o ponto certo mudou o resultado]. Card: 65% buscam depois de ver."},
+  {c:"7. Ponta solta (52–56s)",t:"E tem um terceiro. Esse é o que faz a campanha inteira virar despesa.",d:"Plano fechado, pausa."},
+  {c:"8. Solução (56–76s)",t:"É comprar mídia como quem compra metro quadrado. Quando você negocia preço por metro, tá comprando espaço. Quando negocia rota, horário e contexto, tá comprando atenção. Espaço é custo. Atenção é investimento. Muda a pergunta e muda o resultado: em vez de \"qual o maior\", pergunta \"quem passa aqui, e o que essa pessoa precisa ver\".",d:"Gustavo, plano médio. Card final com as duas perguntas lado a lado."},
+  {c:"9. CTA (76–86s)",t:"Salva esse vídeo e abre ele antes de fechar a próxima campanha.",d:"Plano fechado, tom de conselho."}
  ],
  broll:["Painel de LED grande e vazio numa avenida","Pedestre olhando o celular embaixo de um painel","Fluxo de carros em timelapse","Mapa de calor de rota / deslocamento","Close em campanha bem posicionada em ponto de ônibus"],
  legendas:["0–3s: 'comprar a coisa errada'","12s: card '5x mais atenção'","30s: card '65% buscam depois de ver'","65s: pergunta final"],
  impacto:["Mídia exterior não vende tamanho. Vende atenção.","Um painel bem posicionado prende até 5 vezes mais atenção que o digital comum. Não é sobre ser grande.","Comprar mídia como quem compra metro quadrado é o jeito mais rápido de torrar orçamento."],
- cta:"\"Antes da próxima campanha, pergunte: estou comprando tamanho ou atenção?\"",
+ cta:"\"Salva esse vídeo e abre ele antes de fechar a próxima campanha.\"",
  titulos:{ig:"O erro de R$ que empresas cometem em mídia exterior",li:"O maior erro das empresas em OOH: comprar tamanho em vez de atenção",yt:"O MAIOR erro das empresas ao investir em mídia exterior (e como evitar)"},
  desc:{ig:"Painel grande e barato parece bom negócio, até a campanha acabar sem resultado. O que importa não é tamanho, é atenção. Salva esse. [inserir exemplo real]",li:"DOOH premium capta até 5x mais atenção que o display digital comum, e 65% dos consumidores buscam a marca online após um contato com OOH. Mesmo assim, muitas empresas ainda decidem por preço e tamanho. Por que essa conta não fecha.",fb:"O maior erro em mídia exterior não é gastar pouco, é comprar a coisa errada. Um guia rápido para empresários.",yt:"Gustavo Schorr explica o erro mais comum de empresas ao investir em OOH e DOOH, com dados públicos sobre atenção e comportamento do consumidor. Conteúdo para quem decide orçamento de marketing."},
  hash:{ig:"#midiaexterior #OOH #DOOH #marketing #empreendedorismo #marca #ROI",li:"#OOH #DOOH #marketing #branding #estrategia #atencao",tt:"#marketing #negocios #empreendedorismo #publicidade #dicas",yt:"#OOH #DOOH #marketing #empreendedorismo"},
  thumb:{texto:"TAMANHO ≠ RESULTADO",comp:"Gustavo à esquerda; à direita um painel gigante com um X vermelho e um painel bem posicionado com check",expr:"Confiante, expressão de 'preste atenção nisso'"},
  cortes:{shorts:"Hook + dado dos 5x + pergunta final. 30s enxutos, foco no dado.",linkedin:"Abrir com o dado dos 5x e dos 65%, desenvolver a tese dos três fatores, fechar analítico.",tiktok:"Hook agressivo, texto grande 'TAMANHO NÃO É TUDO', cortes a cada 2s, dado piscando na tela."},
- srt:"1\n00:00:00,000 --> 00:00:03,500\nO maior erro em mídia exterior não é gastar pouco.\n\n2\n00:00:03,500 --> 00:00:06,500\nÉ comprar a coisa errada.\n\n3\n00:00:06,500 --> 00:00:14,000\nA empresa pergunta qual o painel maior e mais barato. Erro.\n\n4\n00:00:14,000 --> 00:00:20,000\nMídia exterior não vende tamanho. Vende atenção.\n\n5\n00:00:20,000 --> 00:00:27,000\nO DOOH premium prende 5 vezes mais atenção que o digital comum.\n\n6\n00:00:27,000 --> 00:00:35,000\n65% das pessoas buscam a marca no celular depois de ver um anúncio na rua.\n\n7\n00:00:35,000 --> 00:00:43,000\nComprar mídia como quem compra metro quadrado queima orçamento.\n\n8\n00:00:43,000 --> 00:00:49,000\nNa próxima campanha: você está comprando tamanho ou atenção?"
+ srt:"1\n00:00:00,000 --> 00:00:02,056\nO erro que mais vejo empresa cometer em mídia exterior não é gastar pouco.\n\n2\n00:00:02,056 --> 00:00:03,000\nÉ gastar certinho na coisa errada.\n\n3\n00:00:03,000 --> 00:00:05,318\nSão três erros. O primeiro quase todo mundo comete.\n\n4\n00:00:05,318 --> 00:00:08,000\nE é justamente ele que estraga a campanha antes de começar.\n\n5\n00:00:08,000 --> 00:00:14,000\nComeça com a pergunta errada: qual o painel maior e mais barato?\n\n6\n00:00:14,000 --> 00:00:17,606\nMídia exterior não vende tamanho. Vende atenção.\n\n7\n00:00:17,606 --> 00:00:26,920\nPesquisa mostra que um painel digital bem posicionado chega a prender cinco vezes mais atenção que um anúncio digital comum.\n\n8\n00:00:26,920 --> 00:00:30,000\nE isso não tem nada a ver com ser grande.\n\n9\n00:00:30,000 --> 00:00:34,000\nMas o tamanho nem é o pior erro. Tem um mais caro que ninguém coloca na planilha.\n\n10\n00:00:34,000 --> 00:00:36,669\nÉ comprar sem saber quem passa ali.\n\n11\n00:00:36,669 --> 00:00:43,153\n65% das pessoas pegam o celular pra procurar a marca depois de ver um anúncio na rua.\n\n12\n00:00:43,153 --> 00:00:49,636\nMas só quando aquilo conversa com elas. Painel na rota errada não gera busca nenhuma.\n\n13\n00:00:49,636 --> 00:00:52,000\nGera foto bonita pro relatório.\n\n14\n00:00:52,000 --> 00:00:56,000\nE tem um terceiro. Esse é o que faz a campanha inteira virar despesa.\n\n15\n00:00:56,000 --> 00:00:58,927\nÉ comprar mídia como quem compra metro quadrado.\n\n16\n00:00:58,927 --> 00:01:02,402\nQuando você negocia preço por metro, tá comprando espaço.\n\n17\n00:01:02,402 --> 00:01:07,159\nQuando negocia rota, horário e contexto, tá comprando atenção. Espaço é custo.\n\n18\n00:01:07,159 --> 00:01:08,561\nAtenção é investimento.\n\n19\n00:01:08,561 --> 00:01:16,000\nMuda a pergunta e muda o resultado: em vez de \"qual o maior\", pergunta \"quem passa aqui, e o que essa pessoa precisa ver\".\n\n20\n00:01:16,000 --> 00:01:26,000\nSalva esse vídeo e abre ele antes de fechar a próxima campanha."
 },
 {
  n:16,semana:1,dia:7,mes:8,ano:2026,pilar:"Futuro",duracao:"60–80s",
+ modelo:"classico",
  titulo:"O futuro do Outdoor",
  objetivo:"Rebater o ciclo repetido de 'essa tecnologia nova vai matar o outdoor' com histórico e mostrar a integração omnichannel como caminho real. Reforça visão de futuro e conhecimento histórico do setor.",
  publico:"Empresários e diretores de marketing céticos sobre a relevância futura da mídia exterior.",
@@ -512,6 +542,7 @@ const VIDEOS=[
 },
 {
  n:3,semana:1,dia:8,mes:8,ano:2026,pilar:"Expansão Internacional",duracao:"70–90s",
+ modelo:"classico",
  titulo:"O que aprendi visitando operações internacionais",
  objetivo:"Elevar a percepção de Gustavo de empresário nacional para executivo com visão global. Traz aprendizados de outros mercados aplicáveis ao empresário brasileiro. Reforça visão global e inteligência de mercado.",
  publico:"Empresários com ambição de escala, investidores e gestores que querem entender tendências antes de chegarem ao Brasil.",
@@ -536,6 +567,7 @@ const VIDEOS=[
 },
 {
  n:17,semana:2,dia:10,mes:8,ano:2026,pilar:"Educação",duracao:"55–70s",
+ modelo:"classico",
  titulo:"Como medir audiência de um Outdoor",
  objetivo:"Explicar de forma simples como funciona a mensuração de audiência em OOH, desmontando a ideia de que é 'contagem de gente passando'. Reforça inteligência de mercado.",
  publico:"Empresários e profissionais de marketing que decidem orçamento com base em métricas.",
@@ -560,6 +592,7 @@ const VIDEOS=[
 },
 {
  n:4,semana:2,dia:11,mes:8,ano:2026,pilar:"Futuro",duracao:"60–80s",
+ modelo:"classico",
  titulo:"Como a IA está mudando o OOH",
  objetivo:"Posicionar Gustavo na fronteira entre tecnologia e negócio. Mostrar que IA no OOH não é hype: é eficiência de investimento para o empresário. Reforça inovação e visão de futuro.",
  publico:"Empresários e CMOs curiosos sobre IA, que querem entender aplicação prática antes de investir.",
@@ -583,55 +616,66 @@ const VIDEOS=[
  srt:"1\n00:00:00,000 --> 00:00:03,000\nA inteligência artificial não vai matar o outdoor. Vai fazer ele pensar.\n\n2\n00:00:03,000 --> 00:00:11,000\nAntes, um anúncio de rua era fixo. Ficava lá 30 dias, chovendo ou não.\n\n3\n00:00:11,000 --> 00:00:19,000\nHoje, com IA, o painel digital muda sozinho conforme clima, horário e fluxo.\n\n4\n00:00:19,000 --> 00:00:26,000\nPara o empresário, isso significa menos desperdício.\n\n5\n00:00:26,000 --> 00:00:34,000\nE a IA mede o que era invisível: quanto movimento de loja aquele painel gerou.\n\n6\n00:00:34,000 --> 00:00:40,000\nO que parecia achismo virou dado.\n\n7\n00:00:40,000 --> 00:00:46,000\nO outdoor não morreu com o digital. Ficou inteligente, só isso.\n\n8\n00:00:46,000 --> 00:00:52,000\nEsse mercado tá mudando rápido. Vale ficar de olho."
 },
 {
- n:18,semana:2,dia:12,mes:8,ano:2026,pilar:"Opinião",duracao:"55–70s",
+ n:18,semana:2,dia:12,mes:8,ano:2026,pilar:"Opinião",duracao:"78–88s",
+ modelo:"viral",
  titulo:"O marketing ficou refém das redes sociais",
  objetivo:"Contestar a ideia de que marketing é sinônimo de rede social, defendendo estratégia integrada. Reforça visão estratégica e evita dependência de plataforma.",
  publico:"Empresários que concentram todo o orçamento de marketing em mídias sociais.",
- hooks:["Nos últimos anos, muita empresa passou a acreditar que marketing significa só publicar nas redes sociais. Não é.","Se o seu marketing depende de um algoritmo só, sua empresa está mais frágil do que parece.","Rede social é um canal. Marketing é a estratégia inteira."],
+ hooks:["Muita empresa hoje acha que marketing é postar. E isso tá saindo caro.","Se a sua empresa vive de uma plataforma só, você não tem cliente. Você aluga o acesso a ele.","Tem um risco em depender de rede social que só aparece quando já é tarde demais."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–4s)",t:"Nos últimos anos, muitas empresas passaram a acreditar que marketing significa apenas publicar nas redes sociais.",d:"Gustavo, plano médio, tom de opinião."},
-  {c:"Cena 2 · Contexto (4–22s)",t:"Mas marketing é muito maior do que isso. As redes sociais são importantes, mas representam apenas um dos canais de comunicação.",d:"B-roll de tela de celular com feed de rede social, depois cortando para outros formatos de mídia."},
-  {c:"Cena 3 · O risco (22–42s)",t:"Quando uma empresa concentra todo o investimento numa única plataforma, ela fica dependente de algoritmo, de mudança de regra e de aumento de custo de mídia.",d:"[substituir por exemplo real do Gustavo de uma empresa afetada por mudança de algoritmo]."},
-  {c:"Cena 4 · Conclusão (42–58s)",t:"As marcas mais fortes trabalham de forma integrada. Combinam presença digital com presença física: outdoor, painel de LED, internet, evento e relacionamento fazendo parte da mesma estratégia.",d:"Plano fechado."},
-  {c:"Cena 5 · CTA (58–68s)",t:"O objetivo não é escolher um canal. É fazer todos trabalharem juntos. Sua empresa depende de uma plataforma só?",d:"Convite ao debate."}
+  {c:"1. Ganchismo (0–3s)",t:"Muita empresa hoje acha que marketing é postar. E isso tá saindo caro.",d:"Gustavo, plano médio, tom de opinião."},
+  {c:"2. Promessa aberta (3–8s)",t:"Tem um risco nisso que só aparece quando já é tarde. Vou te mostrar como ele chega.",d:"Plano fechado."},
+  {c:"3. Introdução (8–14s)",t:"Rede social é importante. Mas é um canal. Um.",d:"B-roll de feed de rede social num celular."},
+  {c:"4. Bloco 1 (14–30s)",t:"Quando a empresa concentra tudo numa plataforma só, ela terceiriza o acesso ao próprio cliente. Quem decide quem vê você não é mais você. É o algoritmo.",d:"B-roll de tela de alcance caindo."},
+  {c:"5. Ponta solta (30–34s)",t:"E o algoritmo mudar nem é o pior cenário. O pior é outro.",d:"Volta pro Gustavo."},
+  {c:"6. Bloco 2 (34–52s)",t:"É o custo. Conforme mais gente disputa o mesmo espaço, o preço pra falar com a mesma pessoa sobe. Você paga mais a cada ano pelo mesmo resultado. E não tem pra quem reclamar.",d:"[substituir por exemplo real do Gustavo: uma empresa afetada por mudança de algoritmo ou salto de custo de mídia]."},
+  {c:"7. Ponta solta (52–56s)",t:"Só que existe uma saída. E não é abandonar rede social.",d:"Plano fechado, pausa."},
+  {c:"8. Solução (56–76s)",t:"É parar de depender de um canal só. As marcas mais fortes trabalham integrado: presença digital junto com presença física. Outdoor, painel de LED, internet, evento, relacionamento, tudo na mesma estratégia. Quando a marca já existe fora da tela, o algoritmo deixa de ser dono do seu acesso ao cliente e vira só mais um caminho. O objetivo nunca foi escolher um canal. É fazer todos trabalharem juntos.",d:"Gustavo, plano médio. B-roll alternando painel urbano e tela de celular."},
+  {c:"9. CTA (76–86s)",t:"Compartilha com quem ainda acha que marketing é só postar.",d:"Plano fechado."}
  ],
  broll:["Feed de rede social genérico em celular","Painel de outdoor em avenida","Evento presencial de empresa","Reunião de relacionamento com cliente","Gustavo em ambiente de escritório"],
  legendas:["0–4s: 'refém das redes sociais'","15s: 'um dos canais, não o único'","35s: 'dependente de algoritmo'","58s: pergunta final"],
  impacto:["Rede social é um canal. Marketing é a estratégia inteira.","Quando a empresa concentra tudo numa plataforma, fica dependente de algoritmo e de custo de mídia crescente.","As marcas mais fortes combinam presença digital com presença física."],
- cta:"\"O objetivo não é escolher um canal. É fazer todos trabalharem juntos. Sua empresa depende de uma plataforma só?\"",
+ cta:"\"Compartilha com quem ainda acha que marketing é só postar.\"",
  titulos:{ig:"Marketing não é só postar nas redes sociais",li:"Por que depender só das redes sociais é um risco de negócio",yt:"O marketing ficou REFÉM das redes sociais (minha opinião)"},
  desc:{ig:"Se o seu marketing é só rede social, sua empresa está mais frágil do que parece. Minha visão sobre isso.",li:"Concentrar todo o investimento de marketing numa única plataforma deixa a empresa dependente de algoritmo, mudança de regra e custo de mídia crescente. Por que as marcas mais fortes combinam presença digital e física na mesma estratégia.",fb:"O marketing ficou refém das redes sociais. E isso é um risco que poucas empresas percebem a tempo.",yt:"Gustavo Schorr dá sua opinião sobre a dependência excessiva das redes sociais no marketing das empresas e por que a estratégia integrada, unindo digital e físico, é o caminho mais seguro."},
  hash:{ig:"#marketing #redessociais #estrategia #empreendedorismo #opiniao",li:"#marketing #estrategia #branding #opiniao #negocios",tt:"#marketing #redessociais #negocios #opiniao",yt:"#marketing #redessociais #estrategia #opiniao"},
  thumb:{texto:"REFÉM DAS REDES SOCIAIS",comp:"Gustavo com ícone de app de rede social riscado ao fundo",expr:"Firme, tom de contestação"},
  cortes:{shorts:"Hook + risco do algoritmo + conclusão + pergunta final.",linkedin:"Manter estrutura completa, tom mais executivo, ótimo para gerar debate nos comentários.",tiktok:"Hook direto, texto 'DEPENDÊNCIA DE ALGORITMO' na tela, ritmo acelerado."},
- srt:"1\n00:00:00,000 --> 00:00:10,081\nNos últimos anos, muitas empresas passaram a acreditar que marketing significa apenas publicar nas redes sociais.\n\n2\n00:00:10,081 --> 00:00:13,649\nMas marketing é muito maior do que isso.\n\n3\n00:00:13,649 --> 00:00:21,321\nAs redes sociais são importantes, mas representam apenas um dos canais de comunicação.\n\n4\n00:00:21,321 --> 00:00:35,327\nQuando uma empresa concentra todo o investimento numa única plataforma, ela fica dependente de algoritmo, de mudança de regra e de aumento de custo de mídia.\n\n5\n00:00:35,327 --> 00:00:39,876\nAs marcas mais fortes trabalham de forma integrada.\n\n6\n00:00:39,876 --> 00:00:52,276\nCombinam presença digital com presença física: outdoor, painel de LED, internet, evento e relacionamento fazendo parte da mesma estratégia.\n\n7\n00:00:52,276 --> 00:00:55,399\nO objetivo não é escolher um canal.\n\n8\n00:00:55,399 --> 00:00:58,342\nÉ fazer todos trabalharem juntos.\n\n9\n00:00:58,342 --> 00:01:02,000\nSua empresa depende de uma plataforma só?"
+ srt:"1\n00:00:00,000 --> 00:00:03,000\nMuita empresa hoje acha que marketing é postar. E isso tá saindo caro.\n\n2\n00:00:03,000 --> 00:00:08,000\nTem um risco nisso que só aparece quando já é tarde. Vou te mostrar como ele chega.\n\n3\n00:00:08,000 --> 00:00:14,000\nRede social é importante. Mas é um canal. Um.\n\n4\n00:00:14,000 --> 00:00:24,066\nQuando a empresa concentra tudo numa plataforma só, ela terceiriza o acesso ao próprio cliente.\n\n5\n00:00:24,066 --> 00:00:30,000\nQuem decide quem vê você não é mais você. É o algoritmo.\n\n6\n00:00:30,000 --> 00:00:34,000\nE o algoritmo mudar nem é o pior cenário. O pior é outro.\n\n7\n00:00:34,000 --> 00:00:35,047\nÉ o custo.\n\n8\n00:00:35,047 --> 00:00:44,047\nConforme mais gente disputa o mesmo espaço, o preço pra falar com a mesma pessoa sobe.\n\n9\n00:00:44,047 --> 00:00:52,000\nVocê paga mais a cada ano pelo mesmo resultado. E não tem pra quem reclamar.\n\n10\n00:00:52,000 --> 00:00:56,000\nSó que existe uma saída. E não é abandonar rede social.\n\n11\n00:00:56,000 --> 00:00:57,763\nÉ parar de depender de um canal só.\n\n12\n00:00:57,763 --> 00:01:02,096\nAs marcas mais fortes trabalham integrado: presença digital junto com presença física.\n\n13\n00:01:02,096 --> 00:01:06,277\nOutdoor, painel de LED, internet, evento, relacionamento, tudo na mesma estratégia.\n\n14\n00:01:06,277 --> 00:01:12,322\nQuando a marca já existe fora da tela, o algoritmo deixa de ser dono do seu acesso ao cliente e vira só mais um caminho.\n\n15\n00:01:12,322 --> 00:01:16,000\nO objetivo nunca foi escolher um canal. É fazer todos trabalharem juntos.\n\n16\n00:01:16,000 --> 00:01:26,000\nCompartilha com quem ainda acha que marketing é só postar."
 },
 {
- n:5,semana:2,dia:13,mes:8,ano:2026,pilar:"Educação",duracao:"55–75s",
+ n:5,semana:2,dia:13,mes:8,ano:2026,pilar:"Educação",duracao:"76–86s",
+ modelo:"viral",
  titulo:"Por que localização vale mais que tamanho",
  objetivo:"Educar o empresário com um conceito simples e memorável (localização > tamanho) que ele leva para qualquer decisão de negócio. Alta capacidade de compartilhamento por ser contraintuitivo e útil.",
  publico:"Pequenos e médios empresários, varejistas, quem tem ponto físico e decide onde investir em visibilidade.",
- hooks:["Tem uma regra na mídia que é a mesma de abrir loja: localização vale mais que tamanho.","Um painel pequeno no lugar certo vende mais que um painel gigante no lugar errado. Toda vez.","Se eu tivesse que escolher entre o maior painel da cidade e o mais bem localizado, nem pensava."],
+ hooks:["Painel pequeno no lugar certo vende mais que painel gigante no lugar errado. Toda vez.","Você não abriria sua loja em qualquer esquina. Então por que compra mídia assim?","Tem uma coisa que custa metade e entrega o dobro em mídia exterior. E não é desconto."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–4s)",t:"Um painel pequeno no lugar certo vende mais que um painel gigante no lugar errado. Toda vez.",d:"Gustavo, plano médio."},
-  {c:"Cena 2 · O princípio (4–24s)",t:"Todo empresário sabe disso quando vai abrir uma loja: ponto é tudo. Mas na hora de anunciar, esquece, e vai atrás do maior painel. O que faz a campanha funcionar não é o tamanho dela. É ela estar no caminho de quem interessa pro seu negócio.",d:"B-roll de duas situações: painel grande em local vazio x painel médio em fluxo intenso."},
-  {c:"Cena 3 · O porquê (24–46s)",t:"Localização, no fundo, é frequência. É a mesma pessoa batendo o olho na sua marca todo dia, indo pro trabalho. Ver de novo e de novo, no lugar certo, cria memória. E é essa memória que faz ela lembrar de você na hora de decidir. Não é à toa que 65% das pessoas vão pesquisar a marca depois de ver na rua. Mas só quando aquele encontro faz sentido.",d:"[substituir por exemplo real do Gustavo sobre um ponto estratégico]."},
-  {c:"Cena 4 · Conclusão (46–62s)",t:"Tamanho impressiona na foto que você manda no grupo. Localização é o que aparece no caixa no fim do mês. Se for pra escolher, escolhe o lugar.",d:"Plano fechado."},
-  {c:"Cena 5 · CTA (62–72s)",t:"Pensa na sua última campanha: você comprou lugar ou comprou tamanho?",d:"Convite."}
+  {c:"1. Ganchismo (0–3s)",t:"Painel pequeno no lugar certo vende mais que painel gigante no lugar errado. Toda vez.",d:"Gustavo, plano médio, afirmação seca."},
+  {c:"2. Promessa aberta (3–8s)",t:"E tem um motivo que ninguém explica direito. Ele aparece no fim, e muda como você compra mídia pra sempre.",d:"Plano fechado."},
+  {c:"3. Introdução (8–14s)",t:"Todo empresário sabe que ponto é tudo quando vai abrir uma loja. Na hora de anunciar, esquece.",d:"B-roll de fachada de loja em rua movimentada."},
+  {c:"4. Bloco 1 (14–28s)",t:"Vai atrás do maior. Só que o que faz a campanha funcionar não é o tamanho dela. É ela estar no caminho de quem interessa pro seu negócio.",d:"B-roll comparando painel grande em local vazio e painel médio em fluxo intenso."},
+  {c:"5. Ponta solta (28–32s)",t:"E aqui tem uma coisa que quase ninguém percebe sobre estar no caminho.",d:"Volta pro Gustavo."},
+  {c:"6. Bloco 2 (32–50s)",t:"Localização, no fundo, é frequência. É a mesma pessoa batendo o olho na sua marca todo dia, indo pro trabalho. Ver de novo, e de novo, no mesmo lugar, cria memória. E memória é o que faz ela lembrar de você na hora de decidir. Não é à toa que 65% das pessoas vão pesquisar a marca depois de ver na rua.",d:"[substituir por exemplo real do Gustavo: um ponto estratégico e por que ele funcionou]."},
+  {c:"7. Ponta solta (50–54s)",t:"Só que tem uma condição. Sem ela, frequência nenhuma resolve.",d:"Plano fechado."},
+  {c:"8. Solução (54–74s)",t:"O encontro precisa fazer sentido. A mesma pessoa, no mesmo trajeto, com uma mensagem que cabe naquele momento dela. Frequência sem contexto é só repetição. Frequência com contexto vira lembrança. Por isso tamanho impressiona na foto que você manda no grupo, e localização é o que aparece no caixa no fim do mês.",d:"Gustavo, plano médio. Card: repetição x lembrança."},
+  {c:"9. CTA (74–84s)",t:"Salva pra consultar antes da próxima negociação de ponto.",d:"Plano fechado."}
  ],
  broll:["Painel grande em avenida vazia","Painel médio em cruzamento movimentado","Mesma pessoa passando pelo ponto em dias diferentes","Mapa com rota destacada","Movimento de caixa / loja cheia"],
  legendas:["0–4s: 'lugar certo > painel gigante'","20s: 'localização é frequência'","40s: card '65% pesquisam após ver'","62s: pergunta final"],
  impacto:["Tamanho impressiona na foto. Localização aparece no caixa.","Localização é frequência. É a mesma pessoa vendo sua marca todo dia.","Ponto é tudo quando você abre uma loja. Por que na hora de anunciar seria diferente?"],
- cta:"\"Na sua última campanha, você comprou lugar ou comprou tamanho?\"",
+ cta:"\"Salva pra consultar antes da próxima negociação de ponto.\"",
  titulos:{ig:"Localização > tamanho: a regra que todo empresário esquece",li:"Por que localização vale mais que tamanho em mídia exterior",yt:"Por que LOCALIZAÇÃO vale mais que tamanho (mídia exterior)"},
  desc:{ig:"Ponto é tudo numa loja, e também num anúncio. Um painel pequeno no lugar certo ganha do gigante no lugar errado. Salva pra próxima campanha. [inserir exemplo real]",li:"Localização é frequência, e frequência constrói memória. 65% dos consumidores pesquisam uma marca depois de vê-la na rua, desde que o contato faça sentido. Por que o empresário deveria priorizar o ponto, não o tamanho do painel.",fb:"A regra que todo empresário conhece ao abrir uma loja, mas esquece ao anunciar: localização vale mais que tamanho.",yt:"Gustavo Schorr explica por que a localização de uma campanha de OOH importa mais que o tamanho do painel, e como isso se conecta com memória de marca e decisão de compra."},
  hash:{ig:"#midiaexterior #OOH #varejo #empreendedorismo #marketing #ponto #marca",li:"#OOH #marketing #varejo #branding #estrategia",tt:"#empreendedorismo #varejo #marketing #dicas #negocios",yt:"#OOH #marketing #varejo #empreendedorismo"},
  thumb:{texto:"LUGAR > TAMANHO",comp:"Comparação lado a lado: painel gigante com X e painel pequeno bem localizado com check; Gustavo apontando",expr:"Didático, confiante, mão em gesto de comparação"},
  cortes:{shorts:"Hook + 'localização é frequência' + pergunta. 30s diretos.",linkedin:"Abrir com o princípio da loja (analogia de negócio), desenvolver frequência/memória, fechar com o dado.",tiktok:"Comparação visual rápida grande x pequeno, texto 'ERRADO / CERTO', ritmo acelerado."},
- srt:"1\n00:00:00,000 --> 00:00:04,500\nUm painel pequeno no lugar certo vende mais que um gigante no lugar errado.\n\n2\n00:00:04,500 --> 00:00:07,000\nSempre.\n\n3\n00:00:07,000 --> 00:00:14,000\nTodo empresário entende isso ao abrir uma loja: ponto é tudo.\n\n4\n00:00:14,000 --> 00:00:21,000\nMas na hora de anunciar, muita gente vai atrás do maior.\n\n5\n00:00:21,000 --> 00:00:29,000\nLocalização é frequência. A mesma pessoa vendo sua marca todo dia.\n\n6\n00:00:29,000 --> 00:00:37,000\n65% das pessoas pesquisam uma marca depois de vê-la na rua.\n\n7\n00:00:37,000 --> 00:00:43,000\nTamanho impressiona na foto. Localização aparece no caixa.\n\n8\n00:00:43,000 --> 00:00:49,000\nNa sua última campanha, você comprou lugar ou tamanho?"
+ srt:"1\n00:00:00,000 --> 00:00:03,000\nPainel pequeno no lugar certo vende mais que painel gigante no lugar errado. Toda vez.\n\n2\n00:00:03,000 --> 00:00:05,095\nE tem um motivo que ninguém explica direito.\n\n3\n00:00:05,095 --> 00:00:08,000\nEle aparece no fim, e muda como você compra mídia pra sempre.\n\n4\n00:00:08,000 --> 00:00:12,129\nTodo empresário sabe que ponto é tudo quando vai abrir uma loja.\n\n5\n00:00:12,129 --> 00:00:14,000\nNa hora de anunciar, esquece.\n\n6\n00:00:14,000 --> 00:00:22,132\nVai atrás do maior. Só que o que faz a campanha funcionar não é o tamanho dela.\n\n7\n00:00:22,132 --> 00:00:28,000\nÉ ela estar no caminho de quem interessa pro seu negócio.\n\n8\n00:00:28,000 --> 00:00:32,000\nE aqui tem uma coisa que quase ninguém percebe sobre estar no caminho.\n\n9\n00:00:32,000 --> 00:00:34,174\nLocalização, no fundo, é frequência.\n\n10\n00:00:34,174 --> 00:00:38,584\nÉ a mesma pessoa batendo o olho na sua marca todo dia, indo pro trabalho.\n\n11\n00:00:38,584 --> 00:00:41,785\nVer de novo, e de novo, no mesmo lugar, cria memória.\n\n12\n00:00:41,785 --> 00:00:45,470\nE memória é o que faz ela lembrar de você na hora de decidir.\n\n13\n00:00:45,470 --> 00:00:50,000\nNão é à toa que 65% das pessoas vão pesquisar a marca depois de ver na rua.\n\n14\n00:00:50,000 --> 00:00:54,000\nSó que tem uma condição. Sem ela, frequência nenhuma resolve.\n\n15\n00:00:54,000 --> 00:00:56,143\nO encontro precisa fazer sentido.\n\n16\n00:00:56,143 --> 00:01:01,403\nA mesma pessoa, no mesmo trajeto, com uma mensagem que cabe naquele momento dela.\n\n17\n00:01:01,403 --> 00:01:06,532\nFrequência sem contexto é só repetição. Frequência com contexto vira lembrança.\n\n18\n00:01:06,532 --> 00:01:14,000\nPor isso tamanho impressiona na foto que você manda no grupo, e localização é o que aparece no caixa no fim do mês.\n\n19\n00:01:14,000 --> 00:01:24,000\nSalva pra consultar antes da próxima negociação de ponto."
 },
 {
  n:19,semana:2,dia:14,mes:8,ano:2026,pilar:"Liderança",duracao:"50–65s",
+ modelo:"classico",
  titulo:"Como crescer usando marca",
  objetivo:"Mostrar que crescimento sustentável passa por construção de marca, não só por volume de vendas. Conteúdo de liderança e visão de negócio.",
  publico:"Empresários focados em crescimento que ainda não conectaram marca a resultado financeiro.",
@@ -656,6 +700,7 @@ const VIDEOS=[
 },
 {
  n:6,semana:2,dia:15,mes:8,ano:2026,pilar:"Bastidores",duracao:"70–90s",
+ modelo:"classico",
  titulo:"Os bastidores de uma expansão internacional",
  objetivo:"Humanizar a jornada de crescimento e mostrar que expandir é decisão de gestão, não de sorte. Conecta liderança, execução e visão global. Storytelling de empresário para empresário.",
  publico:"Empresários que sonham em escalar/exportar o modelo, e admiram quem executou.",
@@ -680,6 +725,7 @@ const VIDEOS=[
 },
 {
  n:20,semana:3,dia:17,mes:8,ano:2026,pilar:"Educação",duracao:"55–70s",
+ modelo:"classico",
  titulo:"Como calcular CPM",
  objetivo:"Explicar de forma simples o indicador de CPM e alertar contra usá-lo isoladamente para julgar campanhas. Educação técnica traduzida para negócio.",
  publico:"Empresários e gestores de marketing que comparam propostas de mídia por indicador.",
@@ -704,6 +750,7 @@ const VIDEOS=[
 },
 {
  n:7,semana:3,dia:18,mes:8,ano:2026,pilar:"Futuro",duracao:"65–85s",
+ modelo:"classico",
  titulo:"As tendências que dominarão o mercado nos próximos 5 anos",
  objetivo:"Consolidar Gustavo como quem antecipa o mercado. Entregar uma leitura de futuro útil para o empresário planejar. Reforça visão de futuro e inteligência de mercado.",
  publico:"Empresários, investidores e diretores que planejam orçamento e estratégia de médio prazo.",
@@ -728,6 +775,7 @@ const VIDEOS=[
 },
 {
  n:21,semana:3,dia:19,mes:8,ano:2026,pilar:"Opinião",duracao:"55–70s",
+ modelo:"classico",
  titulo:"O ROI do digital está aumentando?",
  objetivo:"Questionar a suposição automática de que digital sempre performa melhor, defendendo integração de canais. Reforça inteligência de mercado e visão crítica.",
  publico:"Empresários e diretores de marketing que concentram orçamento em mídia digital por hábito.",
@@ -751,31 +799,37 @@ const VIDEOS=[
  srt:"1\n00:00:00,000 --> 00:00:05,707\nSerá que o retorno do marketing digital continua crescendo?\n\n2\n00:00:05,707 --> 00:00:07,835\nA resposta é: depende.\n\n3\n00:00:07,835 --> 00:00:13,735\nAs plataformas evoluíram, mas a concorrência também aumentou.\n\n4\n00:00:13,735 --> 00:00:19,345\nHoje, praticamente todas as empresas anunciam na internet.\n\n5\n00:00:19,345 --> 00:00:29,501\nIsso significa mais competição pela atenção e, muitas vezes, um custo maior para gerar o mesmo resultado.\n\n6\n00:00:29,501 --> 00:00:39,947\nÉ por isso que muitas empresas estão voltando a investir em estratégias que fortalecem a marca como um todo.\n\n7\n00:00:39,947 --> 00:00:44,009\nO segredo não está em abandonar o digital.\n\n8\n00:00:44,009 --> 00:00:49,329\nEstá em usar ele junto com outros meios de comunicação.\n\n9\n00:00:49,329 --> 00:00:57,067\nQuando diferentes canais trabalham juntos, o resultado costuma ser muito melhor.\n\n10\n00:00:57,067 --> 00:01:01,1000\nSeu marketing está só no digital ou está integrado?"
 },
 {
- n:8,semana:3,dia:20,mes:8,ano:2026,pilar:"Liderança",duracao:"60–80s",
+ n:8,semana:3,dia:20,mes:8,ano:2026,pilar:"Liderança",duracao:"78–88s",
+ modelo:"viral",
  titulo:"O que diferencia empresas que crescem das que desaparecem",
  objetivo:"Conteúdo de liderança puro, com OOH como pano de fundo. Alta capacidade de compartilhamento entre empresários. Reforça liderança e capacidade de execução.",
  publico:"Empresários e líderes de todos os setores, conteúdo universal de gestão.",
- hooks:["Depois de anos nesse mercado, eu percebi que o que separa a empresa que cresce da que some não é o produto.","Empresa não quebra porque o mercado mudou. Quebra porque demorou a mudar junto.","A diferença entre crescer e sumir quase nunca é talento. É uma decisão que a maioria fica adiando."],
+ hooks:["O que separa a empresa que cresce da que some quase nunca é o produto. E também não é dinheiro.","Quase toda empresa que quebrou sabia exatamente o que precisava mudar. Sabia mesmo.","Existe uma distância dentro da sua empresa que dá pra medir. E é ela que decide se você cresce."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–4s)",t:"O que separa a empresa que cresce da que some quase nunca é o produto.",d:"Gustavo, plano médio."},
-  {c:"Cena 2 · A tese (4–26s)",t:"É a velocidade pra se adaptar. O meu mercado é um exemplo duro disso. Em poucos anos, o digital saltou pra quase metade de todo o investimento em mídia exterior. Quem ficou esperando pra ver no que ia dar, sobrou com o formato que tava caindo. Quem se mexeu, pegou a onda de crescimento.",d:"B-roll de transição estático → digital; card 'digital ≈ metade do OOH'."},
-  {c:"Cena 3 · O ponto de gestão (26–52s)",t:"E vale pra qualquer negócio. Na maioria das vezes, a empresa que quebra sabia exatamente o que precisava mudar. Ela só achou que tinha mais tempo. Liderar é diminuir a distância entre perceber e agir. Quem cresce não é quem acerta mais. É quem corrige mais rápido.",d:"[substituir por exemplo real do Gustavo sobre uma decisão de mudar a tempo]."},
-  {c:"Cena 4 · Conclusão (52–68s)",t:"Todo mercado dá aviso antes de virar. Sinal quase sempre tem. O que falta é coragem de agir antes de ter certeza.",d:"Plano fechado."},
-  {c:"Cena 5 · CTA (68–78s)",t:"Me diz o que você acha: o que atrasa mais uma empresa, falta de informação ou falta de decisão?",d:"Convite ao debate."}
+  {c:"1. Ganchismo (0–3s)",t:"O que separa a empresa que cresce da que some quase nunca é o produto. E também não é dinheiro.",d:"Gustavo, plano médio, tom firme."},
+  {c:"2. Promessa aberta (3–8s)",t:"É uma distância. Uma distância que dá pra medir. E quase toda empresa que quebrou tinha ela grande demais.",d:"Plano fechado."},
+  {c:"3. Introdução (8–14s)",t:"O meu mercado é um exemplo duro disso.",d:"Corte para B-roll de transição de painel estático para digital."},
+  {c:"4. Bloco 1 (14–30s)",t:"Em poucos anos, o digital saltou pra quase metade de todo o investimento em mídia exterior. Quem ficou esperando pra ver no que ia dar sobrou com o formato que tava caindo. Quem se mexeu pegou a onda.",d:"Card: digital ≈ metade do OOH."},
+  {c:"5. Ponta solta (30–34s)",t:"Mas o detalhe importante não é quem se mexeu. É por que os outros não se mexeram.",d:"Volta pro Gustavo, plano médio."},
+  {c:"6. Bloco 2 (34–52s)",t:"Porque na maioria das vezes a empresa que quebra sabia exatamente o que precisava mudar. Não faltou informação. Ela só achou que tinha mais tempo.",d:"[substituir por história real do Gustavo: uma decisão de mudar a tempo, e o que teria custado esperar]."},
+  {c:"7. Ponta solta (52–56s)",t:"E é aí que aparece a tal distância que eu falei no começo.",d:"Plano fechado, pausa."},
+  {c:"8. Solução (56–76s)",t:"A distância entre perceber e agir. Liderar é encurtar isso. Todo mercado dá aviso antes de virar, sinal quase sempre tem. O que falta é coragem de agir antes de ter certeza. Porque quando a certeza chega, o movimento já virou reação. E reação é sempre mais cara. Quem cresce não é quem acerta mais. É quem corrige mais rápido.",d:"Gustavo, plano médio, tom de conclusão."},
+  {c:"9. CTA (76–86s)",t:"Comenta aqui: o que atrasa mais uma empresa, falta de informação ou falta de decisão?",d:"Plano fechado, convite ao debate."}
  ],
  broll:["Transição visual estático → LED","Relógio / ampulheta (tempo)","Reunião de decisão","Gráfico de crescimento x queda","Cidade em movimento acelerado"],
  legendas:["0–4s: 'quase nunca é o produto'","18s: card 'digital ≈ metade do OOH'","40s: 'corrigir mais rápido'","68s: pergunta final"],
  impacto:["Quem cresce não é quem acerta mais. É quem corrige mais rápido.","Liderar é diminuir a distância entre perceber e agir.","Sinal quase sempre tem. O que falta é coragem de agir antes da certeza."],
- cta:"\"O que mais atrasa uma empresa: falta de informação ou falta de decisão?\"",
+ cta:"\"Comenta aqui: o que atrasa mais uma empresa, falta de informação ou falta de decisão?\"",
  titulos:{ig:"Por que umas empresas crescem e outras somem",li:"O que separa empresas que crescem das que desaparecem",yt:"O que diferencia empresas que crescem das que DESAPARECEM"},
  desc:{ig:"Empresa não morre porque o mercado mudou. Morre porque demorou a mudar junto. A diferença é velocidade de decisão. Salva e marca um sócio. [inserir exemplo real]",li:"Em poucos anos, o digital virou quase metade do investimento em mídia exterior. Quem esperou ficou com o formato em queda; quem se moveu comprou o crescimento. A lição vale para qualquer negócio: liderar é encurtar a distância entre perceber e agir.",fb:"O que separa empresas que crescem das que desaparecem, uma reflexão de liderança para empresários.",yt:"Gustavo Schorr usa a transformação do mercado de mídia para explicar o que realmente separa empresas que crescem das que desaparecem: velocidade de adaptação e decisão."},
  hash:{ig:"#lideranca #empreendedorismo #gestao #negocios #estrategia #crescimento",li:"#lideranca #gestao #estrategia #negocios #transformacao",tt:"#lideranca #empreendedorismo #negocios #gestao #mentalidade",yt:"#lideranca #empreendedorismo #gestao #negocios"},
  thumb:{texto:"CRESCER OU SUMIR",comp:"Gustavo ao centro; seta subindo de um lado, caindo do outro",expr:"Sério, tom de alerta construtivo"},
  cortes:{shorts:"Hook + 'corrige mais rápido' + pergunta final. Enxuto e universal.",linkedin:"Reflexão de gestão pura: abrir com a tese, usar o dado do mercado como prova, fechar com debate. Alto potencial de comentários.",tiktok:"Tom motivacional-analítico, texto 'VELOCIDADE > TALENTO', cortes rápidos."},
- srt:"1\n00:00:00,000 --> 00:00:04,500\nO que separa a empresa que cresce da que some quase nunca é o produto.\n\n2\n00:00:04,500 --> 00:00:11,000\nÉ a velocidade de adaptação. O mercado de mídia é um exemplo brutal.\n\n3\n00:00:11,000 --> 00:00:18,000\nEm poucos anos, o digital virou quase metade do investimento em mídia exterior.\n\n4\n00:00:18,000 --> 00:00:25,000\nQuem esperou ficou com o formato em queda. Quem se moveu comprou o crescimento.\n\n5\n00:00:25,000 --> 00:00:33,000\nA empresa que desaparece geralmente sabia o que mudar. Só achou que tinha tempo.\n\n6\n00:00:33,000 --> 00:00:40,000\nQuem cresce não é quem acerta mais. É quem corrige mais rápido.\n\n7\n00:00:40,000 --> 00:00:47,000\nSinal quase sempre tem. O que falta é coragem de agir antes da certeza.\n\n8\n00:00:47,000 --> 00:00:53,000\nO que mais atrasa uma empresa: falta de informação ou de decisão?"
+ srt:"1\n00:00:00,000 --> 00:00:02,234\nO que separa a empresa que cresce da que some quase nunca é o produto.\n\n2\n00:00:02,234 --> 00:00:03,000\nE também não é dinheiro.\n\n3\n00:00:03,000 --> 00:00:05,286\nÉ uma distância. Uma distância que dá pra medir.\n\n4\n00:00:05,286 --> 00:00:08,000\nE quase toda empresa que quebrou tinha ela grande demais.\n\n5\n00:00:08,000 --> 00:00:14,000\nO meu mercado é um exemplo duro disso.\n\n6\n00:00:14,000 --> 00:00:21,354\nEm poucos anos, o digital saltou pra quase metade de todo o investimento em mídia exterior.\n\n7\n00:00:21,354 --> 00:00:27,818\nQuem ficou esperando pra ver no que ia dar sobrou com o formato que tava caindo.\n\n8\n00:00:27,818 --> 00:00:30,000\nQuem se mexeu pegou a onda.\n\n9\n00:00:30,000 --> 00:00:34,000\nMas o detalhe importante não é quem se mexeu. É por que os outros não se mexeram.\n\n10\n00:00:34,000 --> 00:00:44,924\nPorque na maioria das vezes a empresa que quebra sabia exatamente o que precisava mudar.\n\n11\n00:00:44,924 --> 00:00:52,000\nNão faltou informação. Ela só achou que tinha mais tempo.\n\n12\n00:00:52,000 --> 00:00:56,000\nE é aí que aparece a tal distância que eu falei no começo.\n\n13\n00:00:56,000 --> 00:00:59,665\nA distância entre perceber e agir. Liderar é encurtar isso.\n\n14\n00:00:59,665 --> 00:01:03,453\nTodo mercado dá aviso antes de virar, sinal quase sempre tem.\n\n15\n00:01:03,453 --> 00:01:06,621\nO que falta é coragem de agir antes de ter certeza.\n\n16\n00:01:06,621 --> 00:01:12,087\nPorque quando a certeza chega, o movimento já virou reação. E reação é sempre mais cara.\n\n17\n00:01:12,087 --> 00:01:16,000\nQuem cresce não é quem acerta mais. É quem corrige mais rápido.\n\n18\n00:01:16,000 --> 00:01:26,000\nComenta aqui: o que atrasa mais uma empresa, falta de informação ou falta de decisão?"
 },
 {
  n:22,semana:3,dia:21,mes:8,ano:2026,pilar:"Educação",duracao:"50–65s",
+ modelo:"classico",
  titulo:"Como escolher uma cidade para investir em mídia",
  objetivo:"Ensinar que população não é o critério certo para escolher praça, complementando o método de análise de ponto já apresentado no mês. Reforça inteligência de mercado.",
  publico:"Empresários em expansão que decidem novas praças com base só em tamanho populacional.",
@@ -799,31 +853,37 @@ const VIDEOS=[
  srt:"1\n00:00:00,000 --> 00:00:07,580\nMuitas empresas escolhem cidades apenas pelo tamanho da população.\n\n2\n00:00:07,580 --> 00:00:09,992\nEsse é um erro comum.\n\n3\n00:00:09,992 --> 00:00:25,612\nO ideal é analisar potencial de consumo, perfil econômico, concorrência, fluxo regional e a presença do público que você deseja atingir.\n\n4\n00:00:25,612 --> 00:00:35,489\nEm muitos casos, uma cidade média gera muito mais resultado do que uma grande capital.\n\n5\n00:00:35,489 --> 00:00:38,935\nNão existe cidade boa ou ruim.\n\n6\n00:00:38,935 --> 00:00:43,988\nExiste cidade adequada para cada estratégia.\n\n7\n00:00:43,988 --> 00:00:53,176\nEscolher bem onde investir é tão importante quanto escolher o ponto da campanha.\n\n8\n00:00:53,176 --> 00:00:58,000\nComo sua empresa escolhe a próxima cidade?"
 },
 {
- n:9,semana:3,dia:22,mes:8,ano:2026,pilar:"Opinião",duracao:"55–70s",
+ n:9,semana:3,dia:22,mes:8,ano:2026,pilar:"Opinião",duracao:"78–88s",
+ modelo:"viral",
  titulo:"O maior mito sobre outdoors",
  objetivo:"Quebrar uma crença comum ('outdoor não dá para medir') com dado. Formato opinião, gera debate e compartilhamento. Reforça inteligência de mercado.",
  publico:"Empresários céticos, performance marketers e quem acha que 'só o digital dá resultado'.",
- hooks:["O maior mito sobre outdoor é que não dá pra medir resultado. Isso acabou.","Tem empresário que ainda acha que outdoor é dinheiro jogado fora porque não dá pra rastrear. Tá enganado.","Vou te dar minha visão: o problema nunca foi a mídia exterior não funcionar. Foi a gente não medir direito."],
+ hooks:["O maior mito sobre outdoor é que não dá pra medir resultado. E quem ainda repete isso deixa dinheiro na mesa.","Me falaram por vinte anos que outdoor não tem métrica. Hoje eu te mostro três.","Se alguém te disser que mídia exterior é achismo, essa pessoa parou de estudar o mercado."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–4s)",t:"O maior mito sobre outdoor é que não dá pra medir resultado. Isso acabou.",d:"Gustavo direto na câmera, tom de opinião firme."},
-  {c:"Cena 2 · O mito (4–22s)",t:"Por décadas o argumento contra a mídia exterior foi o mesmo: é bonito, mas não dá pra provar retorno. E o empresário quer provar retorno, com toda razão. Só que esse argumento ficou velho.",d:"B-roll de outdoor clássico; texto 'MITO' na tela."},
-  {c:"Cena 3 · A realidade (22–48s)",t:"Hoje dá pra medir movimento de loja, busca na internet, conversão. 65% das pessoas procuram a marca depois de ver um anúncio na rua, e isso você consegue rastrear. Pesquisas mostram que a mídia exterior levanta o reconhecimento de marca em mais de 13% na comparação com outros canais. Não é fé. É número.",d:"[substituir por caso real do Gustavo com medição]. Cards '65% buscam · +13,3% awareness'."},
-  {c:"Cena 4 · Conclusão (48–62s)",t:"O outdoor nunca foi impossível de medir. Ele só tava esperando a tecnologia chegar. Quem ainda repete esse mito tá decidindo com informação vencida.",d:"Plano fechado."},
-  {c:"Cena 5 · CTA (62–70s)",t:"Fala pra mim: você ainda enxerga mídia exterior como achismo?",d:"Convite ao debate."}
+  {c:"1. Ganchismo (0–3s)",t:"O maior mito sobre outdoor é que não dá pra medir resultado. E quem ainda repete isso deixa dinheiro na mesa.",d:"Gustavo direto na câmera, tom de opinião firme."},
+  {c:"2. Promessa aberta (3–8s)",t:"Tem três coisas que dá pra medir hoje. A terceira encerra a discussão de vez.",d:"Texto na tela: MITO, com risco por cima."},
+  {c:"3. Introdução (8–14s)",t:"Por décadas o argumento foi o mesmo: é bonito, mas não prova retorno. E o empresário quer provar retorno, com toda razão.",d:"B-roll de outdoor clássico ao entardecer."},
+  {c:"4. Bloco 1 (14–28s)",t:"Só que esse argumento envelheceu. Primeiro: dá pra medir movimento de loja. Fluxo de gente entrando antes e depois da campanha, comparado com uma região sem campanha.",d:"B-roll de fluxo de pessoas na entrada de uma loja."},
+  {c:"5. Ponta solta (28–32s)",t:"E essa é a medição mais óbvia. A próxima é a que costuma surpreender o empresário.",d:"Volta pro Gustavo."},
+  {c:"6. Bloco 2 (32–50s)",t:"Busca na internet. 65% das pessoas procuram a marca depois de ver um anúncio na rua. E isso deixa rastro: pico de busca pelo nome da sua empresa, tráfego direto no site, gente digitando sua marca no mapa.",d:"Card: 65% buscam depois de ver. [substituir por caso real do Gustavo com medição]."},
+  {c:"7. Ponta solta (50–54s)",t:"Mas tem uma terceira. E é ela que encerra a discussão.",d:"Plano fechado, pausa."},
+  {c:"8. Solução (54–76s)",t:"Reconhecimento de marca. Pesquisa comparando canais mostra que a mídia exterior levanta o reconhecimento em mais de 13%. E isso é medido igual a qualquer campanha: pergunta antes, pergunta depois, compara. Então são três: movimento, busca e lembrança. Não é fé. É número. O outdoor nunca foi impossível de medir. Ele só tava esperando a tecnologia chegar.",d:"Card: +13,3% de reconhecimento. Gustavo em plano médio."},
+  {c:"9. CTA (76–86s)",t:"Compartilha com quem ainda te disse que outdoor não dá pra medir.",d:"Plano fechado, tom de provocação amigável."}
  ],
  broll:["Outdoor clássico impresso","Dashboard com métricas de campanha","Pessoa pesquisando no celular","Movimento de loja / fluxo","Gráfico de brand awareness subindo"],
  legendas:["0–4s: 'isso morreu'","10s: 'MITO' em tela","30s: cards '65% · +13,3%'","62s: pergunta final"],
  impacto:["O outdoor nunca foi impossível de medir. Só tava esperando a tecnologia chegar.","Não é fé. É número.","Quem repete o mito decide com informação vencida."],
- cta:"\"Você ainda enxerga mídia exterior como 'achismo'?\"",
+ cta:"\"Compartilha com quem ainda te disse que outdoor não dá pra medir.\"",
  titulos:{ig:"O maior mito sobre outdoor (que custa caro acreditar)",li:"O maior mito sobre outdoor: 'não dá para medir'",yt:"O MAIOR mito sobre outdoors, desmontado com dados"},
  desc:{ig:"'Outdoor não dá pra medir.' Esse mito morreu. Hoje se mede busca, movimento de loja e conversão. O que os dados dizem. [inserir caso real]",li:"O argumento clássico contra a mídia exterior, 'não dá para provar retorno', envelheceu. 65% dos consumidores pesquisam a marca após um contato com OOH e o canal eleva o reconhecimento de marca em mais de 13%. Por que insistir no mito custa caro.",fb:"O maior mito sobre outdoor, desmontado com dados públicos. Para o empresário que decide por resultado.",yt:"Gustavo Schorr desmonta o maior mito sobre a mídia exterior, a ideia de que 'não dá para medir', usando dados públicos sobre busca, awareness e conversão."},
  hash:{ig:"#OOH #midiaexterior #marketing #dados #ROI #empreendedorismo #opiniao",li:"#OOH #marketing #dados #mensuracao #branding #opiniao",tt:"#marketing #mito #negocios #dados #empreendedorismo",yt:"#OOH #midiaexterior #marketing #dados"},
  thumb:{texto:"O MITO DO OUTDOOR",comp:"Gustavo com a palavra 'MITO' riscada em vermelho ao lado",expr:"Firme, sobrancelha levantada, contestando"},
  cortes:{shorts:"Hook + os dois dados (65% / +13,3%) + pergunta. Direto ao ponto.",linkedin:"Formato opinião fundamentada: abrir com o mito, apresentar os dados, fechar com provocação para debate.",tiktok:"Tom de 'mito vs verdade', texto grande alternando MITO/VERDADE, ritmo acelerado."},
- srt:"1\n00:00:00,000 --> 00:00:04,500\nO maior mito sobre outdoor é que você não consegue medir o resultado.\n\n2\n00:00:04,500 --> 00:00:07,000\nIsso morreu.\n\n3\n00:00:07,000 --> 00:00:14,000\nPor décadas o argumento foi: é bonito, mas não dá pra provar retorno.\n\n4\n00:00:14,000 --> 00:00:21,000\nEsse argumento envelheceu.\n\n5\n00:00:21,000 --> 00:00:29,000\nHoje se mede movimento de loja, busca online e conversão.\n\n6\n00:00:29,000 --> 00:00:37,000\n65% das pessoas pesquisam a marca depois de ver um anúncio na rua.\n\n7\n00:00:37,000 --> 00:00:44,000\nO canal eleva o reconhecimento de marca em mais de 13%. Não é fé, é dado.\n\n8\n00:00:44,000 --> 00:00:50,000\nVocê ainda enxerga mídia exterior como achismo?"
+ srt:"1\n00:00:00,000 --> 00:00:01,667\nO maior mito sobre outdoor é que não dá pra medir resultado.\n\n2\n00:00:01,667 --> 00:00:03,000\nE quem ainda repete isso deixa dinheiro na mesa.\n\n3\n00:00:03,000 --> 00:00:08,000\nTem três coisas que dá pra medir hoje. A terceira encerra a discussão de vez.\n\n4\n00:00:08,000 --> 00:00:11,450\nPor décadas o argumento foi o mesmo: é bonito, mas não prova retorno.\n\n5\n00:00:11,450 --> 00:00:14,000\nE o empresário quer provar retorno, com toda razão.\n\n6\n00:00:14,000 --> 00:00:20,364\nSó que esse argumento envelheceu. Primeiro: dá pra medir movimento de loja.\n\n7\n00:00:20,364 --> 00:00:28,000\nFluxo de gente entrando antes e depois da campanha, comparado com uma região sem campanha.\n\n8\n00:00:28,000 --> 00:00:32,000\nE essa é a medição mais óbvia. A próxima é a que costuma surpreender o empresário.\n\n9\n00:00:32,000 --> 00:00:39,448\nBusca na internet. 65% das pessoas procuram a marca depois de ver um anúncio na rua.\n\n10\n00:00:39,448 --> 00:00:50,000\nE isso deixa rastro: pico de busca pelo nome da sua empresa, tráfego direto no site, gente digitando sua marca no mapa.\n\n11\n00:00:50,000 --> 00:00:54,000\nMas tem uma terceira. E é ela que encerra a discussão.\n\n12\n00:00:54,000 --> 00:00:55,504\nReconhecimento de marca.\n\n13\n00:00:55,504 --> 00:01:01,459\nPesquisa comparando canais mostra que a mídia exterior levanta o reconhecimento em mais de 13%.\n\n14\n00:01:01,459 --> 00:01:06,724\nE isso é medido igual a qualquer campanha: pergunta antes, pergunta depois, compara.\n\n15\n00:01:06,724 --> 00:01:10,798\nEntão são três: movimento, busca e lembrança. Não é fé. É número.\n\n16\n00:01:10,798 --> 00:01:16,000\nO outdoor nunca foi impossível de medir. Ele só tava esperando a tecnologia chegar.\n\n17\n00:01:16,000 --> 00:01:26,000\nCompartilha com quem ainda te disse que outdoor não dá pra medir."
 },
 {
  n:23,semana:4,dia:24,mes:8,ano:2026,pilar:"Futuro",duracao:"55–70s",
+ modelo:"classico",
  titulo:"Por que as empresas estão voltando ao físico",
  objetivo:"Mostrar o movimento de marcas retornando à mídia física como diferencial competitivo, com a integração online-offline como tese central. Reforça visão de tendência.",
  publico:"Empresários que investem majoritariamente em digital e ainda não olharam para o físico.",
@@ -848,6 +908,7 @@ const VIDEOS=[
 },
 {
  n:10,semana:4,dia:25,mes:8,ano:2026,pilar:"Autoridade",duracao:"65–85s",
+ modelo:"classico",
  titulo:"Como analisar uma cidade antes de investir em mídia",
  objetivo:"Entregar um método (framework) que o empresário aplica. Conteúdo de altíssimo valor e salvamento. Reforça inteligência de mercado e capacidade de execução.",
  publico:"Empresários em expansão, franqueadores, varejistas escolhendo praças novas.",
@@ -872,6 +933,7 @@ const VIDEOS=[
 },
 {
  n:24,semana:4,dia:26,mes:8,ano:2026,pilar:"Educação",duracao:"55–70s",
+ modelo:"classico",
  titulo:"Como medir o retorno de uma campanha de Outdoor",
  objetivo:"Responder a pergunta mais comum do mês com um método claro por objetivo (venda x marca). Conteúdo de altíssimo valor prático.",
  publico:"Empresários que já investiram em OOH e não sabem como avaliar o resultado.",
@@ -896,6 +958,7 @@ const VIDEOS=[
 },
 {
  n:11,semana:4,dia:27,mes:8,ano:2026,pilar:"Expansão Internacional",duracao:"70–90s",
+ modelo:"classico",
  titulo:"O que aprendi conversando com empresários de outros países",
  objetivo:"Reforçar visão global e rede de relacionamento internacional. Trazer sabedoria de negócio transnacional. Storytelling que conecta liderança e expansão.",
  publico:"Empresários ambiciosos e investidores que valorizam repertório internacional.",
@@ -919,31 +982,37 @@ const VIDEOS=[
  srt:"1\n00:00:00,000 --> 00:00:04,500\nConversando com empresários de outros países, percebi que os melhores fazem a mesma pergunta.\n\n2\n00:00:04,500 --> 00:00:08,000\nE não é sobre dinheiro.\n\n3\n00:00:08,000 --> 00:00:16,000\nEnquanto muitos perguntam quanto rende no trimestre, eles perguntam onde isso os coloca em 10 anos.\n\n4\n00:00:16,000 --> 00:00:24,000\nConstroem marca como quem constrói patrimônio: devagar, com consistência.\n\n5\n00:00:24,000 --> 00:00:32,000\nEmpresa que só pensa no trimestre nunca constrói a marca que cobraria mais caro depois.\n\n6\n00:00:32,000 --> 00:00:39,000\nMídia, aí, não é gasto. É construção de ativo.\n\n7\n00:00:39,000 --> 00:00:46,000\nTrata a sua marca como patrimônio, não como campanha.\n\n8\n00:00:46,000 --> 00:00:52,000\nSua empresa decide pensando no trimestre ou na década?"
 },
 {
- n:25,semana:4,dia:28,mes:8,ano:2026,pilar:"Opinião",duracao:"55–70s",
+ n:25,semana:4,dia:28,mes:8,ano:2026,pilar:"Opinião",duracao:"78–88s",
+ modelo:"viral",
  titulo:"O maior erro do marketing moderno",
  objetivo:"Encerrar o mês com uma tese forte sobre métricas superficiais x construção de marca real. Fecha o ciclo editorial de agosto com posicionamento de autoridade.",
  publico:"Empresários e gestores de marketing que medem só métricas de vaidade (clique, curtida, visualização).",
- hooks:["Na minha opinião, o maior erro do marketing moderno é medir só aquilo que é fácil de medir.","Clique, curtida e visualização são fáceis de medir. Confiança e reputação não. Adivinha o que realmente vende.","Nem tudo que importa de verdade aparece num relatório de desempenho."],
+ hooks:["O maior erro do marketing moderno é medir só aquilo que é fácil de medir.","Seu relatório tá todo verde e sua margem tá caindo. Não é coincidência.","Tem uma métrica que decide se você vende caro ou barato. E ela não tem gráfico."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–4s)",t:"Na minha opinião, o maior erro do marketing moderno é medir só aquilo que é fácil de medir.",d:"Gustavo, plano médio, tom de opinião firme."},
-  {c:"Cena 2 · Contexto (4–18s)",t:"Clique. Curtida. Visualização. Esses indicadores são importantes, mas não contam a história toda.",d:"Card com os três indicadores riscados suavemente."},
-  {c:"Cena 3 · Desenvolvimento (18–40s)",t:"As marcas mais valiosas do mundo investem pesado em construção de marca porque sabem que confiança, lembrança e reputação geram resultado no longo prazo.",d:"[substituir por exemplo real do Gustavo de uma marca valiosa que investe em reputação]."},
-  {c:"Cena 4 · Conclusão (40–56s)",t:"Nem tudo que realmente importa aparece num relatório de desempenho.",d:"Plano fechado."},
-  {c:"Cena 5 · CTA (56–66s)",t:"Marketing eficiente não é só gerar clique. É construir uma marca que as pessoas escolhem antes mesmo de comparar preço. O que sua empresa está medindo de verdade?",d:"Convite ao debate, fechamento de mês."}
+  {c:"1. Ganchismo (0–3s)",t:"O maior erro do marketing moderno é medir só aquilo que é fácil de medir.",d:"Gustavo, plano médio, tom de opinião firme."},
+  {c:"2. Promessa aberta (3–8s)",t:"E o que ficou de fora dessa conta é justamente o que decide se você vende caro ou barato.",d:"Plano fechado."},
+  {c:"3. Introdução (8–13s)",t:"Clique. Curtida. Visualização. Tudo importante. Mas isso é o que dá pra contar até sexta-feira.",d:"Card com os três indicadores."},
+  {c:"4. Bloco 1 (13–28s)",t:"O problema é que a métrica fácil vira a única métrica. E aí a empresa começa a decidir em cima do que o relatório mostra, e não do que o negócio precisa.",d:"B-roll de painel de métricas subindo."},
+  {c:"5. Ponta solta (28–32s)",t:"Só que tem uma coisa que nenhum painel de desempenho mostra. E ela vale mais que todas as outras juntas.",d:"Volta pro Gustavo."},
+  {c:"6. Bloco 2 (32–50s)",t:"É a resposta a uma pergunta: quantas pessoas escolheriam você antes de comparar preço? Isso não tem gráfico. Não sobe na segunda-feira. Mas é o que separa a empresa que negocia margem da que negocia desconto.",d:"[substituir por exemplo real do Gustavo: uma marca que sustenta preço por causa de reputação]."},
+  {c:"7. Ponta solta (50–54s)",t:"E tem um jeito de perceber que você tá perdendo isso, mesmo com o relatório todo verde.",d:"Plano fechado, pausa."},
+  {c:"8. Solução (54–76s)",t:"É quando os números sobem e a margem cai. Mais clique, mais lead, mais visualização, e a venda só fecha com desconto. Esse é o sinal. As marcas mais valiosas do mundo investem pesado em construção de marca justamente porque confiança, lembrança e reputação geram resultado onde o relatório não olha. Nem tudo que importa aparece num painel de desempenho.",d:"Gustavo, plano médio, tom de conclusão."},
+  {c:"9. CTA (76–86s)",t:"Salva esse vídeo e leva pra próxima reunião de resultado.",d:"Plano fechado."}
  ],
  broll:["Tela de dashboard com métricas de clique e curtida","Painel de marca consolidada em ambiente urbano","Cliente escolhendo produto sem comparar preço","Gráfico de reputação de marca no longo prazo","Gustavo em tom conclusivo, escritório"],
  legendas:["0–4s: 'medir só o que é fácil de medir'","12s: 'clique, curtida, visualização'","30s: 'confiança, lembrança e reputação'","56s: pergunta final"],
  impacto:["Clique, curtida e visualização são importantes, mas não contam a história toda.","Nem tudo que realmente importa aparece num relatório de desempenho.","Marketing eficiente é construir uma marca que as pessoas escolhem antes mesmo de comparar preço."],
- cta:"\"O que sua empresa está medindo de verdade?\"",
+ cta:"\"Salva esse vídeo e leva pra próxima reunião de resultado.\"",
  titulos:{ig:"O erro de medir só o que é fácil de medir",li:"O maior erro do marketing moderno: métricas de vaidade",yt:"O MAIOR erro do marketing moderno (na minha opinião)"},
  desc:{ig:"Clique, curtida e visualização são fáceis de medir. Confiança e reputação não. E são elas que vendem de verdade.",li:"As marcas mais valiosas do mundo não competem só em métricas fáceis de medir. Investem pesado em confiança, lembrança e reputação, porque sabem que isso gera resultado no longo prazo. Minha visão sobre o maior erro do marketing moderno.",fb:"O maior erro do marketing moderno: medir só o que é fácil de medir. Fechando o mês com essa reflexão.",yt:"Gustavo Schorr encerra o mês com sua opinião sobre o maior erro do marketing moderno: focar em métricas fáceis de medir e esquecer da construção de marca real."},
  hash:{ig:"#marketing #marca #opiniao #empreendedorismo #negocios #branding",li:"#marketing #branding #opiniao #estrategia #marca",tt:"#marketing #negocios #opiniao #branding",yt:"#marketing #marca #opiniao #branding"},
  thumb:{texto:"O MAIOR ERRO DO MARKETING",comp:"Gustavo com ícones de clique/curtida riscados e um ícone de marca em destaque",expr:"Firme, tom de fechamento de mês"},
  cortes:{shorts:"Hook + os três indicadores fáceis + conclusão + pergunta final.",linkedin:"Manter argumento completo, tom de fechamento de ciclo editorial, ótimo para gerar debate no fim do mês.",tiktok:"Hook direto, texto 'CLIQUE NÃO É TUDO' na tela, ritmo ágil até o CTA."},
- srt:"1\n00:00:00,000 --> 00:00:09,968\nNa minha opinião, o maior erro do marketing moderno é medir só aquilo que é fácil de medir.\n\n2\n00:00:09,968 --> 00:00:10,845\nClique.\n\n3\n00:00:10,845 --> 00:00:11,721\nCurtida.\n\n4\n00:00:11,721 --> 00:00:13,145\nVisualização.\n\n5\n00:00:13,145 --> 00:00:20,375\nEsses indicadores são importantes, mas não contam a história toda.\n\n6\n00:00:20,375 --> 00:00:37,134\nAs marcas mais valiosas do mundo investem pesado em construção de marca porque sabem que confiança, lembrança e reputação geram resultado no longo prazo.\n\n7\n00:00:37,134 --> 00:00:44,473\nNem tudo que realmente importa aparece num relatório de desempenho.\n\n8\n00:00:44,473 --> 00:00:49,074\nMarketing eficiente não é só gerar clique.\n\n9\n00:00:49,074 --> 00:00:57,399\nÉ construir uma marca que as pessoas escolhem antes mesmo de comparar preço.\n\n10\n00:00:57,399 --> 00:01:01,1000\nO que sua empresa está medindo de verdade?"
+ srt:"1\n00:00:00,000 --> 00:00:03,000\nO maior erro do marketing moderno é medir só aquilo que é fácil de medir.\n\n2\n00:00:03,000 --> 00:00:08,000\nE o que ficou de fora dessa conta é justamente o que decide se você vende caro ou barato.\n\n3\n00:00:08,000 --> 00:00:10,500\nClique. Curtida. Visualização. Tudo importante.\n\n4\n00:00:10,500 --> 00:00:13,000\nMas isso é o que dá pra contar até sexta-feira.\n\n5\n00:00:13,000 --> 00:00:18,329\nO problema é que a métrica fácil vira a única métrica.\n\n6\n00:00:18,329 --> 00:00:28,000\nE aí a empresa começa a decidir em cima do que o relatório mostra, e não do que o negócio precisa.\n\n7\n00:00:28,000 --> 00:00:30,330\nSó que tem uma coisa que nenhum painel de desempenho mostra.\n\n8\n00:00:30,330 --> 00:00:32,000\nE ela vale mais que todas as outras juntas.\n\n9\n00:00:32,000 --> 00:00:39,515\nÉ a resposta a uma pergunta: quantas pessoas escolheriam você antes de comparar preço?\n\n10\n00:00:39,515 --> 00:00:43,709\nIsso não tem gráfico. Não sobe na segunda-feira.\n\n11\n00:00:43,709 --> 00:00:50,000\nMas é o que separa a empresa que negocia margem da que negocia desconto.\n\n12\n00:00:50,000 --> 00:00:54,000\nE tem um jeito de perceber que você tá perdendo isso, mesmo com o relatório todo verde.\n\n13\n00:00:54,000 --> 00:00:56,577\nÉ quando os números sobem e a margem cai.\n\n14\n00:00:56,577 --> 00:01:01,291\nMais clique, mais lead, mais visualização, e a venda só fecha com desconto.\n\n15\n00:01:01,291 --> 00:01:02,234\nEsse é o sinal.\n\n16\n00:01:02,234 --> 00:01:12,606\nAs marcas mais valiosas do mundo investem pesado em construção de marca justamente porque confiança, lembrança e reputação geram resultado onde o relatório não olha.\n\n17\n00:01:12,606 --> 00:01:16,000\nNem tudo que importa aparece num painel de desempenho.\n\n18\n00:01:16,000 --> 00:01:26,000\nSalva esse vídeo e leva pra próxima reunião de resultado."
 },
 {
  n:12,semana:4,dia:29,mes:8,ano:2026,pilar:"Histórias",duracao:"70–90s",
+ modelo:"classico",
  titulo:"Como imagino o futuro do mercado de OOH",
  objetivo:"Fechamento do mês com visão de futuro e legado. Consolida Gustavo como voz que constrói mercado. Conecta storytelling, futuro e visão global, com o Grupo Inteli como prova, nunca como foco.",
  publico:"Todo o público-alvo: empresários, parceiros, investidores e o próprio mercado.",
@@ -968,6 +1037,7 @@ const VIDEOS=[
 },
 {
  n:26,semana:1,dia:1,mes:9,ano:2026,pilar:"Futuro",duracao:"60–80s",
+ modelo:"classico",
  titulo:"Como será o marketing em 2030",
  objetivo:"Abrir o mês com uma projeção de futuro fundamentada, ancorando tecnologia (IA, dados, painéis digitais) na permanência de confiança e reputação como ativos centrais.",
  publico:"Empresários e diretores de marketing planejando estratégia de médio e longo prazo.",
@@ -992,6 +1062,7 @@ const VIDEOS=[
 },
 {
  n:27,semana:1,dia:3,mes:9,ano:2026,pilar:"Educação",duracao:"55–70s",
+ modelo:"classico",
  titulo:"Quanto custa errar uma campanha de OOH",
  objetivo:"Reposicionar a pergunta de preço para a pergunta de risco, ensinando que planejamento evita desperdício maior que o próprio investimento em mídia.",
  publico:"Empresários que decidem campanha só pelo orçamento, sem considerar o custo do erro.",
@@ -1015,31 +1086,37 @@ const VIDEOS=[
  srt:"1\n00:00:00,000 --> 00:00:05,697\nMuita gente pergunta quanto custa fazer uma campanha de outdoor.\n\n2\n00:00:05,697 --> 00:00:12,107\nMas a pergunta mais importante é outra: quanto custa errar uma campanha?\n\n3\n00:00:12,107 --> 00:00:27,418\nEscolher um ponto ruim, anunciar para o público errado ou usar uma mensagem que ninguém entende pode desperdiçar muito mais dinheiro do que o próprio investimento em mídia.\n\n4\n00:00:27,418 --> 00:00:32,226\nUma boa campanha não depende apenas de comprar espaço.\n\n5\n00:00:32,226 --> 00:00:42,107\nEla depende de estratégia, conhecimento da região, fluxo de pessoas, perfil do público e uma comunicação clara.\n\n6\n00:00:42,107 --> 00:00:49,496\nNo mercado de mídia exterior, o investimento certo pode gerar um excelente retorno.\n\n7\n00:00:49,496 --> 00:00:55,727\nJá uma decisão mal planejada pode fazer sua marca passar despercebida.\n\n8\n00:00:55,727 --> 00:01:00,000\nAntes de pensar em preço, pense em planejamento."
 },
 {
- n:28,semana:1,dia:5,mes:9,ano:2026,pilar:"Opinião",duracao:"55–70s",
+ n:28,semana:1,dia:5,mes:9,ano:2026,pilar:"Opinião",duracao:"80–90s",
+ modelo:"viral",
  titulo:"O Outdoor vai acabar?",
  objetivo:"Responder diretamente à pergunta mais recorrente do setor com argumento de evolução tecnológica, não substituição. Reforça autoridade e visão de futuro.",
  publico:"Público amplo: empresários céticos, mercado, imprensa e parceiros.",
- hooks:["Essa é uma das perguntas que mais escuto: o outdoor vai acabar?","Minha resposta é simples: não. Na verdade, ele está evoluindo.","Enquanto existirem cidades, gente circulando e marca querendo ser lembrada, vai continuar existindo mídia exterior."],
+ hooks:["Me perguntam isso quase toda semana: o outdoor vai acabar?","Todo mundo discute se o outdoor vai acabar. Enquanto isso, o dinheiro tá indo pra lá.","O outdoor tá morrendo? Tem um dado que muda completamente essa pergunta."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–4s)",t:"Essa é uma das perguntas que mais escuto: o outdoor vai acabar?",d:"Gustavo, plano médio, tom direto."},
-  {c:"Cena 2 · Resposta (4–18s)",t:"Minha resposta é simples: não. Na verdade, ele está evoluindo.",d:"Plano fechado, tom de convicção."},
-  {c:"Cena 3 · Como está evoluindo (18–42s)",t:"O papel está dando espaço ao digital. Os painéis agora exibem campanhas dinâmicas. A tecnologia permite segmentação, integração com dados e atualização instantânea do conteúdo.",d:"B-roll de painel digital trocando criativos em tempo real."},
-  {c:"Cena 4 · Conclusão (42–58s)",t:"Enquanto existirem cidades, pessoas circulando e marcas querendo ser lembradas, vai continuar existindo mídia exterior. O formato muda, a tecnologia evolui, mas a necessidade de comunicar no mundo físico continua fazendo parte da estratégia das grandes empresas.",d:"[substituir por visão real do Gustavo sobre a permanência do outdoor]."},
-  {c:"Cena 5 · CTA (58–68s)",t:"O outdoor não está acabando. Sua empresa já entendeu isso?",d:"Convite ao debate."}
+  {c:"1. Ganchismo (0–3s)",t:"Me perguntam isso quase toda semana: o outdoor vai acabar?",d:"Gustavo, plano médio, tom direto."},
+  {c:"2. Promessa aberta (3–8s)",t:"Vou te dar minha resposta. Mas antes tem um dado que muda completamente a pergunta.",d:"Plano fechado."},
+  {c:"3. Introdução (8–14s)",t:"Minha resposta é não. E não é otimismo de quem trabalha no setor.",d:"Plano fechado, tom de convicção."},
+  {c:"4. Bloco 1 (14–30s)",t:"O que tá acabando é o papel. Não a mídia. Os painéis viraram digitais, exibem campanha dinâmica, trocam criativo em tempo real e integram com dado.",d:"B-roll de painel digital trocando criativos."},
+  {c:"5. Ponta solta (30–34s)",t:"E aqui entra o dado que eu falei. Ele é contraintuitivo.",d:"Volta pro Gustavo."},
+  {c:"6. Bloco 2 (34–52s)",t:"O setor não tá encolhendo. Cresceu mais de vinte por cento de um ano pro outro no Brasil, e já é o terceiro canal que mais recebe investimento publicitário do país. Enquanto todo mundo discute se vai acabar, o dinheiro tá indo pra lá.",d:"Card: +20,6% em um ano · 3º maior canal."},
+  {c:"7. Ponta solta (52–56s)",t:"Mas tem uma razão mais profunda pra isso. E ela não é tecnológica.",d:"Plano fechado, pausa."},
+  {c:"8. Solução (56–78s)",t:"É que a mídia exterior é a única que você não pula, não bloqueia e não fecha. Ela faz parte da cidade. Enquanto existirem cidades, gente circulando e marca querendo ser lembrada, vai existir mídia exterior. O formato muda, a tecnologia evolui. A necessidade de comunicar no mundo físico continua.",d:"[substituir por visão real do Gustavo sobre a permanência do outdoor]. B-roll de avenida ao entardecer."},
+  {c:"9. CTA (78–88s)",t:"Comenta o que você acha: daqui a dez anos, mais ou menos mídia exterior do que hoje?",d:"Plano fechado, convite ao debate."}
  ],
  broll:["Painel de papel clássico dando lugar a painel digital","Cidade com fluxo intenso de pessoas e carros","Painel digital com segmentação e dado em tempo real","Timelapse de avenida ao longo do dia","Gustavo caminhando por região com múltiplos formatos de OOH"],
  legendas:["0–4s: 'o outdoor vai acabar?'","10s: 'não. Está evoluindo'","30s: 'segmentação, dados, atualização instantânea'","58s: pergunta final"],
  impacto:["Minha resposta é simples: não. Na verdade, ele está evoluindo.","O formato muda, a tecnologia evolui, mas a necessidade de comunicar no mundo físico continua.","Enquanto existirem cidades e gente circulando, vai continuar existindo mídia exterior."],
- cta:"\"O outdoor não está acabando. Sua empresa já entendeu isso?\"",
+ cta:"\"Comenta o que você acha: daqui a dez anos, mais ou menos mídia exterior do que hoje?\"",
  titulos:{ig:"O outdoor vai acabar? Minha resposta é simples",li:"O outdoor não vai acabar. Ele está evoluindo",yt:"O OUTDOOR vai acabar? (resposta direta)"},
  desc:{ig:"A pergunta que mais escuto: o outdoor vai acabar? Minha resposta é simples: não.",li:"O papel está dando espaço ao digital, os painéis exibem campanhas dinâmicas e a tecnologia permite segmentação e atualização instantânea. O outdoor não está acabando, está evoluindo. Minha resposta direta para uma das perguntas que mais recebo.",fb:"O outdoor vai acabar? Não. Ele está evoluindo, e rápido.",yt:"Gustavo Schorr responde de forma direta à pergunta que mais recebe: o outdoor vai acabar? Explica por que a mídia exterior está evoluindo, não desaparecendo."},
  hash:{ig:"#OOH #outdoor #midiaexterior #opiniao #futuro #marketing",li:"#OOH #outdoor #midiaexterior #futuro #opiniao",tt:"#marketing #opiniao #futuro #negocios",yt:"#OOH #outdoor #futuro #opiniao"},
  thumb:{texto:"O OUTDOOR VAI ACABAR?",comp:"Gustavo com um grande 'NÃO' estilizado ao lado",expr:"Firme, direto, sem hesitação"},
  cortes:{shorts:"Hook + resposta direta 'não, está evoluindo' + fechamento.",linkedin:"Manter argumento completo, tom institucional, ideal para fixar posicionamento de autoridade.",tiktok:"Pergunta e resposta em corte seco, texto 'NÃO' gigante na tela, ritmo ágil."},
- srt:"1\n00:00:00,000 --> 00:00:06,341\nEssa é uma das perguntas que mais escuto: o outdoor vai acabar?\n\n2\n00:00:06,341 --> 00:00:09,360\nMinha resposta é simples: não.\n\n3\n00:00:09,360 --> 00:00:12,481\nNa verdade, ele está evoluindo.\n\n4\n00:00:12,481 --> 00:00:16,205\nO papel está dando espaço ao digital.\n\n5\n00:00:16,205 --> 00:00:20,633\nOs painéis agora exibem campanhas dinâmicas.\n\n6\n00:00:20,633 --> 00:00:29,994\nA tecnologia permite segmentação, integração com dados e atualização instantânea do conteúdo.\n\n7\n00:00:29,994 --> 00:00:41,971\nEnquanto existirem cidades, pessoas circulando e marcas querendo ser lembradas, vai continuar existindo mídia exterior.\n\n8\n00:00:41,971 --> 00:00:56,263\nO formato muda, a tecnologia evolui, mas a necessidade de comunicar no mundo físico continua fazendo parte da estratégia das grandes empresas.\n\n9\n00:00:56,263 --> 00:00:59,081\nO outdoor não está acabando.\n\n10\n00:00:59,081 --> 00:01:02,000\nSua empresa já entendeu isso?"
+ srt:"1\n00:00:00,000 --> 00:00:03,000\nMe perguntam isso quase toda semana: o outdoor vai acabar?\n\n2\n00:00:03,000 --> 00:00:08,000\nVou te dar minha resposta. Mas antes tem um dado que muda completamente a pergunta.\n\n3\n00:00:08,000 --> 00:00:14,000\nMinha resposta é não. E não é otimismo de quem trabalha no setor.\n\n4\n00:00:14,000 --> 00:00:18,493\nO que tá acabando é o papel. Não a mídia.\n\n5\n00:00:18,493 --> 00:00:30,000\nOs painéis viraram digitais, exibem campanha dinâmica, trocam criativo em tempo real e integram com dado.\n\n6\n00:00:30,000 --> 00:00:34,000\nE aqui entra o dado que eu falei. Ele é contraintuitivo.\n\n7\n00:00:34,000 --> 00:00:36,017\nO setor não tá encolhendo.\n\n8\n00:00:36,017 --> 00:00:46,647\nCresceu mais de vinte por cento de um ano pro outro no Brasil, e já é o terceiro canal que mais recebe investimento publicitário do país.\n\n9\n00:00:46,647 --> 00:00:52,000\nEnquanto todo mundo discute se vai acabar, o dinheiro tá indo pra lá.\n\n10\n00:00:52,000 --> 00:00:56,000\nMas tem uma razão mais profunda pra isso. E ela não é tecnológica.\n\n11\n00:00:56,000 --> 00:01:01,801\nÉ que a mídia exterior é a única que você não pula, não bloqueia e não fecha.\n\n12\n00:01:01,801 --> 00:01:03,610\nEla faz parte da cidade.\n\n13\n00:01:03,610 --> 00:01:11,370\nEnquanto existirem cidades, gente circulando e marca querendo ser lembrada, vai existir mídia exterior.\n\n14\n00:01:11,370 --> 00:01:14,082\nO formato muda, a tecnologia evolui.\n\n15\n00:01:14,082 --> 00:01:18,000\nA necessidade de comunicar no mundo físico continua.\n\n16\n00:01:18,000 --> 00:01:28,000\nComenta o que você acha: daqui a dez anos, mais ou menos mídia exterior do que hoje?"
 },
 {
  n:29,semana:2,dia:8,mes:9,ano:2026,pilar:"Educação",duracao:"55–70s",
+ modelo:"classico",
  titulo:"Como lançar produtos",
  objetivo:"Ensinar que lançamento de sucesso começa antes do produto existir no mercado, com preparação de terreno via marca. Conteúdo de método aplicável.",
  publico:"Empresários lançando produtos ou serviços novos.",
@@ -1064,6 +1141,7 @@ const VIDEOS=[
 },
 {
  n:30,semana:2,dia:10,mes:9,ano:2026,pilar:"Futuro",duracao:"55–70s",
+ modelo:"classico",
  titulo:"O futuro do varejo",
  objetivo:"Contestar a narrativa de que o e-commerce mataria a loja física, defendendo o varejo híbrido como caminho real. Conecta com posicionamento de marca do Grupo Inteli.",
  publico:"Empresários de varejo e franqueadores planejando expansão de loja física.",
@@ -1088,6 +1166,7 @@ const VIDEOS=[
 },
 {
  n:31,semana:2,dia:12,mes:9,ano:2026,pilar:"Educação",duracao:"50–65s",
+ modelo:"classico",
  titulo:"Como aumentar a percepção de valor",
  objetivo:"Diferenciar preço de valor e ensinar como sair da guerra de desconto pela comunicação de qualidade e confiança. Conteúdo de método com forte aplicação prática.",
  publico:"Empresários que competem só por preço e sentem a margem apertar.",
@@ -1112,6 +1191,7 @@ const VIDEOS=[
 },
 {
  n:32,semana:3,dia:15,mes:9,ano:2026,pilar:"Liderança",duracao:"55–70s",
+ modelo:"classico",
  titulo:"Como abrir novas regiões",
  objetivo:"Ensinar que expansão regional exige construção de presença antes da venda, não só prospecção de cliente. Conteúdo de liderança e gestão de expansão.",
  publico:"Empresários planejando expansão para novas regiões ou cidades.",
@@ -1135,76 +1215,91 @@ const VIDEOS=[
  srt:"1\n00:00:00,000 --> 00:00:09,449\nExpandir para uma nova região exige muito mais do que encontrar clientes.\n\n2\n00:00:09,449 --> 00:00:13,203\nÉ preciso construir presença.\n\n3\n00:00:13,203 --> 00:00:22,263\nAntes mesmo da primeira venda, o mercado precisa conhecer sua empresa.\n\n4\n00:00:22,263 --> 00:00:32,877\nAnalise o potencial da região, entenda os hábitos locais e invista em comunicação.\n\n5\n00:00:32,877 --> 00:00:38,313\nMarcas fortes chegam antes dos vendedores.\n\n6\n00:00:38,313 --> 00:00:47,891\nQuando a empresa já é conhecida, conquistar cliente fica muito mais fácil.\n\n7\n00:00:47,891 --> 00:00:55,010\nExpansão bem planejada reduz risco e acelera resultado.\n\n8\n00:00:55,010 --> 00:01:01,1000\nSua empresa está construindo presença antes de vender?"
 },
 {
- n:33,semana:3,dia:17,mes:9,ano:2026,pilar:"Educação",duracao:"55–70s",
+ n:33,semana:3,dia:17,mes:9,ano:2026,pilar:"Educação",duracao:"78–88s",
+ modelo:"viral",
  titulo:"Como vender sem desconto",
  objetivo:"Ensinar que desconto recorrente é sintoma de percepção de valor fraca, não solução de vendas. Conteúdo de método com forte apelo comercial.",
  publico:"Empresários e vendedores que recorrem a desconto para fechar negócio.",
- hooks:["Se a única forma de fechar uma venda é dando desconto, o problema é maior que o preço.","O melhor desconto é aquele que você nunca precisou conceder.","Quando o cliente entende o benefício, a conversa para de ser sobre quanto custa."],
+ hooks:["Se a única forma de fechar uma venda é dando desconto, o problema não é o preço.","Todo desconto que você dá hoje é uma venda mais barata que você já perdeu amanhã.","Tem uma pergunta que revela se a sua empresa vende valor ou vende preço. É desconfortável."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–4s)",t:"Se a única forma de fechar uma venda é oferecendo desconto, existe um problema maior do que o preço.",d:"Gustavo, plano médio, tom direto."},
-  {c:"Cena 2 · O diagnóstico (4–20s)",t:"Provavelmente, o cliente ainda não percebeu o valor da sua solução.",d:"B-roll de negociação com cliente hesitante."},
-  {c:"Cena 3 · A alternativa (20–42s)",t:"Empresas fortes investem em relacionamento, autoridade, marca e diferenciação. Quando o cliente entende claramente o benefício, a conversa deixa de ser sobre quanto custa. Passa a ser sobre quanto vale.",d:"[substituir por exemplo real do Gustavo de uma venda fechada sem desconto]."},
-  {c:"Cena 4 · Conclusão (42–56s)",t:"Quem vende valor protege margem, fortalece a marca e constrói um crescimento sustentável.",d:"Plano fechado."},
-  {c:"Cena 5 · CTA (56–64s)",t:"O melhor desconto é aquele que você nunca precisou conceder.",d:"Frase de fechamento."}
+  {c:"1. Ganchismo (0–3s)",t:"Se a única forma de fechar uma venda é dando desconto, o problema não é o preço.",d:"Gustavo, plano médio, tom direto."},
+  {c:"2. Promessa aberta (3–8s)",t:"Tem uma pergunta que revela o problema de verdade. Ela vem no final, e é desconfortável.",d:"Plano fechado."},
+  {c:"3. Introdução (8–13s)",t:"Desconto recorrente não é estratégia comercial. É sintoma.",d:"B-roll de negociação com cliente hesitante."},
+  {c:"4. Bloco 1 (13–28s)",t:"Sintoma de que o cliente ainda não entendeu o valor do que você faz. Quando ele não vê diferença entre você e o concorrente, decide pela única coisa que consegue comparar: o número.",d:"B-roll de duas propostas lado a lado, só os preços visíveis."},
+  {c:"5. Ponta solta (28–32s)",t:"E tem um efeito colateral disso que quase ninguém calcula.",d:"Volta pro Gustavo."},
+  {c:"6. Bloco 2 (32–50s)",t:"Desconto ensina. Toda vez que você cede, ensina aquele cliente a esperar desconto na próxima. E ele conta pro mercado. Em pouco tempo, seu preço de tabela virou ficção e sua margem virou um lugar onde você não mora mais.",d:"[substituir por exemplo real do Gustavo: uma venda fechada sem desconto e o que sustentou o preço]."},
+  {c:"7. Ponta solta (50–54s)",t:"Agora a pergunta que eu prometi. Responde com sinceridade.",d:"Plano fechado, pausa."},
+  {c:"8. Solução (54–76s)",t:"Se você tirasse o desconto hoje, o cliente ainda teria motivo pra te escolher? Se a resposta demorar, o trabalho não é comercial. É de marca. Empresa que vende sem desconto investiu antes em relacionamento, autoridade e diferenciação, pra que na hora da conversa o assunto não fosse quanto custa, e sim quanto vale. O melhor desconto é aquele que você nunca precisou conceder.",d:"Gustavo, plano médio, tom de conclusão."},
+  {c:"9. CTA (76–86s)",t:"Salva porque você vai precisar disso na próxima negociação.",d:"Plano fechado."}
  ],
  broll:["Negociação com cliente hesitante sobre preço","Apresentação de proposta de valor","Aperto de mão fechando negócio sem desconto","Gráfico de margem protegida ao longo do tempo","Gustavo em reunião comercial"],
  legendas:["0–4s: 'problema maior que o preço'","15s: 'cliente não percebeu o valor'","35s: 'quanto vale, não quanto custa'","56s: 'o melhor desconto'"],
  impacto:["Se a única forma de vender é com desconto, o problema é maior que o preço.","Quando o cliente entende o benefício, a conversa para de ser sobre quanto custa.","O melhor desconto é aquele que você nunca precisou conceder."],
- cta:"\"O melhor desconto é aquele que você nunca precisou conceder.\"",
+ cta:"\"Salva porque você vai precisar disso na próxima negociação.\"",
  titulos:{ig:"Como vender sem depender de desconto",li:"Vender valor, não preço: o método para proteger margem",yt:"Como VENDER SEM DESCONTO (protegendo a margem)"},
  desc:{ig:"Se você só vende com desconto, o problema não é o preço. É a percepção de valor. Salva esse.",li:"Empresas que dependem de desconto constante para vender normalmente ainda não comunicaram valor com clareza. Relacionamento, autoridade, marca e diferenciação mudam a conversa de 'quanto custa' para 'quanto vale', protegendo margem.",fb:"Como vender sem depender de desconto: o segredo está na percepção de valor, não no preço.",yt:"Gustavo Schorr explica por que depender de desconto para fechar venda é sintoma de um problema maior, e como comunicar valor protege margem e fortalece a marca."},
  hash:{ig:"#vendas #marketing #precificacao #empreendedorismo #negocios",li:"#vendas #marketing #valor #estrategia #precificacao",tt:"#vendas #negocios #dicas #empreendedorismo",yt:"#vendas #marketing #valor #precificacao"},
  thumb:{texto:"VENDER SEM DESCONTO",comp:"Gustavo com uma etiqueta de desconto riscada ao fundo",expr:"Confiante, tom de método comercial"},
  cortes:{shorts:"Hook + diagnóstico + fechamento 'o melhor desconto'.",linkedin:"Manter estrutura completa, tom comercial estratégico, ótimo para times de vendas.",tiktok:"Hook direto, texto 'DESCONTO NÃO É SOLUÇÃO' na tela, ritmo ágil."},
- srt:"1\n00:00:00,000 --> 00:00:11,628\nSe a única forma de fechar uma venda é oferecendo desconto, existe um problema maior do que o preço.\n\n2\n00:00:11,628 --> 00:00:19,419\nProvavelmente, o cliente ainda não percebeu o valor da sua solução.\n\n3\n00:00:19,419 --> 00:00:28,488\nEmpresas fortes investem em relacionamento, autoridade, marca e diferenciação.\n\n4\n00:00:28,488 --> 00:00:39,186\nQuando o cliente entende claramente o benefício, a conversa deixa de ser sobre quanto custa.\n\n5\n00:00:39,186 --> 00:00:42,674\nPassa a ser sobre quanto vale.\n\n6\n00:00:42,674 --> 00:00:53,023\nQuem vende valor protege margem, fortalece a marca e constrói um crescimento sustentável.\n\n7\n00:00:53,023 --> 00:01:00,000\nO melhor desconto é aquele que você nunca precisou conceder."
+ srt:"1\n00:00:00,000 --> 00:00:03,000\nSe a única forma de fechar uma venda é dando desconto, o problema não é o preço.\n\n2\n00:00:03,000 --> 00:00:08,000\nTem uma pergunta que revela o problema de verdade. Ela vem no final, e é desconfortável.\n\n3\n00:00:08,000 --> 00:00:13,000\nDesconto recorrente não é estratégia comercial. É sintoma.\n\n4\n00:00:13,000 --> 00:00:18,667\nSintoma de que o cliente ainda não entendeu o valor do que você faz.\n\n5\n00:00:18,667 --> 00:00:28,000\nQuando ele não vê diferença entre você e o concorrente, decide pela única coisa que consegue comparar: o número.\n\n6\n00:00:28,000 --> 00:00:32,000\nE tem um efeito colateral disso que quase ninguém calcula.\n\n7\n00:00:32,000 --> 00:00:33,327\nDesconto ensina.\n\n8\n00:00:33,327 --> 00:00:39,631\nToda vez que você cede, ensina aquele cliente a esperar desconto na próxima.\n\n9\n00:00:39,631 --> 00:00:41,622\nE ele conta pro mercado.\n\n10\n00:00:41,622 --> 00:00:50,000\nEm pouco tempo, seu preço de tabela virou ficção e sua margem virou um lugar onde você não mora mais.\n\n11\n00:00:50,000 --> 00:00:54,000\nAgora a pergunta que eu prometi. Responde com sinceridade.\n\n12\n00:00:54,000 --> 00:00:58,601\nSe você tirasse o desconto hoje, o cliente ainda teria motivo pra te escolher?\n\n13\n00:00:58,601 --> 00:01:02,257\nSe a resposta demorar, o trabalho não é comercial. É de marca.\n\n14\n00:01:02,257 --> 00:01:12,461\nEmpresa que vende sem desconto investiu antes em relacionamento, autoridade e diferenciação, pra que na hora da conversa o assunto não fosse quanto custa, e sim quanto vale.\n\n15\n00:01:12,461 --> 00:01:16,000\nO melhor desconto é aquele que você nunca precisou conceder.\n\n16\n00:01:16,000 --> 00:01:26,000\nSalva porque você vai precisar disso na próxima negociação."
 },
 {
- n:34,semana:3,dia:19,mes:9,ano:2026,pilar:"Opinião",duracao:"55–70s",
+ n:34,semana:3,dia:19,mes:9,ano:2026,pilar:"Opinião",duracao:"80–90s",
+ modelo:"viral",
  titulo:"O fim do vendedor tradicional",
  objetivo:"Defender a transformação do vendedor em consultor diante de um cliente mais informado. Reforça visão de mercado sobre profissão em transição.",
  publico:"Empresários que lideram times comerciais e vendedores em transição de carreira.",
- hooks:["Existe uma profissão que está mudando rápido: a do vendedor.","Quando o cliente chega até o vendedor hoje, ele já sabe quase tudo sobre o produto.","Quem só tira pedido vai ser substituído. Quem resolve problema vai valer cada vez mais."],
+ hooks:["Tem uma profissão sendo apagada em silêncio: a do vendedor que só apresenta produto.","Seu vendedor treinou uma apresentação que o cliente já viu três vezes. Melhor editada.","O cliente chega sabendo mais do produto do que o seu time. E isso é uma oportunidade."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–4s)",t:"Existe uma profissão que está mudando rapidamente: a do vendedor.",d:"Gustavo, plano médio, tom de observação."},
-  {c:"Cena 2 · O que mudou (4–24s)",t:"O modelo antigo, baseado em apresentar produto e negociar preço, está ficando para trás. Hoje o cliente pesquisa antes de comprar, compara concorrente, lê avaliação, assiste vídeo. Quando chega até o vendedor, ele já sabe quase tudo sobre o produto.",d:"B-roll de pessoa pesquisando produto no celular antes de ir à loja."},
-  {c:"Cena 3 · O novo papel (24–46s)",t:"Por isso o novo vendedor precisa ser consultor. Precisa entender o negócio do cliente, gerar confiança e criar solução.",d:"[substituir por exemplo real do Gustavo de um vendedor que virou consultor]."},
-  {c:"Cena 4 · Conclusão (46–60s)",t:"Quem apenas tira pedido vai ser substituído. Quem resolve problema vai ser cada vez mais valorizado.",d:"Plano fechado."},
-  {c:"Cena 5 · CTA (60–70s)",t:"O futuro pertence aos vendedores que entregam inteligência, não apenas produto. Seu time comercial já virou esse tipo de vendedor?",d:"Convite ao debate."}
+  {c:"1. Ganchismo (0–3s)",t:"Tem uma profissão sendo apagada em silêncio: a do vendedor que só apresenta produto.",d:"Gustavo, plano médio, tom de observação."},
+  {c:"2. Promessa aberta (3–8s)",t:"E o motivo não é a tecnologia. É uma coisa que já aconteceu com o seu cliente.",d:"Plano fechado."},
+  {c:"3. Introdução (8–13s)",t:"Quando ele chega até o seu vendedor, ele já sabe quase tudo.",d:"B-roll de pessoa pesquisando no celular antes de entrar na loja."},
+  {c:"4. Bloco 1 (13–30s)",t:"Pesquisou, comparou concorrente, leu avaliação, assistiu vídeo. Aquela apresentação de produto que o seu time treinou pra fazer? Ele já viu. Três vezes. Melhor editada.",d:"B-roll de tela com comparativo de produtos."},
+  {c:"5. Ponta solta (30–34s)",t:"Só que aí acontece uma coisa curiosa. E é a maior oportunidade comercial de hoje.",d:"Volta pro Gustavo."},
+  {c:"6. Bloco 2 (34–52s)",t:"O cliente sabe tudo do produto, mas não sabe o que fazer com aquilo dentro do negócio dele. Ele tem informação demais e decisão de menos. Ninguém traduziu.",d:"[substituir por exemplo real do Gustavo: um vendedor que virou consultor e o que mudou no resultado]."},
+  {c:"7. Ponta solta (52–56s)",t:"E é exatamente aí que separa quem vai sobreviver de quem vai sumir.",d:"Plano fechado, pausa."},
+  {c:"8. Solução (56–78s)",t:"Quem só tira pedido compete com um site. E o site é mais rápido e mais barato. Quem entende o negócio do cliente e mostra o caminho não compete com ninguém. O vendedor não tá acabando. Tá virando consultor. O futuro é de quem entrega inteligência, não produto.",d:"Gustavo, plano médio, tom de conclusão."},
+  {c:"9. CTA (78–88s)",t:"Compartilha com o líder comercial da sua empresa.",d:"Plano fechado."}
  ],
  broll:["Pessoa pesquisando produto no celular antes de comprar","Vendedor em conversa consultiva com cliente","Comparação de avaliações e concorrentes numa tela","Gráfico simples de mudança de perfil de venda","Gustavo em treinamento ou reunião com time comercial"],
  legendas:["0–4s: 'a profissão do vendedor está mudando'","15s: 'já sabe quase tudo sobre o produto'","38s: 'o novo vendedor precisa ser consultor'","60s: pergunta final"],
  impacto:["Quando chega até o vendedor, o cliente já sabe quase tudo sobre o produto.","Quem apenas tira pedido vai ser substituído. Quem resolve problema vai valer mais.","O futuro pertence aos vendedores que entregam inteligência, não apenas produto."],
- cta:"\"Seu time comercial já virou esse tipo de vendedor?\"",
+ cta:"\"Compartilha com o líder comercial da sua empresa.\"",
  titulos:{ig:"O vendedor tradicional está desaparecendo",li:"O fim do vendedor tradicional: por que o consultor vai ganhar",yt:"O FIM do vendedor tradicional (minha opinião)"},
  desc:{ig:"O cliente já sabe quase tudo antes de falar com o vendedor. Quem só tira pedido vai ficar para trás.",li:"Com o cliente pesquisando, comparando e avaliando antes da compra, o modelo antigo de vendedor está ficando para trás. O novo vendedor precisa ser consultor: entender o negócio do cliente, gerar confiança e criar solução.",fb:"O fim do vendedor tradicional: minha opinião sobre uma profissão em transformação.",yt:"Gustavo Schorr dá sua opinião sobre a transformação da profissão de vendedor, e por que o futuro pertence a quem entrega inteligência, não apenas produto."},
  hash:{ig:"#vendas #lideranca #empreendedorismo #opiniao #negocios",li:"#vendas #lideranca #opiniao #estrategia #negocios",tt:"#vendas #negocios #opiniao #lideranca",yt:"#vendas #lideranca #opiniao"},
  thumb:{texto:"O FIM DO VENDEDOR TRADICIONAL",comp:"Gustavo com ícone de vendedor clássico riscado e ícone de consultor em destaque",expr:"Firme, tom de opinião"},
  cortes:{shorts:"Hook + 'já sabe quase tudo' + conclusão 'quem resolve problema vale mais'.",linkedin:"Manter argumento completo, tom executivo, ótimo para líderes comerciais.",tiktok:"Hook direto, texto 'VENDEDOR VIROU CONSULTOR' na tela, ritmo ágil."},
- srt:"1\n00:00:00,000 --> 00:00:06,322\nExiste uma profissão que está mudando rapidamente: a do vendedor.\n\n2\n00:00:06,322 --> 00:00:14,881\nO modelo antigo, baseado em apresentar produto e negociar preço, está ficando para trás.\n\n3\n00:00:14,881 --> 00:00:23,733\nHoje o cliente pesquisa antes de comprar, compara concorrente, lê avaliação, assiste vídeo.\n\n4\n00:00:23,733 --> 00:00:30,347\nQuando chega até o vendedor, ele já sabe quase tudo sobre o produto.\n\n5\n00:00:30,347 --> 00:00:34,918\nPor isso o novo vendedor precisa ser consultor.\n\n6\n00:00:34,918 --> 00:00:41,824\nPrecisa entender o negócio do cliente, gerar confiança e criar solução.\n\n7\n00:00:41,824 --> 00:00:46,103\nQuem apenas tira pedido vai ser substituído.\n\n8\n00:00:46,103 --> 00:00:51,453\nQuem resolve problema vai ser cada vez mais valorizado.\n\n9\n00:00:51,453 --> 00:00:59,137\nO futuro pertence aos vendedores que entregam inteligência, não apenas produto.\n\n10\n00:00:59,137 --> 00:01:03,1000\nSeu time comercial já virou esse tipo de vendedor?"
+ srt:"1\n00:00:00,000 --> 00:00:03,000\nTem uma profissão sendo apagada em silêncio: a do vendedor que só apresenta produto.\n\n2\n00:00:03,000 --> 00:00:08,000\nE o motivo não é a tecnologia. É uma coisa que já aconteceu com o seu cliente.\n\n3\n00:00:08,000 --> 00:00:13,000\nQuando ele chega até o seu vendedor, ele já sabe quase tudo.\n\n4\n00:00:13,000 --> 00:00:19,452\nPesquisou, comparou concorrente, leu avaliação, assistiu vídeo.\n\n5\n00:00:19,452 --> 00:00:28,464\nAquela apresentação de produto que o seu time treinou pra fazer? Ele já viu. Três vezes.\n\n6\n00:00:28,464 --> 00:00:30,000\nMelhor editada.\n\n7\n00:00:30,000 --> 00:00:34,000\nSó que aí acontece uma coisa curiosa. E é a maior oportunidade comercial de hoje.\n\n8\n00:00:34,000 --> 00:00:44,636\nO cliente sabe tudo do produto, mas não sabe o que fazer com aquilo dentro do negócio dele.\n\n9\n00:00:44,636 --> 00:00:52,000\nEle tem informação demais e decisão de menos. Ninguém traduziu.\n\n10\n00:00:52,000 --> 00:00:56,000\nE é exatamente aí que separa quem vai sobreviver de quem vai sumir.\n\n11\n00:00:56,000 --> 00:01:02,677\nQuem só tira pedido compete com um site. E o site é mais rápido e mais barato.\n\n12\n00:01:02,677 --> 00:01:09,268\nQuem entende o negócio do cliente e mostra o caminho não compete com ninguém.\n\n13\n00:01:09,268 --> 00:01:13,463\nO vendedor não tá acabando. Tá virando consultor.\n\n14\n00:01:13,463 --> 00:01:18,000\nO futuro é de quem entrega inteligência, não produto.\n\n15\n00:01:18,000 --> 00:01:28,000\nCompartilha com o líder comercial da sua empresa."
 },
 {
- n:35,semana:3,dia:22,mes:9,ano:2026,pilar:"Futuro",duracao:"55–70s",
+ n:35,semana:3,dia:22,mes:9,ano:2026,pilar:"Futuro",duracao:"80–90s",
+ modelo:"viral",
  titulo:"A Inteligência Artificial vai substituir as agências?",
  objetivo:"Encerrar o transbordo de setembro com uma tese sobre IA e trabalho estratégico, defendendo que profissionais que evoluem se fortalecem. Reforça visão de futuro e liderança.",
  publico:"Empresários, agências parceiras e profissionais de marketing preocupados com automação.",
- hooks:["A inteligência artificial já está transformando o marketing. Mas será que isso significa o fim das agências?","Na minha opinião, a IA não veio para substituir profissional. Veio para substituir quem não evolui.","O que vai desaparecer não é a agência. É a tarefa repetitiva que ela ainda cobra caro para fazer."],
+ hooks:["A inteligência artificial vai acabar com as agências? A resposta tem um porém.","Tem um tipo de agência que a IA já está substituindo. Dá pra descobrir qual em uma pergunta.","Se a sua agência sumisse amanhã, o cliente perderia o quê? A resposta vale muito."],
  roteiro:[
-  {c:"Cena 1 · Hook (0–4s)",t:"A inteligência artificial já está transformando o marketing. Ela escreve texto, cria imagem, analisa dado e acelera processo. Mas será que isso significa o fim das agências?",d:"Gustavo, plano médio, tom de análise."},
-  {c:"Cena 2 · Resposta (4–18s)",t:"Na minha opinião, não.",d:"Plano fechado, tom de convicção."},
-  {c:"Cena 3 · O que muda de verdade (18–40s)",t:"O que vai desaparecer são as atividades repetitivas e operacionais. O verdadeiro diferencial continua sendo estratégia, criatividade, conhecimento do negócio e capacidade de gerar resultado.",d:"[substituir por exemplo real do Gustavo de uma decisão estratégica que IA não substitui]."},
-  {c:"Cena 4 · Conclusão (40–56s)",t:"As agências que apenas executam tarefa correm risco. As que ajudam o cliente a tomar melhor decisão vão valer ainda mais.",d:"Plano fechado."},
-  {c:"Cena 5 · CTA (56–66s)",t:"A IA não veio para substituir profissional. Veio para substituir profissional que não evolui. Sua equipe já está evoluindo com ela?",d:"Convite, fechamento do transbordo de setembro."}
+  {c:"1. Ganchismo (0–3s)",t:"A inteligência artificial vai acabar com as agências? A resposta tem um porém.",d:"Gustavo, plano médio, tom de análise."},
+  {c:"2. Promessa aberta (3–8s)",t:"Tem um tipo de agência que sim, vai acabar. E dá pra saber qual em uma pergunta só.",d:"Plano fechado."},
+  {c:"3. Introdução (8–14s)",t:"A IA já escreve texto, cria imagem, analisa dado e acelera processo. Isso é real.",d:"B-roll de interface de IA gerando variações de criativo."},
+  {c:"4. Bloco 1 (14–30s)",t:"Só que ela é boa em tarefa. Tarefa é o que tem começo, meio e fim definidos. Fazer variação de anúncio, cortar vídeo, montar relatório.",d:"B-roll de timeline de edição."},
+  {c:"5. Ponta solta (30–34s)",t:"E é aqui que a maioria erra a conta. Porque agência não vende tarefa.",d:"Volta pro Gustavo."},
+  {c:"6. Bloco 2 (34–52s)",t:"Vende decisão. Onde investir, o que dizer, pra quem, em que ordem, e principalmente o que não fazer. Isso depende de entender o negócio do cliente, o mercado dele e o momento dele. A IA não tem esse contexto. Quem senta na reunião tem.",d:"[substituir por exemplo real do Gustavo: uma decisão estratégica que nenhuma ferramenta tomaria]."},
+  {c:"7. Ponta solta (52–56s)",t:"Aí vem a pergunta que eu prometi. Ela é bem simples.",d:"Plano fechado, pausa."},
+  {c:"8. Solução (56–78s)",t:"Se a sua agência sumisse amanhã, o cliente perderia execução ou perderia direção? Se for execução, a IA já tá substituindo. Se for direção, ela ficou ainda mais valiosa, porque agora executa mais rápido com o mesmo cérebro. A IA não veio pra substituir profissional. Veio pra substituir profissional que não evolui.",d:"Gustavo, plano médio, tom de conclusão."},
+  {c:"9. CTA (78–88s)",t:"Segue o perfil, porque é esse tipo de leitura de mercado que eu publico aqui.",d:"Plano fechado, convite direto."}
  ],
  broll:["Tela mostrando geração de texto e imagem por IA","Equipe de agência em reunião estratégica","Painel de dados sendo analisado em tempo real","Gráfico simples de tarefa operacional x estratégia","Gustavo em conversa com equipe sobre tecnologia"],
  legendas:["0–4s: 'o fim das agências?'","10s: 'na minha opinião, não'","30s: 'estratégia, criatividade, conhecimento do negócio'","56s: pergunta final"],
  impacto:["O que vai desaparecer são as atividades repetitivas e operacionais.","As agências que ajudam o cliente a tomar melhor decisão vão valer ainda mais.","A IA não veio para substituir profissional. Veio para substituir quem não evolui."],
- cta:"\"Sua equipe já está evoluindo com a IA?\"",
+ cta:"\"Segue o perfil, porque é esse tipo de leitura de mercado que eu publico aqui.\"",
  titulos:{ig:"A IA vai acabar com as agências? Minha opinião",li:"IA e agências: o que realmente vai mudar",yt:"A Inteligência Artificial vai SUBSTITUIR as agências?"},
  desc:{ig:"A IA não veio para substituir profissional. Veio para substituir quem não evolui. Minha visão sobre isso.",li:"A inteligência artificial já escreve texto, cria imagem e analisa dado. Mas o que sustenta o valor de uma agência continua sendo estratégia, criatividade e conhecimento do negócio do cliente. Minha opinião sobre o que realmente muda com a IA.",fb:"A inteligência artificial vai substituir as agências? Na minha opinião, não. Mas algo vai mudar.",yt:"Gustavo Schorr dá sua opinião sobre o impacto da inteligência artificial nas agências de marketing e explica por que estratégia e conhecimento do negócio continuam sendo o verdadeiro diferencial."},
  hash:{ig:"#IA #inteligenciaartificial #marketing #agencias #futuro #opiniao",li:"#IA #inteligenciaartificial #marketing #futuro #opiniao",tt:"#ia #marketing #futuro #opiniao",yt:"#IA #inteligenciaartificial #marketing #futuro"},
  thumb:{texto:"IA VAI ACABAR COM AS AGÊNCIAS?",comp:"Gustavo com ícones de IA e de equipe estratégica lado a lado",expr:"Analítico, tom de opinião ponderada"},
  cortes:{shorts:"Hook + resposta direta 'na minha opinião, não' + fechamento sobre evolução.",linkedin:"Manter argumento completo, tom executivo, ótimo para debate entre agências e clientes.",tiktok:"Hook direto, texto 'IA NÃO SUBSTITUI QUEM EVOLUI' na tela, ritmo ágil."},
- srt:"1\n00:00:00,000 --> 00:00:06,086\nA inteligência artificial já está transformando o marketing.\n\n2\n00:00:06,086 --> 00:00:12,577\nEla escreve texto, cria imagem, analisa dado e acelera processo.\n\n3\n00:00:12,577 --> 00:00:17,344\nMas será que isso significa o fim das agências?\n\n4\n00:00:17,344 --> 00:00:19,575\nNa minha opinião, não.\n\n5\n00:00:19,575 --> 00:00:26,371\nO que vai desaparecer são as atividades repetitivas e operacionais.\n\n6\n00:00:26,371 --> 00:00:38,745\nO verdadeiro diferencial continua sendo estratégia, criatividade, conhecimento do negócio e capacidade de gerar resultado.\n\n7\n00:00:38,745 --> 00:00:44,019\nAs agências que apenas executam tarefa correm risco.\n\n8\n00:00:44,019 --> 00:00:50,916\nAs que ajudam o cliente a tomar melhor decisão vão valer ainda mais.\n\n9\n00:00:50,916 --> 00:00:55,277\nA IA não veio para substituir profissional.\n\n10\n00:00:55,277 --> 00:01:00,247\nVeio para substituir profissional que não evolui.\n\n11\n00:01:00,247 --> 00:01:04,000\nSua equipe já está evoluindo com ela?"
+ srt:"1\n00:00:00,000 --> 00:00:03,000\nA inteligência artificial vai acabar com as agências? A resposta tem um porém.\n\n2\n00:00:03,000 --> 00:00:08,000\nTem um tipo de agência que sim, vai acabar. E dá pra saber qual em uma pergunta só.\n\n3\n00:00:08,000 --> 00:00:14,000\nA IA já escreve texto, cria imagem, analisa dado e acelera processo. Isso é real.\n\n4\n00:00:14,000 --> 00:00:23,075\nSó que ela é boa em tarefa. Tarefa é o que tem começo, meio e fim definidos.\n\n5\n00:00:23,075 --> 00:00:30,000\nFazer variação de anúncio, cortar vídeo, montar relatório.\n\n6\n00:00:30,000 --> 00:00:34,000\nE é aqui que a maioria erra a conta. Porque agência não vende tarefa.\n\n7\n00:00:34,000 --> 00:00:35,086\nVende decisão.\n\n8\n00:00:35,086 --> 00:00:41,681\nOnde investir, o que dizer, pra quem, em que ordem, e principalmente o que não fazer.\n\n9\n00:00:41,681 --> 00:00:47,810\nIsso depende de entender o negócio do cliente, o mercado dele e o momento dele.\n\n10\n00:00:47,810 --> 00:00:52,000\nA IA não tem esse contexto. Quem senta na reunião tem.\n\n11\n00:00:52,000 --> 00:00:56,000\nAí vem a pergunta que eu prometi. Ela é bem simples.\n\n12\n00:00:56,000 --> 00:01:01,730\nSe a sua agência sumisse amanhã, o cliente perderia execução ou perderia direção?\n\n13\n00:01:01,730 --> 00:01:04,630\nSe for execução, a IA já tá substituindo.\n\n14\n00:01:04,630 --> 00:01:11,633\nSe for direção, ela ficou ainda mais valiosa, porque agora executa mais rápido com o mesmo cérebro.\n\n15\n00:01:11,633 --> 00:01:14,605\nA IA não veio pra substituir profissional.\n\n16\n00:01:14,605 --> 00:01:18,000\nVeio pra substituir profissional que não evolui.\n\n17\n00:01:18,000 --> 00:01:28,000\nSegue o perfil, porque é esse tipo de leitura de mercado que eu publico aqui."
 }
 ];
 /* ==== MESES:END ==== */
@@ -1244,7 +1339,7 @@ var MARCA_PADRAO = {
 
 var CHAVES_MES = Object.keys(MESES).sort();
 var mesAtual = CHAVES_MES[0] || '';
-var filtro = {pilar:'all', semana:'all'};
+var filtro = {pilar:'all', semana:'all', modelo:'all'};
 var tamTele = 16;
 var pecaAberta = null;
 
@@ -1331,6 +1426,7 @@ function pecasDoMes(k){
 function passaFiltro(v){
   if(filtro.pilar !== 'all' && v.pilar !== filtro.pilar) return false;
   if(filtro.semana !== 'all' && String(v.semana) !== filtro.semana) return false;
+  if(filtro.modelo !== 'all' && (v.modelo || 'classico') !== filtro.modelo) return false;
   return true;
 }
 
@@ -1369,12 +1465,14 @@ function renderStats(){
   var pilares = {};
   preenchidas.forEach(function(v){ pilares[v.pilar] = 1; });
   var vazias = pecas.length - preenchidas.length;
+  var virais = preenchidas.filter(function(v){ return v.modelo === 'viral'; }).length;
 
   var cards = [
     ['', preenchidas.length, 'peças no mês'],
     ['ok', ok, 'aprovadas'],
     ['nao', nao, 'recusadas'],
     ['', preenchidas.length - ok - nao, 'aguardando'],
+    ['', virais, 'roteiros de retenção'],
     ['', Object.keys(pilares).length, 'pilares usados'],
     ['', VIDEOS.filter(function(v){return !v.vazio;}).length, 'peças no total']
   ];
@@ -1393,7 +1491,15 @@ function renderFiltros(){
   pecas.forEach(function(v){ if(semanas.indexOf(v.semana) < 0) semanas.push(v.semana); });
   semanas.sort(function(a,b){ return a - b; });
 
-  var h = '<span class="rot">Pilar</span>';
+  var temViral = pecas.some(function(v){ return v.modelo === 'viral'; });
+  var h = '';
+  if(temViral){
+    h += '<span class="rot">Formato</span>';
+    h += botao('modelo','all','Todos');
+    h += botao('modelo','viral','⚡ Retenção');
+    h += botao('modelo','classico','Clássico');
+  }
+  h += '<span class="rot">Pilar</span>';
   h += botao('pilar','all','Todos');
   pilares.forEach(function(p){ h += botao('pilar', p, p); });
   h += '<span class="rot">Semana</span>';
@@ -1475,7 +1581,7 @@ function botaoPeca(v){
 
   b.innerHTML =
     '<span class="tit">' + esc(v.titulo) + '</span>' +
-    '<span class="marca"><span>' + esc(v.pilar) + '</span><span class="chk">' +
+    '<span class="marca"><span>' + (v.modelo === 'viral' ? '<span class="fmt">⚡</span> ' : '') + esc(v.pilar) + '</span><span class="chk">' +
       (s && s.status === 'aprovado' ? '✓' : s && s.status === 'recusado' ? '✕' : '') +
     '</span></span>';
   b.onclick = function(){ abrirPeca(v); };
@@ -1566,7 +1672,11 @@ function abrirPeca(v){
   document.getElementById('mTitulo').textContent = v.vazio ? 'Dia ' + pad2(v.dia) + ' — falta preencher' : v.titulo;
   document.getElementById('mMeta').innerHTML =
     '<span>' + DOW_LONGO[dow] + ', ' + pad2(v.dia) + ' de ' + (m ? m.nome : '') + '</span>' +
-    (v.vazio ? '' : '<span>Semana ' + v.semana + '</span><span>' + esc(v.duracao) + '</span><span>Peça #' + v.n + '</span>');
+    (v.vazio ? '' :
+      '<span>Semana ' + v.semana + '</span><span>' + esc(v.duracao) + '</span><span>Peça #' + v.n + '</span>' +
+      '<span class="selo">' + (v.modelo === 'viral'
+        ? '⚡ Retenção · ' + v.roteiro.length + ' tempos'
+        : 'Clássico · ' + v.roteiro.length + ' cenas') + '</span>');
 
   document.getElementById('mCorpo').innerHTML = v.vazio ? corpoVazio(v) : corpoPeca(v);
 
@@ -1611,7 +1721,8 @@ function corpoPeca(v){
     '<div class="teleprompter" id="teleprompter" style="font-size:' + tamTele + 'px">' +
       v.roteiro.map(function(c, i){
         var ehCta = /CTA|convite/i.test(c.c) || i === v.roteiro.length - 1;
-        return '<p><span class="cena">' + esc(c.c) + '</span>' +
+        var ehPonta = /ponta solta|ganchismo|promessa aberta/i.test(c.c);
+        return '<p' + (ehPonta ? ' class="ponta"' : '') + '><span class="cena">' + esc(c.c) + '</span>' +
           '<span class="' + (ehCta ? 'cta-fala' : '') + '">' + marcar(c.t) + '</span>' +
           '<span class="dir">Imagem: ' + marcar(c.d) + '</span></p>';
       }).join('') +
