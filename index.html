@@ -245,6 +245,19 @@
   .status.aprovado{color:var(--ok)} .status.recusado{color:var(--nao)}
   .cxrecusa{margin-top:12px;display:none}
   .cxrecusa.on{display:block}
+
+  .notas textarea{min-height:110px;font-size:13.5px;line-height:1.55}
+  .notas-barra{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+  .notas-aviso{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .notas-aviso.salvo{color:var(--ok)}
+  .notas-links{margin-top:10px;display:flex;flex-direction:column;gap:5px}
+  .notas-links a{
+    font-size:12.5px;color:var(--realce);text-decoration:none;word-break:break-all;
+    display:inline-flex;align-items:baseline;gap:6px;
+  }
+  .notas-links a:hover{text-decoration:underline}
+  .notas-links .lk{font-family:var(--mono);font-size:10px;color:var(--muted);flex:none}
+  .ev .clip{color:var(--realce)}
   textarea{
     width:100%;min-height:82px;border:1px solid var(--line);background:var(--raised);color:var(--ink);
     border-radius:10px;padding:10px 12px;font-family:inherit;font-size:14px;resize:vertical;
@@ -327,7 +340,8 @@
     <br><br>
     Roteiros marcados com <span class="ph">[substituir por história real do Gustavo]</span> precisam de experiência real antes de gravar — não inventamos viagens, negociações nem números internos.
     Onde aparece <span class="ph">[INSERIR NÚMERO REAL]</span>, confirme o dado antes de publicar.
-    <br>Decisões e histórico ficam salvos neste navegador (localStorage). Para levar para outra máquina, use <em>Exportar base</em>.
+    <br>Decisões, anotações e histórico ficam salvos neste navegador (localStorage). Para levar para outra máquina, use <em>Exportar base</em>.
+    <br>O cartão com <strong>🔗</strong> tem anotação — abra a peça e role até <em>Anotações e links</em>.
   </footer>
 </main>
 
@@ -1309,6 +1323,7 @@ const VIDEOS=[
 var NS = 'gs';
 var K_STATUS = NS + '.status';
 var K_LOG    = NS + '.log';
+var K_NOTAS  = NS + '.notas';
 var K_MARCA  = NS + '.marca';
 var K_TEMA   = NS + '.tema';
 
@@ -1370,6 +1385,25 @@ function definirStatus(v, status, motivo){
   else { t[k] = {status:status, motivo:motivo || '', ts:Date.now()}; }
   gravar(K_STATUS, t);
 }
+// Anotação avulsa da peça: links do Drive, andamento da gravação, o que for.
+function notaDe(v){
+  var t = ler(K_NOTAS, {});
+  var n = t[chaveDecisao(v)];
+  if(!n) return null;
+  return typeof n === 'string' ? {texto:n, ts:0} : n;
+}
+function definirNota(v, texto){
+  var t = ler(K_NOTAS, {});
+  var k = chaveDecisao(v);
+  if(!texto.trim()){ delete t[k]; }
+  else { t[k] = {texto:texto, ts:Date.now()}; }
+  gravar(K_NOTAS, t);
+}
+function temNota(v){
+  var n = notaDe(v);
+  return !!(n && n.texto.trim());
+}
+
 function registrarRecusa(v, motivo){
   var log = ler(K_LOG, []);
   log.unshift({
@@ -1568,9 +1602,12 @@ function botaoPeca(v){
   b.style.setProperty('--pilar', PILAR_COR[v.pilar] || 'var(--marca)');
   b.dataset.chave = chaveDecisao(v);
 
+  var clipe = temNota(v) ? '🔗' : '';
+
   if(v.vazio){
     b.className += ' vazio';
-    b.innerHTML = '<span class="tit">Slot vazio — falta preencher</span>';
+    b.innerHTML = '<span class="tit">Slot vazio — falta preencher</span>' +
+      '<span class="marca"><span></span><span class="clip">' + clipe + '</span></span>';
     b.onclick = function(){ abrirPeca(v); };
     return b;
   }
@@ -1581,9 +1618,10 @@ function botaoPeca(v){
 
   b.innerHTML =
     '<span class="tit">' + esc(v.titulo) + '</span>' +
-    '<span class="marca"><span>' + (v.modelo === 'viral' ? '<span class="fmt">⚡</span> ' : '') + esc(v.pilar) + '</span><span class="chk">' +
+    '<span class="marca"><span>' + (v.modelo === 'viral' ? '<span class="fmt">⚡</span> ' : '') + esc(v.pilar) + '</span>' +
+    '<span><span class="clip">' + clipe + '</span> <span class="chk">' +
       (s && s.status === 'aprovado' ? '✓' : s && s.status === 'recusado' ? '✕' : '') +
-    '</span></span>';
+    '</span></span></span>';
   b.onclick = function(){ abrirPeca(v); };
   return b;
 }
@@ -1649,6 +1687,7 @@ function exportarBase(){
     exportadoEm: new Date().toISOString(),
     marca: marcaAtual(),
     decisoes: ler(K_STATUS, {}),
+    anotacoes: ler(K_NOTAS, {}),
     recusas: ler(K_LOG, []),
     termosRecorrentes: termosRecorrentes()
   };
@@ -1685,6 +1724,7 @@ function abrirPeca(v){
     ligarAbas(v);
     ligarDecisao(v);
   }
+  ligarNotas(v);
 
   document.getElementById('overlay').classList.add('on');
   document.body.style.overflow = 'hidden';
@@ -1701,6 +1741,20 @@ function corpoVazio(v){
       '<li>Thumbnail, cortes por formato e legenda SRT</li>' +
     '</ul>' +
     '<p style="margin-top:10px">Rode o workflow <strong>Novo mês do calendário</strong> no GitHub Actions para preencher, ou edite o bloco <code>MESES</code> no index.html à mão.</p>' +
+  '</div>' + secaoNotas(v);
+}
+
+// Campo livre da peça: anotações de produção, links de Drive, andamento.
+function secaoNotas(v){
+  return '<div class="secao notas">' +
+    '<h4>Anotações e links</h4>' +
+    '<textarea id="txtNota" placeholder="Andamento desta peça, links do Drive, referências, o que combinou com o cliente. Salva sozinho neste navegador."></textarea>' +
+    '<div class="notas-barra">' +
+      '<button class="btn" id="btnCopiarNota" type="button">Copiar anotação</button>' +
+      '<button class="btn" id="btnLimparNota" type="button">Limpar</button>' +
+      '<span class="notas-aviso" id="avisoNota"></span>' +
+    '</div>' +
+    '<div class="notas-links" id="linksNota"></div>' +
   '</div>';
 }
 
@@ -1767,6 +1821,8 @@ function corpoPeca(v){
     '<div class="btn-linha"><button class="btn" id="btnSrt" type="button">Copiar SRT</button>' +
     '<button class="btn" id="btnRoteiro" type="button">Copiar roteiro</button></div></div>';
 
+  h += secaoNotas(v);
+
   h += '<div class="mrodape">' +
     '<button class="btn-ok" id="btnAprovar" type="button">Aprovar</button>' +
     '<button class="btn-nao" id="btnRecusar" type="button">Recusar</button>' +
@@ -1821,6 +1877,92 @@ function ligarAbas(v){
   mostrar(0);
 }
 
+var RE_URL = /\b((?:https?:\/\/|www\.)[^\s<>"')\]]+[^\s<>"')\].,;:!?])/gi;
+
+function rotuloLink(u){
+  var limpo = u.replace(/^https?:\/\//i, '').replace(/^www\./i, '');
+  return limpo.length > 68 ? limpo.slice(0, 65) + '…' : limpo;
+}
+function linksDe(texto){
+  var achados = String(texto || '').match(RE_URL) || [];
+  var vistos = {}, saida = [];
+  achados.forEach(function(u){
+    var href = /^www\./i.test(u) ? 'https://' + u : u;
+    if(vistos[href]) return;
+    vistos[href] = 1; saida.push(href);
+  });
+  return saida;
+}
+
+function ligarNotas(v){
+  var txt = document.getElementById('txtNota');
+  var aviso = document.getElementById('avisoNota');
+  var lista = document.getElementById('linksNota');
+  var n = notaDe(v);
+  var timer = null;
+
+  txt.value = n ? n.texto : '';
+
+  function pintarLinks(){
+    var urls = linksDe(txt.value);
+    lista.innerHTML = urls.map(function(u){
+      return '<a href="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' +
+        '<span class="lk">↗</span>' + esc(rotuloLink(u)) + '</a>';
+    }).join('');
+  }
+  function pintarAviso(quando, agora){
+    aviso.className = 'notas-aviso' + (agora ? ' salvo' : '');
+    if(agora){ aviso.textContent = 'Salvo.'; return; }
+    if(!quando){ aviso.textContent = txt.value.trim() ? '' : 'Nada anotado ainda.'; return; }
+    var d = new Date(quando);
+    aviso.textContent = isNaN(d) ? '' : 'Última edição: ' +
+      d.toLocaleString('pt-BR', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  }
+
+  function salvar(){
+    definirNota(v, txt.value);
+    pintarAviso(0, true);
+    marcarCartaoNota(v);
+    setTimeout(function(){ if(pecaAberta === v) pintarAviso(Date.now(), false); }, 1600);
+  }
+
+  txt.oninput = function(){
+    pintarLinks();
+    aviso.className = 'notas-aviso';
+    aviso.textContent = 'Digitando…';
+    clearTimeout(timer);
+    timer = setTimeout(salvar, 700);
+  };
+  txt.onblur = function(){ clearTimeout(timer); salvar(); };
+
+  document.getElementById('btnCopiarNota').onclick = function(){ copiar(txt.value, this); };
+  document.getElementById('btnLimparNota').onclick = function(){
+    if(txt.value.trim() && !confirm('Apagar a anotação desta peça?')) return;
+    txt.value = '';
+    clearTimeout(timer);
+    salvar(); pintarLinks();
+  };
+
+  pintarLinks();
+  pintarAviso(n ? n.ts : 0, false);
+}
+
+// Grava a anotação pendente antes de fechar o modal, sem esperar o debounce.
+function salvarNotaPendente(){
+  var txt = document.getElementById('txtNota');
+  if(!txt || !pecaAberta) return;
+  var n = notaDe(pecaAberta);
+  if((n ? n.texto : '') === txt.value) return;
+  definirNota(pecaAberta, txt.value);
+  marcarCartaoNota(pecaAberta);
+}
+
+// Atualiza só o clipe do cartão, sem redesenhar a grade inteira.
+function marcarCartaoNota(v){
+  var b = document.querySelector('.ev[data-chave="' + chaveDecisao(v) + '"] .clip');
+  if(b) b.textContent = temNota(v) ? '🔗' : '';
+}
+
 function ligarDecisao(v){
   var bOk = document.getElementById('btnAprovar');
   var bNao = document.getElementById('btnRecusar');
@@ -1868,6 +2010,7 @@ function ligarDecisao(v){
 }
 
 function fecharPeca(){
+  salvarNotaPendente();
   document.getElementById('overlay').classList.remove('on');
   document.body.style.overflow = '';
   pecaAberta = null;

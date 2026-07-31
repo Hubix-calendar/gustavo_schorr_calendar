@@ -18,6 +18,10 @@ Você não precisa programar para usar nada disto.
   roteiro em 5 cenas com teleprompter (com botão de aumentar a letra),
   B-roll, legendas na tela, frases de impacto, CTA, título/descrição/hashtags
   por rede, thumbnail, cortes por formato e a legenda SRT pronta para copiar.
+- **Anotações e links** no fim da peça — campo livre para andamento da gravação,
+  link do Drive, referência, o que combinou com o cliente. Salva sozinho enquanto
+  você digita e transforma toda URL colada em link clicável logo abaixo. Peça com
+  anotação ganha 🔗 no cartão do calendário.
 - **Aprovar / Recusar** dentro da peça. Ao recusar, você escreve o motivo.
 - **Banco de aprendizado** no fim da página: guarda todas as recusas, destaca os
   termos que mais se repetem nos motivos e exporta tudo em JSON.
@@ -73,7 +77,7 @@ derrubar, erro caro, contradição com o senso comum e polêmica do setor. Tutor
 passo a passo e conteúdo técnico seguem no clássico, onde a estrutura de
 retenção soaria forçada.
 
-> As aprovações e o histórico ficam salvos **no navegador que você usou**. Não
+> As aprovações, as anotações e o histórico ficam salvos **no navegador que você usou**. Não
 > sincronizam entre computadores. Para levar de uma máquina para outra, use
 > **Exportar base (JSON)**.
 
