@@ -35,6 +35,24 @@ com experiência real antes de gravar. O mesmo vale para `[INSERIR NÚMERO REAL]
 
 ---
 
+## A cadência
+
+**Um dia útil sim, outro não. De segunda a sexta, sem fim de semana e sem dois
+dias seguidos.** Dá 2 ou 3 peças por semana, 10 ou 11 por mês.
+
+O dia livre entre duas publicações é o dia de gravar — foi por isso que a
+cadência mudou: uma peça por dia sufoca a produção e a qualidade cai antes da
+quantidade. Feriado nacional não publica e também não inverte o ritmo: pula o
+feriado e mantém a alternância no próximo dia útil.
+
+As 35 peças já escritas ficaram assim: 11 em agosto, 10 em setembro, 11 em
+outubro e 3 em novembro, que segue a partir daí.
+
+A regra vale para os meses novos também. Se o gerador devolver sábado, domingo,
+feriado ou dois dias colados, a validação aborta e nada é gravado.
+
+---
+
 ## Os dois formatos de roteiro
 
 As peças não seguem todas o mesmo desenho. Há dois formatos, e o filtro
@@ -72,7 +90,7 @@ O CTA nunca é genérico. Educativo e tutorial pedem **salvar**, autoridade pede
 com quebra de padrão e duas pontas soltas, o feed viraria uma coisa só e o
 efeito acabava. Por isso o gerador é obrigado a ficar entre um quarto e um terço
 das peças do mês, com teto de metade — se passar disso, a validação aborta e
-nada é gravado. Hoje são **12 de 35** (34%), escolhidas por tema: mito a
+nada é gravado. Hoje são **12 de 35** (entre 30% e 36% em cada mês), escolhidas por tema: mito a
 derrubar, erro caro, contradição com o senso comum e polêmica do setor. Tutorial
 passo a passo e conteúdo técnico seguem no clássico, onde a estrutura de
 retenção soaria forçada.
@@ -137,7 +155,7 @@ Há três lugares, e a diferença importa:
 | Onde | Para o quê | Exemplo |
 |---|---|---|
 | Campo `estrategia` do workflow | Comando de **um mês só** | "Novembro é Black Friday, puxa mais Opinião" |
-| `ESTRATEGIA.md` | Regra **permanente** do perfil | "Sábado deixou de performar, tirar da cadência" |
+| `ESTRATEGIA.md` | Regra **permanente** do perfil | "Educação passou de metade do mês, segurar em um terço" |
 | `scripts/gerar-mes.mjs` | Como o sistema **funciona** | Mudar validação, schema, modelo de IA |
 
 Quando uma decisão pontual se repetir por dois ou três meses, ela deixou de ser

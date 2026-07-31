@@ -392,8 +392,9 @@ ${estrutura.temasVirais.length ? estrutura.temasVirais.map((t) => `  · ${t}`).j
 Arco de objetivos do mês de referência:
 ${estrutura.arco.map((l) => `  ${l}`).join('\n')}
 
-Replique essa estrutura — quantidade, cadência, dias da semana e proporção de
-pilares — trocando apenas temas e ângulos. Não repita títulos nem teses já usadas.`
+Replique o mix de pilares, as durações e a proporção de retenção, trocando
+apenas temas e ângulos. Não repita títulos nem teses já usadas. A quantidade e
+os dias vêm da cadência obrigatória mais abaixo, não da estrutura herdada.`
     : 'Não há mês de referência. Monte a estrutura a partir da estratégia.';
 
   const comando = estrategia
@@ -536,7 +537,17 @@ Dias no mês: ${dias}. O dia 1 cai em ${DOW[firstDow]}.
 
 ${calendario.join('\n')}
 
-Fim de semana é permitido se a cadência pedir — não é erro.
+## Cadência obrigatória
+
+Publica **um dia útil sim, outro não**, de segunda a sexta. Nunca sábado, nunca
+domingo, nunca dois dias seguidos — entre duas publicações tem que sobrar pelo
+menos um dia útil livre, que é o dia de gravar.
+
+Feriado não publica e também não inverte o ritmo: pula o feriado e mantém a
+alternância no próximo dia útil.
+
+Isso costuma dar 10 ou 11 peças no mês. Se a estrutura herdada disser outra
+quantidade, esta regra vence — ela é decisão de produção, não de conteúdo.
 
 ${heranca}
 
@@ -549,9 +560,43 @@ Devolva o mês completo no formato do schema.`;
 
 // --------------------------------------------------------------- validação
 
-export function validar(videos, { ano, mes, dias }) {
+export function validar(videos, { ano, mes, dias, feriados = {} }) {
   const erros = [];
   const vistos = new Set();
+
+  // A cadência é decisão de produção: um dia útil sim, outro não. Sem esta
+  // checagem o modelo volta ao ritmo quase diário do primeiro mês, que é
+  // exatamente o que sufocou a gravação.
+  const publicados = videos
+    .map((v) => v.dia)
+    .filter((d) => Number.isInteger(d) && d >= 1 && d <= dias)
+    .sort((a, b) => a - b);
+
+  for (const d of publicados) {
+    const dow = new Date(Date.UTC(ano, mes - 1, d)).getUTCDay();
+    if (dow === 0 || dow === 6) {
+      erros.push(`dia ${pad(d)}: cai num ${dow === 0 ? 'domingo' : 'sábado'} — a cadência é só de segunda a sexta`);
+    }
+    if (feriados[pad(d)]) {
+      erros.push(`dia ${pad(d)}: é feriado (${feriados[pad(d)]}) — não publica`);
+    }
+  }
+
+  // Entre duas publicações tem que sobrar um dia útil livre. Fim de semana e
+  // feriado no meio não contam como folga: eles não seriam dia de gravação.
+  for (let i = 1; i < publicados.length; i++) {
+    let uteisNoMeio = 0;
+    for (let d = publicados[i - 1] + 1; d < publicados[i]; d++) {
+      const dow = new Date(Date.UTC(ano, mes - 1, d)).getUTCDay();
+      if (dow >= 1 && dow <= 5 && !feriados[pad(d)]) uteisNoMeio++;
+    }
+    if (uteisNoMeio < 1) {
+      erros.push(
+        `dias ${pad(publicados[i - 1])} e ${pad(publicados[i])}: sem dia útil livre entre as duas peças — ` +
+        'a cadência é um dia útil sim, outro não'
+      );
+    }
+  }
 
   for (const v of videos) {
     const rot = `dia ${v.dia ?? '?'} (${v.titulo ?? 'sem título'})`;
@@ -776,11 +821,26 @@ const TEMPOS_VIRAL = [
   'Ponta solta (52–56s)', 'Solução (56–78s)', 'CTA (78–88s)',
 ];
 
-function gerarMock({ dias, estrutura }) {
-  const alvo = estrutura?.total ?? 8;
+// Os dias do mock seguem a mesma cadência do mês real — um dia útil sim, outro
+// não, sem feriado. Caso contrário o teste falha na própria validação.
+function diasDaCadencia(ano, mes, dias, feriados = {}) {
+  const saida = [];
+  let passo = 0;
+  for (let d = 1; d <= dias; d++) {
+    const dow = new Date(Date.UTC(ano, mes - 1, d)).getUTCDay();
+    if (dow === 0 || dow === 6 || feriados[pad(d)]) continue;
+    if (passo % 2 === 0) saida.push(d);
+    passo++;
+  }
+  return saida;
+}
+
+function gerarMock({ ano, mes, dias, feriados, estrutura }) {
+  const agenda = diasDaCadencia(ano, mes, dias, feriados);
+  const alvo = Math.min(estrutura?.total ?? 8, agenda.length);
   const videos = [];
-  let dia = 1;
-  for (let i = 0; i < alvo && dia <= dias; i++) {
+  for (let i = 0; i < alvo; i++) {
+    const dia = agenda[i];
     const viral = i % 3 === 0;
     videos.push({
       dia,
@@ -816,7 +876,6 @@ function gerarMock({ dias, estrutura }) {
       cortes: { shorts: '[MOCK] shorts', linkedin: '[MOCK] linkedin', tiktok: '[MOCK] tiktok' },
       srt: '1\n00:00:00,000 --> 00:00:04,500\n[MOCK] legenda de teste.',
     });
-    dia += 2;
   }
   return {
     plano: '[MOCK] Execução de teste — nenhuma chamada de API foi feita.',
@@ -938,9 +997,11 @@ async function main() {
     }
 
     console.log(`· Gerando ${nome}/${a} com ${MODELO}${mock ? ' (MOCK)' : ''}...`);
-    const saida = mock ? gerarMock({ dias, estrutura }) : await gerarComIA(prompt);
+    const saida = mock
+      ? gerarMock({ ano: a, mes: m, dias, feriados, estrutura })
+      : await gerarComIA(prompt);
 
-    const erros = validar(saida.videos, { ano: a, mes: m, dias });
+    const erros = validar(saida.videos, { ano: a, mes: m, dias, feriados });
     if (erros.length) {
       console.error(`\nValidação falhou para ${nome}/${a}. Nada foi gravado no site.\n`);
       for (const e of erros) console.error(`  ✕ ${e}`);

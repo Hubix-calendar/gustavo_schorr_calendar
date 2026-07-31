@@ -4,7 +4,8 @@ Este arquivo é lido pelo gerador a cada mês novo. **Editar aqui muda o conteú
 que a IA produz, sem mexer em uma linha de código.** É o lugar de registrar o
 que aprendemos e o que decidimos — não um documento de arquivo.
 
-Última revisão: julho de 2026, depois de montar agosto e setembro.
+Última revisão: julho de 2026, ao trocar a cadência para dia alternado em dia
+útil e remanejar as 35 peças de agosto a novembro.
 
 ---
 
@@ -52,7 +53,7 @@ falando para o setor, não para o cliente.
 
 ## 3. Pilares e o que cada um resolve
 
-Distribuição real de agosto + setembro (35 peças):
+Distribuição real das 35 peças escritas, hoje espalhadas de agosto a novembro:
 
 | Pilar | Peças | Para que serve |
 |---|---|---|
@@ -74,14 +75,37 @@ tutorial e o alcance cai. Se Opinião passar de um terço, vira palanque.
 
 ---
 
-## 4. Cadência que funcionou
+## 4. Cadência — um dia útil sim, outro não
 
-- **Agosto:** 25 peças, praticamente uma por dia útil, com sábado ativo (5 peças)
-- **Setembro:** 10 peças, transbordo, concentrado em terça, quinta e sábado
+**Regra vigente, decidida em julho de 2026: publica em dia alternado, só de
+segunda a sexta. Sem sábado, sem domingo, nunca dois dias seguidos.**
 
-Sábado publica. Não é erro — o empresário consome conteúdo de negócio no fim de
-semana, quando finalmente para. Qualquer validação que tratar fim de semana como
-erro está errada.
+Na prática dá 2 ou 3 peças por semana e 10 a 11 por mês. O ritmo cai numa onda
+que atravessa a semana — segunda, quarta, sexta; depois terça, quinta; depois
+segunda de novo.
+
+Feriado nacional não publica **e não inverte o ritmo**: pula o feriado e mantém
+a alternância no próximo dia útil, senão um feriado viraria a onda do mês
+inteiro.
+
+**Por que mudou:** a cadência anterior era de quase uma peça por dia, com sábado
+ativo — 25 peças só em agosto. Gravar nesse volume sufoca a produção e a
+qualidade cai antes da quantidade. Vídeo bom exige preparo, e preparo exige dia
+livre entre uma gravação e outra. Um perfil de autoridade não perde por publicar
+menos; perde por publicar apressado.
+
+Distribuição depois do remanejo das 35 peças já escritas:
+
+| Mês | Peças |
+|---|---|
+| Agosto/2026 | 11 |
+| Setembro/2026 | 10 |
+| Outubro/2026 | 11 |
+| Novembro/2026 | 3 (o mês continua a partir daí) |
+
+Sábado saiu da cadência. A tese de que o empresário consome no fim de semana
+pode até valer, mas não paga o custo de produção de um dia extra por semana —
+se o dado do perfil mostrar o contrário, essa decisão volta a ser discutida.
 
 ---
 
@@ -214,7 +238,10 @@ Depois das primeiras semanas no ar, checar e voltar aqui para corrigir:
    O gráfico de retenção mostra onde a queda acontece.
 3. **Opinião realmente compartilha mais?** A aposta é que sim. Se Educação
    compartilhar igual, o critério de escolha do formato muda.
-4. **Sábado performa?** A cadência herdou sábado ativo. Confirmar antes de manter.
+4. **Dia alternado segura a recorrência?** A cadência caiu de quase diária para
+   2 ou 3 peças por semana. O ganho esperado é de qualidade por peça; o risco é
+   o perfil sumir do feed entre uma publicação e outra. Comparar alcance médio
+   por peça e frequência de retorno do seguidor antes e depois de agosto.
 5. **CTA explícito muda o gesto?** Comparar as 12 peças com ação pedida contra as
    23 que só perguntam.
 
