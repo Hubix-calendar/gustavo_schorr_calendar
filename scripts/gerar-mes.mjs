@@ -306,7 +306,7 @@ function schemaMes() {
       roteiro: {
         type: 'array',
         items: cena,
-        description: 'No modelo "classico": exatamente 5 cenas (hook, contexto, virada, conclusão, CTA). No modelo "viral": exatamente 9 tempos, nesta ordem — Ganchismo, Promessa aberta, Introdução, Bloco 1, Ponta solta, Bloco 2, Ponta solta, Solução, CTA. No modelo "youtube": 8 a 14 blocos — hook, promessa do vídeo, contexto, de 3 a 6 blocos de conteúdo (cada um cobrindo uma ideia completa do argumento), recapitulação e CTA. O rótulo em "c" deve começar com o número e o nome do bloco/tempo, com a marcação de tempo. Ex: "5. Ponta solta (28–32s)" ou "4. Critério 1 · Fluxo x atenção (1:40–3:10)".',
+        description: 'No modelo "classico": exatamente 5 cenas (hook, contexto, virada, conclusão, CTA). No modelo "viral": exatamente 9 tempos, nesta ordem — Ganchismo, Promessa aberta, Introdução, Bloco 1, Ponta solta, Bloco 2, Ponta solta, Solução, CTA. No modelo "youtube": 8 a 14 blocos, nesta ordem — Hook multi-gatilho, Apresentação do vídeo, Convite pra se inscrever, de 3 a 6 blocos de conteúdo (cada um cobrindo uma ideia completa do argumento), Recapitulação, opcionalmente "Antes de você ir" (referência a um vídeo youtube anterior do canal, só quando houver um relevante), CTA de ação. O rótulo em "c" deve começar com o número e o nome do bloco/tempo, com a marcação de tempo. Ex: "5. Ponta solta (28–32s)" ou "4. Critério 1 · Fluxo x atenção (1:40–3:10)".',
       },
       broll: { type: 'array', items: str, description: '5 sugestões de B-roll' },
       legendas: { type: 'array', items: str, description: 'Momentos de legenda na tela, com marcação de tempo' },
@@ -524,11 +524,31 @@ todas.
 
 ### modelo "youtube" — 8 a 12 minutos, 8 a 14 blocos
 
-Formato longo, fora do feed vertical: hook, promessa do vídeo, contexto/por que
-isso importa, de 3 a 6 blocos de conteúdo — cada um cobrindo uma ideia completa
-do argumento, não uma cena de 3 a 15 segundos —, recapitulação e CTA. Ainda
-assim é roteiro pra teleprompter: fala corrida no campo "t", direção de imagem
-no campo "d", mesmas regras de autenticidade e de CTA por objetivo.
+Formato longo, fora do feed vertical. Ainda é roteiro pra teleprompter: fala
+corrida no campo "t", direção de imagem no campo "d", mesmas regras de
+autenticidade e de CTA por objetivo. A estrutura de blocos é fixa, nesta ordem:
+
+1. **Hook multi-gatilho** — mesma doutrina do ganchismo do modelo viral:
+   nunca um gatilho só, combine quebra de padrão, curiosidade, promessa,
+   contradição ou identificação. Baseie no que já funciona nos ganchos do mês
+   — não invente um registro novo só porque o vídeo é mais longo.
+2. **Apresentação do vídeo** — breve, diz o que vai ser mostrado (tipo
+   agenda), sem ainda entregar o conteúdo.
+3. **Convite pra se inscrever no canal** — vem logo depois da apresentação,
+   nunca antes do hook. É o momento certo porque a expectativa já foi criada
+   mas o conteúdo ainda não começou. Curto, ligado ao valor do canal ("é isso
+   que eu trago toda semana pra..."), nunca implorado.
+4. **De 3 a 6 blocos de conteúdo** — cada um cobrindo uma ideia completa do
+   argumento, não uma cena de 3 a 15 segundos.
+5. **Recapitulação** — fecha o argumento.
+6. **Antes de você ir** — aponta pra um vídeo anterior do canal quando existir
+   um vídeo youtube anterior relevante no histórico (ver arco do mês de
+   referência); se não houver nenhum vídeo anterior pertinente, pule este
+   bloco e feche direto no CTA. Nunca force uma referência forçada só pra
+   preencher.
+7. **CTA de ação** — salvar, seguir, compartilhar ou comentar, pelo objetivo
+   da peça. Separado do convite de inscrição — um pede o canal, o outro pede
+   uma ação nesse vídeo.
 
 Reserve pra tema que pede profundidade que o clássico e o viral não comportam:
 framework completo com vários critérios, tese central do perfil argumentada a
@@ -696,8 +716,15 @@ export function validar(videos, { ano, mes, dias, feriados = {} }) {
         if (!rotulos.some((r) => r.includes('solucao'))) erros.push(`${rot}: roteiro viral sem o tempo de solução`);
       } else if (v.modelo === 'classico' && v.roteiro.length !== 5) {
         erros.push(`${rot}: roteiro clássico precisa de 5 cenas (tem ${v.roteiro.length})`);
-      } else if (v.modelo === 'youtube' && (v.roteiro.length < 8 || v.roteiro.length > 14)) {
-        erros.push(`${rot}: roteiro youtube precisa de 8 a 14 blocos (tem ${v.roteiro.length})`);
+      } else if (v.modelo === 'youtube') {
+        if (v.roteiro.length < 8 || v.roteiro.length > 14) {
+          erros.push(`${rot}: roteiro youtube precisa de 8 a 14 blocos (tem ${v.roteiro.length})`);
+        }
+        // O convite pra se inscrever é o único bloco obrigatório além do
+        // hook/CTA — precisa vir cedo, é o "momento certo" antes do conteúdo.
+        const metade = Math.ceil(v.roteiro.length / 2);
+        const temConvite = v.roteiro.slice(0, metade).some((c) => normalizar(c?.c ?? '').includes('inscrev') || normalizar(c?.t ?? '').includes('inscrev'));
+        if (!temConvite) erros.push(`${rot}: roteiro youtube sem convite pra se inscrever no canal na primeira metade`);
       }
     }
 
@@ -911,8 +938,8 @@ function diasLivresUteis(ano, mes, dias, feriados, ocupados) {
 }
 
 const BLOCOS_YOUTUBE_MOCK = [
-  '1. Hook', '2. Promessa do vídeo', '3. Contexto', '4. Bloco 1', '5. Bloco 2',
-  '6. Bloco 3', '7. Recapitulação', '8. CTA',
+  '1. Hook', '2. Apresentação do vídeo', '3. Convite pra se inscrever', '4. Bloco 1',
+  '5. Bloco 2', '6. Bloco 3', '7. Recapitulação', '8. CTA',
 ];
 
 function gerarMock({ ano, mes, dias, feriados, estrutura }) {

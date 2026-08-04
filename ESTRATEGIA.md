@@ -128,10 +128,25 @@ segue**.
 
 ### ▶️ YouTube longo — 8 a 12min, 8 a 14 blocos
 
-Adicionado em agosto de 2026. Formato fora do feed vertical: hook, promessa do
-vídeo, contexto, de 3 a 6 blocos de conteúdo — cada um cobrindo uma ideia
-completa do argumento, não uma cena de segundos — recapitulação e CTA. Serve
-pro tema grande demais pra 90 segundos: framework completo com vários
+Adicionado em agosto de 2026. Formato fora do feed vertical, com estrutura de
+blocos fixa:
+
+1. **Hook multi-gatilho** — mesma doutrina do ganchismo do ⚡ Retenção
+2. **Apresentação do vídeo** — o que vai ser mostrado, breve, tipo agenda
+3. **Convite pra se inscrever no canal** — logo depois da apresentação, nunca
+   antes do hook. É o momento certo: a expectativa já foi criada, o conteúdo
+   ainda não começou. Curto, ligado ao valor do canal, nunca implorado
+4. **De 3 a 6 blocos de conteúdo** — cada um cobrindo uma ideia completa do
+   argumento, não uma cena de segundos
+5. **Recapitulação**
+6. **Antes de você ir** (opcional) — aponta pra um vídeo youtube anterior do
+   canal quando existir um relevante. Sem vídeo anterior pertinente, pula
+   direto pro CTA — nunca força uma referência só pra preencher
+7. **CTA de ação** — salvar, seguir, compartilhar ou comentar pelo objetivo da
+   peça, separado do convite de inscrição (um pede o canal, o outro pede ação
+   nesse vídeo)
+
+Serve pro tema grande demais pra 90 segundos: framework completo com vários
 critérios, a tese central do perfil argumentada a fundo com contra-argumento
 respondido, ou um mapa de decisão em fases.
 
