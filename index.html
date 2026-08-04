@@ -139,6 +139,21 @@
   .ev.aprovado{background:var(--ok-bg);border-color:var(--ok)}
   .ev.recusado{background:var(--nao-bg);border-color:var(--nao)}
   .ev.vazio{border-style:dashed;color:var(--muted);background:transparent}
+  .ev.selecionada{outline:2px solid var(--realce);outline-offset:1px}
+
+  /* ---------- mover peça: escolha e alvo ---------- */
+  .escolha-peca{
+    position:fixed;z-index:70;display:flex;gap:6px;background:var(--card);
+    border:1px solid var(--line);border-radius:10px;padding:6px;box-shadow:var(--sombra);
+  }
+  .escolha-peca button{
+    border:1px solid var(--line);background:var(--raised);color:var(--ink);
+    border-radius:7px;padding:6px 11px;font-size:12.5px;font-weight:600;white-space:nowrap;
+  }
+  .escolha-peca button:hover{border-color:var(--realce);color:var(--realce)}
+  .escolha-peca button.excluir:hover{border-color:var(--nao);color:var(--nao)}
+  .grade.modo-mover .cel{cursor:pointer}
+  .grade.modo-mover .cel:hover{border-color:var(--realce);background:var(--realce-fraco)}
   .chk{font-weight:700}
   .ev.aprovado .chk{color:var(--ok)} .ev.recusado .chk{color:var(--nao)}
 
@@ -1495,7 +1510,8 @@ function iniciais(nome){
 function pecasDoMes(k){
   var m = MESES[k];
   if(!m) return [];
-  return VIDEOS.filter(function(v){ return v.ano === m.ano && v.mes === m.mes; })
+  var rem = removidosSet();
+  return VIDEOS.filter(function(v){ return v.ano === m.ano && v.mes === m.mes && !rem[v.n]; })
                .sort(function(a,b){ return a.dia - b.dia; });
 }
 function passaFiltro(v){
@@ -1549,7 +1565,7 @@ function renderStats(){
     ['', preenchidas.length - ok - nao, 'aguardando'],
     ['', virais, 'roteiros de retenção'],
     ['', Object.keys(pilares).length, 'pilares usados'],
-    ['', VIDEOS.filter(function(v){return !v.vazio;}).length, 'peças no total']
+    ['', VIDEOS.filter(function(v){return !v.vazio && !removidosSet()[v.n];}).length, 'peças no total']
   ];
   if(vazias) cards.splice(4, 0, ['', vazias, 'slots vazios']);
 
@@ -1614,6 +1630,7 @@ function renderGrade(){
   for(var d = 1; d <= m.dias; d++){
     var cel = document.createElement('div');
     cel.className = 'cel';
+    cel.dataset.dia = d;
     var fer = m.feriados ? m.feriados[pad2(d)] : null;
     if(fer) cel.className += ' feriado';
 
@@ -1649,7 +1666,7 @@ function botaoPeca(v){
     b.className += ' vazio';
     b.innerHTML = '<span class="tit">Slot vazio — falta preencher</span>' +
       '<span class="marca"><span></span><span class="clip">' + clipe + '</span></span>';
-    b.onclick = function(){ abrirPeca(v); };
+    ligarInteracaoCartao(b, v);
     return b;
   }
 
@@ -1663,8 +1680,162 @@ function botaoPeca(v){
     '<span><span class="clip">' + clipe + '</span> <span class="chk">' +
       (s && s.status === 'aprovado' ? '✓' : s && s.status === 'recusado' ? '✕' : '') +
     '</span></span></span>';
-  b.onclick = function(){ abrirPeca(v); };
+  ligarInteracaoCartao(b, v);
   return b;
+}
+
+// ============================================================ arrastar peça (mudar de dia)
+
+var K_REMANEJO_MANUAL = NS + '.remanejo.manual';
+
+function overridesManuais(){ return ler(K_REMANEJO_MANUAL, {}); }
+
+// Reaplica movimentações manuais (arrastar-e-soltar) por cima dos dados gerados,
+// antes de qualquer render — senão a peça voltaria pro dia original a cada load.
+function aplicarOverridesManuais(){
+  var ov = overridesManuais();
+  VIDEOS.forEach(function(v){
+    var o = ov[v.n];
+    if(!o) return;
+    v.dia = o.dia; v.mes = o.mes; v.ano = o.ano;
+    v.semana = Math.ceil(o.dia / 7);
+  });
+}
+
+function trocarChaveEmMapa(mapa, a, b){
+  var va = mapa[a], vb = mapa[b];
+  if(vb !== undefined) mapa[a] = vb; else delete mapa[a];
+  if(va !== undefined) mapa[b] = va; else delete mapa[b];
+}
+
+// Move a peça v para novoDia, dentro do mesmo mês. Se o dia de destino já tiver
+// exatamente uma peça (ou slot vazio), as duas trocam de lugar — decisão, anotação
+// e semana andam junto com cada uma, do mesmo jeito que a migração de cadência fez.
+function moverPeca(v, novoDia){
+  var m = MESES[chaveMes(v)];
+  if(!m || novoDia === v.dia || novoDia < 1 || novoDia > m.dias) return;
+
+  var diaAntigoV = v.dia;
+  var chaveAntigaV = chaveDecisao(v);
+
+  var ocupantes = pecasDoMes(mesAtual).filter(function(x){ return x !== v && x.dia === novoDia; });
+  var destino = ocupantes.length === 1 ? ocupantes[0] : null;
+  var chaveAntigaDestino = destino ? chaveDecisao(destino) : null;
+
+  v.dia = novoDia;
+  v.semana = Math.ceil(novoDia / 7);
+  if(destino){
+    destino.dia = diaAntigoV;
+    destino.semana = Math.ceil(diaAntigoV / 7);
+  }
+
+  var statusMap = ler(K_STATUS, {});
+  var notasMap  = ler(K_NOTAS, {});
+  if(destino){
+    trocarChaveEmMapa(statusMap, chaveAntigaV, chaveAntigaDestino);
+    trocarChaveEmMapa(notasMap,  chaveAntigaV, chaveAntigaDestino);
+  } else {
+    var novaChaveV = chaveDecisao(v);
+    if(statusMap[chaveAntigaV] !== undefined){ statusMap[novaChaveV] = statusMap[chaveAntigaV]; delete statusMap[chaveAntigaV]; }
+    if(notasMap[chaveAntigaV]  !== undefined){ notasMap[novaChaveV]  = notasMap[chaveAntigaV];  delete notasMap[chaveAntigaV]; }
+  }
+  gravar(K_STATUS, statusMap);
+  gravar(K_NOTAS, notasMap);
+
+  var ov = overridesManuais();
+  ov[v.n] = {dia:v.dia, mes:v.mes, ano:v.ano};
+  if(destino) ov[destino.n] = {dia:destino.dia, mes:destino.mes, ano:destino.ano};
+  gravar(K_REMANEJO_MANUAL, ov);
+
+  atualizarTudo();
+}
+
+// Um clique só abre o cartão de escolha (mover ou excluir); dois cliques abre a peça.
+var escolha = null;   // {v, botao, popover} — cartão de escolha aberto no momento
+var modoMover = null; // peça aguardando clique num dia de destino
+
+function ligarInteracaoCartao(b, v){
+  var timer = null;
+  b.onclick = function(e){
+    if(e.detail > 1) return; // é o primeiro clique de um duplo-clique — o dblclick cuida disso
+    clearTimeout(timer);
+    timer = setTimeout(function(){ abrirEscolha(v, b); }, 220);
+  };
+  b.ondblclick = function(){
+    clearTimeout(timer);
+    fecharEscolha();
+    sairModoMover();
+    abrirPeca(v);
+  };
+}
+
+function fecharEscolha(){
+  if(!escolha) return;
+  escolha.botao.classList.remove('selecionada');
+  escolha.popover.remove();
+  document.removeEventListener('click', aoClicarForaEscolha, true);
+  escolha = null;
+}
+function aoClicarForaEscolha(e){
+  if(escolha && (escolha.popover.contains(e.target) || e.target === escolha.botao)) return;
+  fecharEscolha();
+}
+
+function abrirEscolha(v, botao){
+  var mesmoCartao = escolha && escolha.botao === botao;
+  fecharEscolha();
+  if(mesmoCartao) return;
+
+  var pop = document.createElement('div');
+  pop.className = 'escolha-peca';
+  pop.innerHTML =
+    '<button type="button" class="mover">Mover</button>' +
+    '<button type="button" class="excluir">Excluir</button>';
+  document.body.appendChild(pop);
+
+  var r = botao.getBoundingClientRect();
+  var esquerda = Math.min(r.left, window.innerWidth - pop.offsetWidth - 10);
+  var topo = r.bottom + 6;
+  if(topo + pop.offsetHeight > window.innerHeight - 10) topo = r.top - pop.offsetHeight - 6;
+  pop.style.left = Math.max(10, esquerda) + 'px';
+  pop.style.top = Math.max(10, topo) + 'px';
+
+  pop.querySelector('.mover').onclick = function(){ fecharEscolha(); entrarModoMover(v); };
+  pop.querySelector('.excluir').onclick = function(){
+    fecharEscolha();
+    if(confirm('Excluir esta peça do calendário? Ela some deste navegador — exporte a base antes se quiser guardar.')){
+      excluirPeca(v);
+    }
+  };
+
+  botao.classList.add('selecionada');
+  escolha = {v:v, botao:botao, popover:pop};
+  document.addEventListener('click', aoClicarForaEscolha, true);
+}
+
+function entrarModoMover(v){
+  modoMover = v;
+  document.getElementById('grade').classList.add('modo-mover');
+  var b = document.querySelector('.ev[data-chave="' + chaveDecisao(v) + '"]');
+  if(b) b.classList.add('selecionada');
+}
+function sairModoMover(){
+  if(!modoMover) return;
+  var b = document.querySelector('.ev[data-chave="' + chaveDecisao(modoMover) + '"]');
+  if(b) b.classList.remove('selecionada');
+  modoMover = null;
+  document.getElementById('grade').classList.remove('modo-mover');
+}
+
+// ============================================================ excluir peça
+
+var K_REMOVIDOS = NS + '.removidos';
+function removidosSet(){ return ler(K_REMOVIDOS, {}); }
+function excluirPeca(v){
+  var rem = removidosSet();
+  rem[v.n] = true;
+  gravar(K_REMOVIDOS, rem);
+  atualizarTudo();
 }
 
 // ============================================================ banco de aprendizado
@@ -1730,6 +1901,7 @@ function exportarBase(){
     decisoes: ler(K_STATUS, {}),
     anotacoes: ler(K_NOTAS, {}),
     recusas: ler(K_LOG, []),
+    remanejoManual: overridesManuais(),
     termosRecorrentes: termosRecorrentes()
   };
   var blob = new Blob([JSON.stringify(base, null, 2)], {type:'application/json'});
@@ -2142,6 +2314,18 @@ document.getElementById('filtros').onclick = function(e){
   renderFiltros(); renderGrade();
 };
 
+// Completa o "Mover": clique num dia da grade enquanto uma peça está selecionada
+// pra mover. Fase de captura pra não deixar o clique também abrir o cartão.
+document.getElementById('grade').addEventListener('click', function(e){
+  if(!modoMover) return;
+  var cel = e.target.closest('.cel[data-dia]');
+  if(!cel) return;
+  e.stopPropagation();
+  var v = modoMover, novoDia = Number(cel.dataset.dia);
+  sairModoMover();
+  moverPeca(v, novoDia);
+}, true);
+
 document.getElementById('mFechar').onclick = fecharPeca;
 document.getElementById('overlay').onclick = function(e){ if(e.target === this) fecharPeca(); };
 
@@ -2196,6 +2380,8 @@ document.addEventListener('keydown', function(e){
   if(e.key === 'Escape'){
     if(document.getElementById('overlay').classList.contains('on')) fecharPeca();
     else if(overlayMarca.classList.contains('on')) fecharMarca();
+    else if(modoMover) sairModoMover();
+    else if(escolha) fecharEscolha();
   }
   if(document.getElementById('overlay').classList.contains('on')) return;
   if(overlayMarca.classList.contains('on')) return;
@@ -2211,6 +2397,7 @@ window.addEventListener('hashchange', function(){
 // ============================================================ arranque
 
 migrarRemanejo();
+aplicarOverridesManuais();
 aplicarTema();
 aplicarMarca();
 lerHash();
