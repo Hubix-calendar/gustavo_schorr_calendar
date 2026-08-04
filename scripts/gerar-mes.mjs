@@ -244,6 +244,7 @@ function analisarEstrutura(meses, videos) {
   for (const v of doMes) contPilar[v.pilar] = (contPilar[v.pilar] ?? 0) + 1;
 
   const virais = doMes.filter((v) => v.modelo === 'viral');
+  const youtube = doMes.filter((v) => v.modelo === 'youtube');
 
   const semanas = {};
   for (const v of doMes) semanas[v.semana] = (semanas[v.semana] ?? 0) + 1;
@@ -259,7 +260,9 @@ function analisarEstrutura(meses, videos) {
     duracoes: [...new Set(doMes.map((v) => v.duracao))],
     virais: virais.length,
     temasVirais: virais.map((v) => v.titulo),
-    arco: doMes.map((v) => `dia ${pad(v.dia)} · ${v.modelo === 'viral' ? '[viral] ' : ''}${v.pilar} · ${v.titulo}`),
+    youtube: youtube.length,
+    temasYoutube: youtube.map((v) => v.titulo),
+    arco: doMes.map((v) => `dia ${pad(v.dia)} · ${v.modelo === 'viral' ? '[viral] ' : v.modelo === 'youtube' ? '[youtube] ' : ''}${v.pilar} · ${v.titulo}`),
   };
 }
 
@@ -292,10 +295,10 @@ function schemaMes() {
       pilar: { type: 'string', enum: PILARES },
       modelo: {
         type: 'string',
-        enum: ['viral', 'classico'],
-        description: 'Estrutura do roteiro. "viral" = 9 tempos de retenção (só para os temas de maior potencial de compartilhamento). "classico" = 5 cenas.',
+        enum: ['viral', 'classico', 'youtube'],
+        description: 'Estrutura do roteiro. "viral" = 9 tempos de retenção (só para os temas de maior potencial de compartilhamento). "classico" = 5 cenas. "youtube" = formato longo, 8 a 14 blocos, duas peças fixas por mês.',
       },
-      duracao: { type: 'string', description: 'Ex: "60–75s" no clássico, "78–88s" no viral' },
+      duracao: { type: 'string', description: 'Ex: "60–75s" no clássico, "78–88s" no viral, "8–12min" no youtube' },
       titulo: str,
       objetivo: { type: 'string', description: 'Por que esta peça existe e o que ela move no negócio' },
       publico: { type: 'string', description: 'Recorte específico do público-alvo' },
@@ -303,7 +306,7 @@ function schemaMes() {
       roteiro: {
         type: 'array',
         items: cena,
-        description: 'No modelo "classico": exatamente 5 cenas (hook, contexto, virada, conclusão, CTA). No modelo "viral": exatamente 9 tempos, nesta ordem — Ganchismo, Promessa aberta, Introdução, Bloco 1, Ponta solta, Bloco 2, Ponta solta, Solução, CTA. O rótulo em "c" deve começar com o número e o nome do tempo, com a marcação de tempo. Ex: "5. Ponta solta (28–32s)".',
+        description: 'No modelo "classico": exatamente 5 cenas (hook, contexto, virada, conclusão, CTA). No modelo "viral": exatamente 9 tempos, nesta ordem — Ganchismo, Promessa aberta, Introdução, Bloco 1, Ponta solta, Bloco 2, Ponta solta, Solução, CTA. No modelo "youtube": 8 a 14 blocos — hook, promessa do vídeo, contexto, de 3 a 6 blocos de conteúdo (cada um cobrindo uma ideia completa do argumento), recapitulação e CTA. O rótulo em "c" deve começar com o número e o nome do bloco/tempo, com a marcação de tempo. Ex: "5. Ponta solta (28–32s)" ou "4. Critério 1 · Fluxo x atenção (1:40–3:10)".',
       },
       broll: { type: 'array', items: str, description: '5 sugestões de B-roll' },
       legendas: { type: 'array', items: str, description: 'Momentos de legenda na tela, com marcação de tempo' },
@@ -388,6 +391,9 @@ Durações usadas: ${estrutura.duracoes.join(', ')}
 Peças no modelo viral: ${estrutura.virais} de ${estrutura.total}
 Temas que foram virais no mês de referência (não repita as mesmas teses):
 ${estrutura.temasVirais.length ? estrutura.temasVirais.map((t) => `  · ${t}`).join('\n') : '  (nenhum)'}
+Peças no modelo youtube: ${estrutura.youtube} de ${estrutura.total}
+Temas que foram youtube no mês de referência (não repita os mesmos ângulos):
+${estrutura.temasYoutube.length ? estrutura.temasYoutube.map((t) => `  · ${t}`).join('\n') : '  (nenhum)'}
 
 Arco de objetivos do mês de referência:
 ${estrutura.arco.map((l) => `  ${l}`).join('\n')}
@@ -450,16 +456,16 @@ Português do Brasil, oralidade natural — o roteiro é lido em teleprompter.
 Vídeo distribuído em Reels, Shorts, TikTok, LinkedIn e Facebook. Cada peça
 carrega 17 entregáveis; o schema define todos eles.
 
-Regras que valem para os dois modelos:
-- o campo "t" de cada cena é só a fala corrida, sem "CENA 1", sem descrição de
-  imagem, sem rubrica. Direção de imagem vai no campo "d"
+Regras que valem para os três modelos:
+- o campo "t" de cada cena/bloco é só a fala corrida, sem "CENA 1", sem
+  descrição de imagem, sem rubrica. Direção de imagem vai no campo "d"
 - hooks tem exatamente 3 alternativas de abertura
 - impacto tem exatamente 3 frases recortáveis
 - srt é a legenda completa, numerada, com timecodes no formato
   00:00:00,000 --> 00:00:04,500, coerente com as falas e com a duração declarada
 - pilar é um de: ${PILARES.join(' · ')}
 
-## Dois modelos de roteiro — escolha peça a peça
+## Três modelos de roteiro — escolha peça a peça
 
 ### modelo "classico" — 45 a 90 segundos, 5 cenas
 
@@ -516,6 +522,31 @@ A sequência é curiosidade → recompensa → curiosidade → recompensa até o
 Varie os CTAs entre as peças virais do mês — não repita "salva esse vídeo" em
 todas.
 
+### modelo "youtube" — 8 a 12 minutos, 8 a 14 blocos
+
+Formato longo, fora do feed vertical: hook, promessa do vídeo, contexto/por que
+isso importa, de 3 a 6 blocos de conteúdo — cada um cobrindo uma ideia completa
+do argumento, não uma cena de 3 a 15 segundos —, recapitulação e CTA. Ainda
+assim é roteiro pra teleprompter: fala corrida no campo "t", direção de imagem
+no campo "d", mesmas regras de autenticidade e de CTA por objetivo.
+
+Reserve pra tema que pede profundidade que o clássico e o viral não comportam:
+framework completo com vários critérios, tese central do perfil argumentada a
+fundo com contra-argumento respondido, ou um mapa de decisão em fases. Puxe
+prioritariamente da lista "Ângulos ainda não explorados" do ESTRATEGIA.md — são
+exatamente os temas grandes demais pra 90 segundos.
+
+**Cadência fixa: exatamente 2 peças no modelo youtube por mês**, à parte da
+cadência principal de dia alternado. Regras de posicionamento:
+- dia útil, nunca sábado, domingo ou feriado — igual às peças curtas
+- não precisa do dia livre de intervalo que as peças curtas exigem entre si:
+  é produção separada, pode ficar ao lado de uma peça clássica ou viral no
+  calendário
+- as duas peças youtube do mês não ficam no mesmo dia nem, se der pra evitar,
+  na mesma semana
+- não conta na proporção de peças virais (o denominador da proporção é só
+  clássico + viral)
+
 ## Autenticidade — inegociável
 
 NUNCA invente número, caso, percentual, viagem, negociação ou resultado de
@@ -539,7 +570,8 @@ ${calendario.join('\n')}
 
 ## Cadência obrigatória
 
-Publica **um dia útil sim, outro não**, de segunda a sexta. Nunca sábado, nunca
+Vale para os modelos "classico" e "viral" — as peças curtas do feed. Publica
+**um dia útil sim, outro não**, de segunda a sexta. Nunca sábado, nunca
 domingo, nunca dois dias seguidos — entre duas publicações tem que sobrar pelo
 menos um dia útil livre, que é o dia de gravar.
 
@@ -548,6 +580,9 @@ alternância no próximo dia útil.
 
 Isso costuma dar 10 ou 11 peças no mês. Se a estrutura herdada disser outra
 quantidade, esta regra vence — ela é decisão de produção, não de conteúdo.
+
+As 2 peças do modelo "youtube" são à parte dessa cadência — ver a seção do
+modelo "youtube" acima pra regra de posicionamento delas.
 
 ${heranca}
 
@@ -566,13 +601,22 @@ export function validar(videos, { ano, mes, dias, feriados = {} }) {
 
   // A cadência é decisão de produção: um dia útil sim, outro não. Sem esta
   // checagem o modelo volta ao ritmo quase diário do primeiro mês, que é
-  // exatamente o que sufocou a gravação.
-  const publicados = videos
+  // exatamente o que sufocou a gravação. As peças "youtube" são produção à
+  // parte — entram no checa de fim de semana/feriado, mas não no intervalo.
+  const curtas = videos.filter((v) => v.modelo !== 'youtube');
+  const longas = videos.filter((v) => v.modelo === 'youtube');
+
+  const publicados = curtas
     .map((v) => v.dia)
     .filter((d) => Number.isInteger(d) && d >= 1 && d <= dias)
     .sort((a, b) => a - b);
 
-  for (const d of publicados) {
+  const diasTodos = videos
+    .map((v) => v.dia)
+    .filter((d) => Number.isInteger(d) && d >= 1 && d <= dias)
+    .sort((a, b) => a - b);
+
+  for (const d of diasTodos) {
     const dow = new Date(Date.UTC(ano, mes - 1, d)).getUTCDay();
     if (dow === 0 || dow === 6) {
       erros.push(`dia ${pad(d)}: cai num ${dow === 0 ? 'domingo' : 'sábado'} — a cadência é só de segunda a sexta`);
@@ -582,8 +626,9 @@ export function validar(videos, { ano, mes, dias, feriados = {} }) {
     }
   }
 
-  // Entre duas publicações tem que sobrar um dia útil livre. Fim de semana e
-  // feriado no meio não contam como folga: eles não seriam dia de gravação.
+  // Entre duas publicações curtas tem que sobrar um dia útil livre. Fim de
+  // semana e feriado no meio não contam como folga: eles não seriam dia de
+  // gravação. As peças "youtube" ficam fora desta checagem de propósito.
   for (let i = 1; i < publicados.length; i++) {
     let uteisNoMeio = 0;
     for (let d = publicados[i - 1] + 1; d < publicados[i]; d++) {
@@ -595,6 +640,17 @@ export function validar(videos, { ano, mes, dias, feriados = {} }) {
         `dias ${pad(publicados[i - 1])} e ${pad(publicados[i])}: sem dia útil livre entre as duas peças — ` +
         'a cadência é um dia útil sim, outro não'
       );
+    }
+  }
+
+  // Padrão fixo: 2 peças no modelo youtube por mês, à parte da cadência
+  // principal. Só checa em meses com volume normal, pra não travar teste
+  // pequeno nem o modo "vazio" parcial.
+  if (videos.length >= 8) {
+    if (longas.length === 0) {
+      erros.push('nenhuma peça no modelo youtube — o padrão do mês é 2 roteiros longos');
+    } else if (longas.length > 3) {
+      erros.push(`${longas.length} peças no modelo youtube — o padrão é 2 por mês, no máximo 3`);
     }
   }
 
@@ -614,8 +670,8 @@ export function validar(videos, { ano, mes, dias, feriados = {} }) {
     if (!v.titulo?.trim()) erros.push(`${rot}: sem título`);
     if (!v.publico?.trim()) erros.push(`${rot}: sem público definido`);
 
-    if (!['viral', 'classico'].includes(v.modelo)) {
-      erros.push(`${rot}: modelo inválido "${v.modelo}" (use "viral" ou "classico")`);
+    if (!['viral', 'classico', 'youtube'].includes(v.modelo)) {
+      erros.push(`${rot}: modelo inválido "${v.modelo}" (use "viral", "classico" ou "youtube")`);
     }
 
     if (!Array.isArray(v.roteiro) || v.roteiro.length < 3) {
@@ -640,6 +696,8 @@ export function validar(videos, { ano, mes, dias, feriados = {} }) {
         if (!rotulos.some((r) => r.includes('solucao'))) erros.push(`${rot}: roteiro viral sem o tempo de solução`);
       } else if (v.modelo === 'classico' && v.roteiro.length !== 5) {
         erros.push(`${rot}: roteiro clássico precisa de 5 cenas (tem ${v.roteiro.length})`);
+      } else if (v.modelo === 'youtube' && (v.roteiro.length < 8 || v.roteiro.length > 14)) {
+        erros.push(`${rot}: roteiro youtube precisa de 8 a 14 blocos (tem ${v.roteiro.length})`);
       }
     }
 
@@ -659,12 +717,14 @@ export function validar(videos, { ano, mes, dias, feriados = {} }) {
   if (!videos.length) erros.push('nenhuma peça gerada');
 
   // Proporção: se todo mês virasse roteiro de retenção, o feed ficaria repetitivo
-  // e o formato perderia o efeito. Se nenhum virasse, o mês não teria peça de alcance.
-  if (videos.length >= 4) {
-    const virais = videos.filter((v) => v.modelo === 'viral').length;
-    const parte = virais / videos.length;
+  // e o formato perderia o efeito. Se nenhum virasse, o mês não teria peça de
+  // alcance. O denominador é só classico + viral — youtube é produção à parte
+  // e não deve diluir essa conta.
+  if (curtas.length >= 4) {
+    const virais = curtas.filter((v) => v.modelo === 'viral').length;
+    const parte = virais / curtas.length;
     if (virais === 0) erros.push('nenhuma peça no modelo viral — o mês precisa de peças de alcance');
-    else if (parte > 0.5) erros.push(`${virais} de ${videos.length} peças no modelo viral (${Math.round(parte * 100)}%) — o teto é 50%, senão o feed fica repetitivo`);
+    else if (parte > 0.5) erros.push(`${virais} de ${curtas.length} peças curtas no modelo viral (${Math.round(parte * 100)}%) — o teto é 50%, senão o feed fica repetitivo`);
   }
 
   return erros;
@@ -686,6 +746,8 @@ function markdown(mesKey, meta, videos) {
     L.push('');
     const rotuloModelo = v.modelo === 'viral'
       ? `retenção, ${v.roteiro.length} tempos`
+      : v.modelo === 'youtube'
+      ? `YouTube longo, ${v.roteiro.length} blocos`
       : `clássico, ${v.roteiro.length} cenas`;
     L.push(`**Pilar:** ${v.pilar} · **Semana:** ${v.semana} · **Duração:** ${v.duracao} · **Formato:** ${rotuloModelo}`);
     L.push('');
@@ -835,6 +897,24 @@ function diasDaCadencia(ano, mes, dias, feriados = {}) {
   return saida;
 }
 
+// Dias úteis livres do mês que não colidem com a agenda das peças curtas —
+// é onde entram as 2 peças mock do modelo youtube.
+function diasLivresUteis(ano, mes, dias, feriados, ocupados) {
+  const saida = [];
+  for (let d = 1; d <= dias; d++) {
+    if (ocupados.has(d)) continue;
+    const dow = new Date(Date.UTC(ano, mes - 1, d)).getUTCDay();
+    if (dow === 0 || dow === 6 || feriados[pad(d)]) continue;
+    saida.push(d);
+  }
+  return saida;
+}
+
+const BLOCOS_YOUTUBE_MOCK = [
+  '1. Hook', '2. Promessa do vídeo', '3. Contexto', '4. Bloco 1', '5. Bloco 2',
+  '6. Bloco 3', '7. Recapitulação', '8. CTA',
+];
+
 function gerarMock({ ano, mes, dias, feriados, estrutura }) {
   const agenda = diasDaCadencia(ano, mes, dias, feriados);
   const alvo = Math.min(estrutura?.total ?? 8, agenda.length);
@@ -877,6 +957,40 @@ function gerarMock({ ano, mes, dias, feriados, estrutura }) {
       srt: '1\n00:00:00,000 --> 00:00:04,500\n[MOCK] legenda de teste.',
     });
   }
+
+  // Padrão fixo: 2 peças youtube por mês, em dias livres que não colidem com
+  // a agenda das peças curtas.
+  const ocupados = new Set(videos.map((v) => v.dia));
+  const diasYoutube = diasLivresUteis(ano, mes, dias, feriados, ocupados).slice(0, 2);
+  diasYoutube.forEach((dia, i) => {
+    videos.push({
+      dia,
+      semana: Math.min(5, Math.ceil(dia / 7)),
+      pilar: PILARES[(i + 3) % PILARES.length],
+      modelo: 'youtube',
+      duracao: '9–10min',
+      titulo: `[MOCK] Roteiro YouTube longo ${i + 1}`,
+      objetivo: '[MOCK] objetivo de teste do fluxo do gerador, formato longo.',
+      publico: '[MOCK] público de teste.',
+      hooks: ['[MOCK] gancho 1', '[MOCK] gancho 2', '[MOCK] gancho 3'],
+      roteiro: BLOCOS_YOUTUBE_MOCK.map((bloco, k) => ({
+        c: bloco,
+        t: `[MOCK] fala do bloco ${k + 1}.`,
+        d: k === 3 ? '[substituir por história real do Gustavo: teste].' : '[MOCK] direção de imagem.',
+      })),
+      broll: ['[MOCK] painel de LED', '[MOCK] avenida', '[MOCK] reunião', '[MOCK] mapa', '[MOCK] fachada'],
+      legendas: ['0:00: [MOCK]', '3:00: [MOCK]'],
+      impacto: ['[MOCK] frase 1', '[MOCK] frase 2', '[MOCK] frase 3'],
+      cta: '[MOCK] chamada final.',
+      titulos: { ig: '[MOCK] título IG', li: '[MOCK] título LI', yt: '[MOCK] título YT' },
+      desc: { ig: '[MOCK] desc IG', li: '[MOCK] desc LI', fb: '[MOCK] desc FB', yt: '[MOCK] desc YT' },
+      hash: { ig: '#mock', li: '#mock', tt: '#mock', yt: '#mock' },
+      thumb: { texto: '[MOCK]', comp: '[MOCK] composição', expr: '[MOCK] expressão' },
+      cortes: { shorts: '[MOCK] shorts', linkedin: '[MOCK] linkedin', tiktok: '[MOCK] tiktok' },
+      srt: '1\n00:00:00,000 --> 00:00:04,500\n[MOCK] legenda de teste.',
+    });
+  });
+
   return {
     plano: '[MOCK] Execução de teste — nenhuma chamada de API foi feita.',
     pendencias: ['[MOCK] nada a preencher, isto é um teste.'],

@@ -53,10 +53,10 @@ feriado ou dois dias colados, a validação aborta e nada é gravado.
 
 ---
 
-## Os dois formatos de roteiro
+## Os três formatos de roteiro
 
-As peças não seguem todas o mesmo desenho. Há dois formatos, e o filtro
-**Formato** no topo da grade separa os dois.
+As peças não seguem todas o mesmo desenho. Há três formatos, e o filtro
+**Formato** no topo da grade separa os três.
 
 ### Clássico — 5 cenas, 45 a 90s
 
@@ -94,6 +94,19 @@ nada é gravado. Hoje são **12 de 35** (entre 30% e 36% em cada mês), escolhid
 derrubar, erro caro, contradição com o senso comum e polêmica do setor. Tutorial
 passo a passo e conteúdo técnico seguem no clássico, onde a estrutura de
 retenção soaria forçada.
+
+### ▶️ YouTube longo — 8 a 12min, 8 a 14 blocos
+
+Marcado com ▶️ na grade. Formato fora do feed vertical, pra tema grande demais
+pra 90 segundos: framework completo com vários critérios, a tese central do
+perfil argumentada a fundo, um mapa de decisão em fases. Mesma lógica de
+teleprompter das outras peças, só que em blocos de argumento mais longos em
+vez de cenas de segundos.
+
+**Padrão fixo: 2 peças por mês**, fora da cadência de dia alternado — são
+produção separada e não competem pelo dia de gravação das peças curtas, só
+respeitam dia útil sem sábado, domingo ou feriado. Começou com 1 peça em
+agosto de 2026 e virou 2 por mês a partir de setembro.
 
 > As aprovações, as anotações e o histórico ficam salvos **no navegador que você usou**. Não
 > sincronizam entre computadores. Para levar de uma máquina para outra, use

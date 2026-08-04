@@ -107,9 +107,13 @@ Sábado saiu da cadência. A tese de que o empresário consome no fim de semana
 pode até valer, mas não paga o custo de produção de um dia extra por semana —
 se o dado do perfil mostrar o contrário, essa decisão volta a ser discutida.
 
+Essa cadência vale para as peças clássico e retenção. As 2 peças por mês do
+formato YouTube longo (seção 5) ficam fora dela — ver ali a regra de
+posicionamento.
+
 ---
 
-## 5. A doutrina dos dois formatos
+## 5. A doutrina dos três formatos
 
 ### Clássico — 5 cenas, 50 a 80s
 
@@ -121,6 +125,28 @@ bastidores, conteúdo técnico e tudo que a pessoa consome por interesse própri
 Ganchismo, promessa aberta, introdução, bloco 1, ponta solta, bloco 2, ponta
 solta, solução, CTA. Serve para conteúdo que precisa alcançar **quem ainda não
 segue**.
+
+### ▶️ YouTube longo — 8 a 12min, 8 a 14 blocos
+
+Adicionado em agosto de 2026. Formato fora do feed vertical: hook, promessa do
+vídeo, contexto, de 3 a 6 blocos de conteúdo — cada um cobrindo uma ideia
+completa do argumento, não uma cena de segundos — recapitulação e CTA. Serve
+pro tema grande demais pra 90 segundos: framework completo com vários
+critérios, a tese central do perfil argumentada a fundo com contra-argumento
+respondido, ou um mapa de decisão em fases.
+
+**Padrão fixo: 2 peças por mês**, escolhidas da lista "Ângulos ainda não
+explorados" da seção 8 preferencialmente. Ficam fora da cadência de dia
+alternado — são produção separada, não competem pelo mesmo dia de gravação das
+peças curtas e não entram no cálculo de proporção de Retenção. Ainda assim
+respeitam dia útil, sem sábado, domingo ou feriado.
+
+**Por que entrou:** o feed vertical não comporta argumento com mais de uma
+camada — a proposta de mídia com quatro critérios, a tese de marca como ativo
+com contra-argumento respondido, o mapa de investimento por fase de empresa.
+São exatamente os temas que ficavam represados em "ângulos ainda não
+explorados" porque não cabiam em 90 segundos. Começou com 1 peça em agosto e 2
+em setembro; a partir de setembro de 2026 o padrão é 2 por mês.
 
 **Como escolher o formato — pelo tema, nunca por sorteio:**
 
