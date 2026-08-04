@@ -136,6 +136,9 @@
   .ev:hover{border-color:var(--realce);border-left-color:var(--pilar,var(--marca))}
   .ev .tit{display:block;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
   .ev .marca{font-family:var(--mono);font-size:10px;color:var(--muted);display:flex;justify-content:space-between;gap:4px;margin-top:3px}
+  .postado-chk{cursor:pointer;font-size:12px;line-height:1;color:var(--muted)}
+  .postado-chk.on{color:var(--ok)}
+  .postado-chk:hover{color:var(--realce)}
   .ev.aprovado{background:var(--ok-bg);border-color:var(--ok)}
   .ev.recusado{background:var(--nao-bg);border-color:var(--nao)}
   .ev.vazio{border-style:dashed;color:var(--muted);background:transparent}
@@ -256,6 +259,8 @@
   .btn-ok.on{background:var(--ok);color:#fff}
   .btn-nao{border:1px solid var(--nao);background:transparent;color:var(--nao);border-radius:9px;padding:9px 16px;font-weight:600;font-size:13.5px}
   .btn-nao.on{background:var(--nao);color:#fff}
+  .chk-postado{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:var(--ink2);cursor:pointer;user-select:none}
+  .chk-postado input{width:16px;height:16px;accent-color:var(--ok);cursor:pointer}
   .status{font-size:13px;color:var(--muted)}
   .status.aprovado{color:var(--ok)} .status.recusado{color:var(--nao)}
   .cxrecusa{margin-top:12px;display:none}
@@ -1338,11 +1343,12 @@ const VIDEOS=[
 // ============================================================ estado / chaves
 
 var NS = 'gs';
-var K_STATUS = NS + '.status';
-var K_LOG    = NS + '.log';
-var K_NOTAS  = NS + '.notas';
-var K_MARCA  = NS + '.marca';
-var K_TEMA   = NS + '.tema';
+var K_STATUS  = NS + '.status';
+var K_LOG     = NS + '.log';
+var K_NOTAS   = NS + '.notas';
+var K_POSTADO = NS + '.postado';
+var K_MARCA   = NS + '.marca';
+var K_TEMA    = NS + '.tema';
 
 var PILAR_COR = {
   'Autoridade':'#1a56c4','Bastidores':'#8a5a1e','Opinião':'#7a2e8a','Educação':'#0f8a5f',
@@ -1459,6 +1465,17 @@ function temNota(v){
   var n = notaDe(v);
   return !!(n && n.texto.trim());
 }
+// Controle de uso: marca se a peça já foi de fato publicada (independe de aprovação).
+function postadoDe(v){
+  var t = ler(K_POSTADO, {});
+  return !!t[chaveDecisao(v)];
+}
+function definirPostado(v, valor){
+  var t = ler(K_POSTADO, {});
+  var k = chaveDecisao(v);
+  if(valor) t[k] = true; else delete t[k];
+  gravar(K_POSTADO, t);
+}
 
 function registrarRecusa(v, motivo){
   var log = ler(K_LOG, []);
@@ -1557,12 +1574,14 @@ function renderStats(){
   preenchidas.forEach(function(v){ pilares[v.pilar] = 1; });
   var vazias = pecas.length - preenchidas.length;
   var virais = preenchidas.filter(function(v){ return v.modelo === 'viral'; }).length;
+  var postadas = preenchidas.filter(function(v){ return postadoDe(v); }).length;
 
   var cards = [
     ['', preenchidas.length, 'peças no mês'],
     ['ok', ok, 'aprovadas'],
     ['nao', nao, 'recusadas'],
     ['', preenchidas.length - ok - nao, 'aguardando'],
+    ['ok', postadas, 'postadas'],
     ['', virais, 'roteiros de retenção'],
     ['', Object.keys(pilares).length, 'pilares usados'],
     ['', VIDEOS.filter(function(v){return !v.vazio && !removidosSet()[v.n];}).length, 'peças no total']
@@ -1674,13 +1693,28 @@ function botaoPeca(v){
   if(s && s.status === 'aprovado') b.className += ' aprovado';
   if(s && s.status === 'recusado') b.className += ' recusado';
 
+  var postado = postadoDe(v);
+
   b.innerHTML =
     '<span class="tit">' + esc(v.titulo) + '</span>' +
     '<span class="marca"><span>' + (v.modelo === 'viral' ? '<span class="fmt">⚡</span> ' : '') + esc(v.pilar) + '</span>' +
-    '<span><span class="clip">' + clipe + '</span> <span class="chk">' +
+    '<span><span class="postado-chk' + (postado ? ' on' : '') + '" title="' +
+      (postado ? 'Postado — clique pra desmarcar' : 'Marcar como postado') + '">' + (postado ? '☑' : '☐') + '</span> ' +
+      '<span class="clip">' + clipe + '</span> <span class="chk">' +
       (s && s.status === 'aprovado' ? '✓' : s && s.status === 'recusado' ? '✕' : '') +
     '</span></span></span>';
   ligarInteracaoCartao(b, v);
+
+  var chkPostado = b.querySelector('.postado-chk');
+  chkPostado.onclick = function(e){
+    e.stopPropagation();
+    var novo = !postadoDe(v);
+    definirPostado(v, novo);
+    chkPostado.classList.toggle('on', novo);
+    chkPostado.textContent = novo ? '☑' : '☐';
+    chkPostado.title = novo ? 'Postado — clique pra desmarcar' : 'Marcar como postado';
+  };
+
   return b;
 }
 
@@ -1731,16 +1765,20 @@ function moverPeca(v, novoDia){
 
   var statusMap = ler(K_STATUS, {});
   var notasMap  = ler(K_NOTAS, {});
+  var postadoMap = ler(K_POSTADO, {});
   if(destino){
     trocarChaveEmMapa(statusMap, chaveAntigaV, chaveAntigaDestino);
     trocarChaveEmMapa(notasMap,  chaveAntigaV, chaveAntigaDestino);
+    trocarChaveEmMapa(postadoMap, chaveAntigaV, chaveAntigaDestino);
   } else {
     var novaChaveV = chaveDecisao(v);
     if(statusMap[chaveAntigaV] !== undefined){ statusMap[novaChaveV] = statusMap[chaveAntigaV]; delete statusMap[chaveAntigaV]; }
     if(notasMap[chaveAntigaV]  !== undefined){ notasMap[novaChaveV]  = notasMap[chaveAntigaV];  delete notasMap[chaveAntigaV]; }
+    if(postadoMap[chaveAntigaV] !== undefined){ postadoMap[novaChaveV] = postadoMap[chaveAntigaV]; delete postadoMap[chaveAntigaV]; }
   }
   gravar(K_STATUS, statusMap);
   gravar(K_NOTAS, notasMap);
+  gravar(K_POSTADO, postadoMap);
 
   var ov = overridesManuais();
   ov[v.n] = {dia:v.dia, mes:v.mes, ano:v.ano};
@@ -1900,6 +1938,7 @@ function exportarBase(){
     marca: marcaAtual(),
     decisoes: ler(K_STATUS, {}),
     anotacoes: ler(K_NOTAS, {}),
+    postados: ler(K_POSTADO, {}),
     recusas: ler(K_LOG, []),
     remanejoManual: overridesManuais(),
     termosRecorrentes: termosRecorrentes()
@@ -1936,6 +1975,7 @@ function abrirPeca(v){
     ligarTeleprompter();
     ligarAbas(v);
     ligarDecisao(v);
+    ligarPostado(v);
   }
   ligarNotas(v);
 
@@ -2039,6 +2079,7 @@ function corpoPeca(v){
   h += '<div class="mrodape">' +
     '<button class="btn-ok" id="btnAprovar" type="button">Aprovar</button>' +
     '<button class="btn-nao" id="btnRecusar" type="button">Recusar</button>' +
+    '<label class="chk-postado"><input type="checkbox" id="chkPostado"> Postado</label>' +
     '<span class="status" id="statusPeca"></span>' +
   '</div>' +
   '<div class="cxrecusa" id="cxRecusa">' +
@@ -2174,6 +2215,24 @@ function salvarNotaPendente(){
 function marcarCartaoNota(v){
   var b = document.querySelector('.ev[data-chave="' + chaveDecisao(v) + '"] .clip');
   if(b) b.textContent = temNota(v) ? '🔗' : '';
+}
+
+function ligarPostado(v){
+  var chk = document.getElementById('chkPostado');
+  chk.checked = postadoDe(v);
+  chk.onchange = function(){
+    definirPostado(v, chk.checked);
+    marcarCartaoPostado(v);
+  };
+}
+// Atualiza só o check de postado do cartão na grade, sem redesenhar tudo.
+function marcarCartaoPostado(v){
+  var el = document.querySelector('.ev[data-chave="' + chaveDecisao(v) + '"] .postado-chk');
+  if(!el) return;
+  var p = postadoDe(v);
+  el.classList.toggle('on', p);
+  el.textContent = p ? '☑' : '☐';
+  el.title = p ? 'Postado — clique pra desmarcar' : 'Marcar como postado';
 }
 
 function ligarDecisao(v){
